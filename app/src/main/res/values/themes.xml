@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="Theme.GsynJava" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/gsyn_primary</item>
+        <item name="colorOnPrimary">@color/gsyn_on_primary</item>
+        <item name="colorSecondary">@color/gsyn_secondary</item>
+        <item name="android:colorBackground">@color/gsyn_background</item>
+        <item name="colorSurface">@color/gsyn_surface</item>
+        <item name="colorOnSurface">@color/gsyn_on_surface</item>
+        <item name="colorSurfaceVariant">@color/gsyn_surface_variant</item>
+        <item name="colorOutline">@color/gsyn_outline</item>
+        <item name="colorSecondaryContainer">@color/gsyn_surface_elevated</item>
+        <item name="colorOnSecondaryContainer">@color/gsyn_on_surface</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/gsyn_background</item>
+        <item name="android:navigationBarColor" tools:targetApi="o_mr1">@color/gsyn_background</item>
+    </style>
+</resources>
+

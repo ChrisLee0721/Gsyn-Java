@@ -1,0 +1,30 @@
+# Gradle / Android build output
+.gradle/
+build/
+**/build/
+
+# Local machine config
+local.properties
+
+# IDE files
+.idea/
+*.iml
+
+# Generated captures / logs
+captures/
+*.log
+
+# APK / AAB outputs
+*.apk
+*.aab
+*.ap_
+
+# Native / compiled artifacts
+*.class
+*.dex
+*.so
+
+# OS files
+.DS_Store
+Thumbs.db
+

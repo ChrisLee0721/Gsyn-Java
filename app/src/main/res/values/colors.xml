@@ -1,0 +1,17 @@
+<resources>
+    <color name="gsyn_primary">#00639B</color>
+    <color name="gsyn_on_primary">#FFFFFF</color>
+    <color name="gsyn_secondary">#4C6A88</color>
+    <color name="gsyn_background">#101418</color>
+    <color name="gsyn_surface">#182028</color>
+    <color name="gsyn_surface_variant">#1E2833</color>
+    <color name="gsyn_surface_elevated">#233140</color>
+    <color name="gsyn_on_surface">#E2E8F0</color>
+    <color name="gsyn_on_surface_muted">#9FB0C3</color>
+    <color name="gsyn_outline">#314050</color>
+    <color name="gsyn_online">#34C759</color>
+    <color name="gsyn_warning">#FFB020</color>
+    <color name="gsyn_danger">#FF5A5F</color>
+    <color name="gsyn_info">#5AC8FA</color>
+</resources>
+
