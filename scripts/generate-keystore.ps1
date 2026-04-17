@@ -71,7 +71,7 @@ Write-Host ""
 
 # 验证 keystore 格式
 Write-Host "正在验证 keystore 格式..."
-$keystoreInfo = & keytool -list -v -keystore $keystoreName 2>&1 | Out-String
+$keystoreInfo = & keytool -J-Duser.language=en -list -v -keystore $keystoreName 2>&1 | Out-String
 $keystoreType = if ($keystoreInfo -match "Keystore type:\s*(\w+)") { $Matches[1] } else { "UNKNOWN" }
 
 if ($keystoreType -ne "JKS") {
@@ -84,7 +84,7 @@ Write-Host ""
 
 # 显示 keystore 信息
 Write-Host "Keystore 信息："
-& keytool -list -v -keystore $keystoreName | Select-Object -First 20
+& keytool -J-Duser.language=en -list -v -keystore $keystoreName | Select-Object -First 20
 
 Write-Host ""
 Write-Host "========================================"

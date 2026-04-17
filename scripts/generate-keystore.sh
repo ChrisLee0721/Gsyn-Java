@@ -75,7 +75,7 @@ echo ""
 
 # 验证 keystore 格式
 echo "正在验证 keystore 格式..."
-KEYSTORE_TYPE=$(keytool -list -v -keystore "$KEYSTORE_NAME" 2>&1 | grep "Keystore type:" | awk '{print $3}')
+KEYSTORE_TYPE=$(keytool -J-Duser.language=en -list -v -keystore "$KEYSTORE_NAME" 2>&1 | grep "Keystore type:" | awk '{print $3}')
 
 if [ "$KEYSTORE_TYPE" != "JKS" ]; then
     echo "❌ 错误: Keystore 类型不是 JKS (实际: $KEYSTORE_TYPE)"
@@ -87,7 +87,7 @@ echo ""
 
 # 显示 keystore 信息
 echo "Keystore 信息："
-keytool -list -v -keystore "$KEYSTORE_NAME" | head -20
+keytool -J-Duser.language=en -list -v -keystore "$KEYSTORE_NAME" | head -20
 
 echo ""
 echo "========================================"

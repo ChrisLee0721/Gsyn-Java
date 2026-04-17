@@ -98,7 +98,7 @@ jobs:
       - name: Validate Keystore Format
         run: |
           echo "检查 Keystore 格式..."
-          KEYSTORE_TYPE=$(keytool -list -v -keystore ${{ runner.temp }}/release.jks -storepass "${{ secrets.KEYSTORE_PASSWORD }}" 2>&1 | grep "Keystore type:" | awk '{print $3}')
+          KEYSTORE_TYPE=$(keytool -J-Duser.language=en -list -v -keystore ${{ runner.temp }}/release.jks -storepass "${{ secrets.KEYSTORE_PASSWORD }}" 2>&1 | grep "Keystore type:" | awk '{print $3}')
           echo "Keystore 类型: $KEYSTORE_TYPE"
           
           if [ "$KEYSTORE_TYPE" != "JKS" ]; then
@@ -112,10 +112,10 @@ jobs:
           echo "✅ Keystore 格式验证通过 (JKS)"
           
           # 验证别名是否存在
-          if ! keytool -list -keystore ${{ runner.temp }}/release.jks -storepass "${{ secrets.KEYSTORE_PASSWORD }}" -alias "${{ secrets.KEY_ALIAS }}" > /dev/null 2>&1; then
+          if ! keytool -J-Duser.language=en -list -keystore ${{ runner.temp }}/release.jks -storepass "${{ secrets.KEYSTORE_PASSWORD }}" -alias "${{ secrets.KEY_ALIAS }}" > /dev/null 2>&1; then
             echo "❌ 错误: 在 keystore 中找不到别名 '${{ secrets.KEY_ALIAS }}'"
             echo "可用的别名列表："
-            keytool -list -keystore ${{ runner.temp }}/release.jks -storepass "${{ secrets.KEYSTORE_PASSWORD }}" | grep "PrivateKeyEntry\|SecretKeyEntry\|TrustedCertEntry" || true
+            keytool -J-Duser.language=en -list -keystore ${{ runner.temp }}/release.jks -storepass "${{ secrets.KEYSTORE_PASSWORD }}" | grep "PrivateKeyEntry\|SecretKeyEntry\|TrustedCertEntry" || true
             exit 1
           fi
           
