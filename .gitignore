@@ -28,3 +28,17 @@ captures/
 .DS_Store
 Thumbs.db
 
+
+# Build log files
+build_err.txt
+build_err2.txt
+build_out.txt
+build_out2.txt
+build_output.txt
+gradle_err.txt
+gradle_out.txt
+
+# Release keystore (never commit!)
+*.jks
+*.keystore
+keystore_base64.txt
