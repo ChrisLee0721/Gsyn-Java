@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gsyn_background">
+    android:background="?android:colorBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/gsyn_surface"
+            app:cardBackgroundColor="?attr/colorSurface"
             app:cardUseCompatPadding="true"
             app:strokeColor="@color/gsyn_secondary"
             app:strokeWidth="1dp">
@@ -90,6 +90,7 @@
             android:textStyle="bold" />
 
         <LinearLayout
+            android:id="@+id/containerKpiRow1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -156,6 +157,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/containerKpiRow2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -222,6 +224,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/containerKpiRow3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -288,6 +291,7 @@
         </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/containerGauges"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -355,6 +359,7 @@
             android:textStyle="bold" />
 
         <LinearLayout
+            android:id="@+id/containerCharts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -419,6 +424,7 @@
         </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/containerActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -512,6 +518,7 @@
         </LinearLayout>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/containerLatestReadings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

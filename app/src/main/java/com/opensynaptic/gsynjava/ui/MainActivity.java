@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 
 import com.opensynaptic.gsynjava.AppController;
 import com.opensynaptic.gsynjava.R;
+import com.opensynaptic.gsynjava.core.AppThemeConfig;
 import com.opensynaptic.gsynjava.databinding.ActivityMainBinding;
 import com.opensynaptic.gsynjava.ui.alerts.AlertsFragment;
 import com.opensynaptic.gsynjava.ui.dashboard.DashboardFragment;
@@ -20,10 +21,20 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Apply theme overlays BEFORE super.onCreate() — this is the canonical approach.
+        // AppCompat/Material3 reads theme attributes during super.onCreate(); overlays
+        // applied before that call are guaranteed to be in place for all component setup.
+        // getApplicationContext() is always safe here (Application is initialised before any Activity).
+        getTheme().applyStyle(AppThemeConfig.getAccentOverlayRes(
+                AppThemeConfig.loadThemePreset(getApplicationContext())), true);
+        getTheme().applyStyle(AppThemeConfig.getBgOverlayRes(
+                AppThemeConfig.loadBgPreset(getApplicationContext())), true);
         super.onCreate(savedInstanceState);
         AppController.get(this);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        // Sync status-bar / nav-bar colours AFTER setContentView so the window is fully set up.
+        AppThemeConfig.applyBgToWindow(getWindow(), this);
         setSupportActionBar(binding.toolbar);
         binding.bottomNav.setOnItemSelectedListener(this::onNavSelected);
         if (savedInstanceState == null) {
@@ -65,4 +76,3 @@ public class MainActivity extends AppCompatActivity {
         return getString(R.string.shell_toolbar_subtitle_dashboard);
     }
 }
-

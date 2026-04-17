@@ -16,10 +16,30 @@ android {
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
+    signingConfigs {
+        release {
+            // 签名参数由 CI 通过 -P 参数注入，本地构建时可在 local.properties 中配置
+            if (project.hasProperty('android.injected.signing.store.file')) {
+                storeFile     file(project.property('android.injected.signing.store.file'))
+                storePassword project.property('android.injected.signing.store.password')
+                keyAlias      project.property('android.injected.signing.key.alias')
+                keyPassword   project.property('android.injected.signing.key.password')
+            }
+        }
+    }
+
     buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+            versionNameSuffix   '-debug'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            // 仅在 CI 传入签名参数时使用 release signing config
+            if (project.hasProperty('android.injected.signing.store.file')) {
+                signingConfig signingConfigs.release
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package com.opensynaptic.gsynjava.ui.settings;
 
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.chip.Chip;
 import com.opensynaptic.gsynjava.AppController;
 import com.opensynaptic.gsynjava.R;
+import com.opensynaptic.gsynjava.core.AppThemeConfig;
 import com.opensynaptic.gsynjava.databinding.FragmentSettingsBinding;
 import com.opensynaptic.gsynjava.transport.TransportManager;
 import com.opensynaptic.gsynjava.ui.SecondaryActivity;
+import com.opensynaptic.gsynjava.ui.dashboard.DashboardCardConfig;
 
 import java.util.Locale;
 
@@ -25,7 +29,11 @@ public class SettingsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
+        AppThemeConfig.applyBgToRoot(binding.getRoot(), requireContext());
         loadPrefs();
+        buildAccentChips();
+        buildBgChips();
+        loadCardConfig();
         binding.btnSave.setOnClickListener(v -> savePrefs());
         binding.btnOpenMap.setOnClickListener(v -> startActivity(SecondaryActivity.intent(requireContext(), SecondaryActivity.MODE_MAP, R.string.title_map)));
         binding.btnOpenHistory.setOnClickListener(v -> startActivity(SecondaryActivity.intent(requireContext(), SecondaryActivity.MODE_HISTORY, R.string.title_history)));
@@ -39,6 +47,87 @@ public class SettingsFragment extends Fragment {
         binding = null;
         super.onDestroyView();
     }
+
+    // ── Accent colour chip group ───────────────────────────────────────────
+
+    private void buildAccentChips() {
+        if (binding == null) return;
+        AppThemeConfig.ThemePreset current = AppThemeConfig.loadThemePreset(requireContext());
+        binding.chipGroupAccent.removeAllViews();
+        int selectedId = View.NO_ID;
+        for (AppThemeConfig.ThemePreset preset : AppThemeConfig.ThemePreset.values()) {
+            Chip chip = new Chip(requireContext());
+            chip.setId(View.generateViewId());
+            chip.setText(preset.label);
+            chip.setCheckable(true);
+            GradientDrawable dot = new GradientDrawable();
+            dot.setShape(GradientDrawable.OVAL);
+            dot.setColor(preset.color());
+            dot.setSize(40, 40);
+            chip.setChipIcon(dot);
+            chip.setChipIconSize(40f);
+            // Use click listener to avoid double-fire from OnCheckedChangeListener
+            chip.setOnClickListener(v -> AppThemeConfig.saveThemePreset(requireContext(), preset));
+            binding.chipGroupAccent.addView(chip);
+            if (preset == current) selectedId = chip.getId();
+        }
+        if (selectedId != View.NO_ID) binding.chipGroupAccent.check(selectedId);
+    }
+
+    // ── Background preset chip group ───────────────────────────────────────
+
+    private void buildBgChips() {
+        if (binding == null) return;
+        AppThemeConfig.BgPreset current = AppThemeConfig.loadBgPreset(requireContext());
+        binding.chipGroupBg.removeAllViews();
+        int selectedId = View.NO_ID;
+        for (AppThemeConfig.BgPreset preset : AppThemeConfig.BgPreset.values()) {
+            Chip chip = new Chip(requireContext());
+            chip.setId(View.generateViewId());
+            chip.setText(preset.label);
+            chip.setCheckable(true);
+            GradientDrawable dot = new GradientDrawable();
+            dot.setShape(GradientDrawable.OVAL);
+            dot.setColor(preset.bgColor());
+            dot.setStroke(2, android.graphics.Color.GRAY);
+            dot.setSize(40, 40);
+            chip.setChipIcon(dot);
+            chip.setChipIconSize(40f);
+            chip.setOnClickListener(v -> AppThemeConfig.saveBgPreset(requireContext(), preset));
+            binding.chipGroupBg.addView(chip);
+            if (preset == current) selectedId = chip.getId();
+        }
+        if (selectedId != View.NO_ID) binding.chipGroupBg.check(selectedId);
+    }
+
+    // ── Dashboard card visibility toggles ─────────────────────────────────
+
+    private void loadCardConfig() {
+        if (binding == null) return;
+        DashboardCardConfig cfg = DashboardCardConfig.load(requireContext());
+        binding.switchCardKpiRow1.setChecked(cfg.showKpiRow1);
+        binding.switchCardKpiRow2.setChecked(cfg.showKpiRow2);
+        binding.switchCardKpiRow3.setChecked(cfg.showKpiRow3);
+        binding.switchCardGauges.setChecked(cfg.showGauges);
+        binding.switchCardCharts.setChecked(cfg.showCharts);
+        binding.switchCardActivity.setChecked(cfg.showActivityFeed);
+        binding.switchCardReadings.setChecked(cfg.showLatestReadings);
+    }
+
+    private void saveCardConfig() {
+        if (binding == null) return;
+        DashboardCardConfig cfg = DashboardCardConfig.defaults();
+        cfg.showKpiRow1        = binding.switchCardKpiRow1.isChecked();
+        cfg.showKpiRow2        = binding.switchCardKpiRow2.isChecked();
+        cfg.showKpiRow3        = binding.switchCardKpiRow3.isChecked();
+        cfg.showGauges         = binding.switchCardGauges.isChecked();
+        cfg.showCharts         = binding.switchCardCharts.isChecked();
+        cfg.showActivityFeed   = binding.switchCardActivity.isChecked();
+        cfg.showLatestReadings = binding.switchCardReadings.isChecked();
+        cfg.save(requireContext());
+    }
+
+    // ── Prefs ──────────────────────────────────────────────────────────────
 
     private void loadPrefs() {
         var prefs = AppController.get(requireContext()).preferences();
@@ -54,6 +143,9 @@ public class SettingsFragment extends Fragment {
     }
 
     private void savePrefs() {
+        // Save card config
+        saveCardConfig();
+
         var prefs = AppController.get(requireContext()).preferences();
         prefs.edit()
                 .putString("udp_host", textOf(binding.etUdpHost).trim())
@@ -83,6 +175,9 @@ public class SettingsFragment extends Fragment {
         } catch (Exception ex) {
             Toast.makeText(requireContext(), "应用连接设置失败: " + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
+
+        // Recreate activity to apply any accent/bg theme change
+        requireActivity().recreate();
     }
 
     private void refreshTransportStatus() {

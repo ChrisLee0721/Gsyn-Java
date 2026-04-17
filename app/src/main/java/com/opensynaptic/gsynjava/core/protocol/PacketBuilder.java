@@ -8,6 +8,21 @@ import java.util.Map;
 public final class PacketBuilder {
     private PacketBuilder() {}
 
+    /** Entry for buildMultiSensorPacket — mirrors Flutter's SensorEntry. */
+    public static final class SensorEntry {
+        public final String sensorId;
+        public final String unit;
+        public final String state;
+        public final double value;
+
+        public SensorEntry(String sensorId, String unit, String state, double value) {
+            this.sensorId = sensorId;
+            this.unit     = unit;
+            this.state    = state;
+            this.value    = value;
+        }
+    }
+
     public static byte[] buildPacket(int cmd, int aid, int tid, long tsSec, byte[] body) {
         if (body == null) body = new byte[0];
         int frameLen = 13 + body.length + 3;
@@ -43,15 +58,28 @@ public final class PacketBuilder {
         return buildPacket(OsCmd.DATA_FULL, aid, tid, tsSec, body.getBytes(StandardCharsets.UTF_8));
     }
 
+    /** Original overload kept for backward compatibility. */
     public static byte[] buildMultiSensorPacket(int aid, int tid, long tsSec, String nodeId, String nodeState, List<Map<String, Object>> sensors) {
         StringBuilder sb = new StringBuilder();
         sb.append(nodeId).append('.').append(nodeState).append('.').append(Base62Codec.encodeTimestamp(tsSec)).append('|');
         for (Map<String, Object> sensor : sensors) {
-            String sid = String.valueOf(sensor.get("sensor_id"));
-            String unit = String.valueOf(sensor.get("unit"));
+            String sid   = String.valueOf(sensor.get("sensor_id"));
+            String unit  = String.valueOf(sensor.get("unit"));
             String state = String.valueOf(sensor.getOrDefault("state", "U"));
-            double value = ((Number) sensor.get("value")).doubleValue();
-            sb.append(sid).append('>').append(state).append('.').append(unit).append(':').append(Base62Codec.encodeValue(value)).append('|');
+            double val   = ((Number) sensor.get("value")).doubleValue();
+            sb.append(sid).append('>').append(state).append('.').append(unit).append(':').append(Base62Codec.encodeValue(val)).append('|');
+        }
+        return buildPacket(OsCmd.DATA_FULL, aid, tid, tsSec, sb.toString().getBytes(StandardCharsets.UTF_8));
+    }
+
+    /** SensorEntry overload used by SendFragment multi-sensor rows. */
+    public static byte[] buildMultiSensorPacket(int aid, int tid, long tsSec, List<SensorEntry> entries) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(aid).append(".U.").append(Base62Codec.encodeTimestamp(tsSec)).append('|');
+        for (SensorEntry e : entries) {
+            String state = (e.state != null && !e.state.isEmpty()) ? e.state : "U";
+            sb.append(e.sensorId).append('>').append(state).append('.')
+              .append(e.unit).append(':').append(Base62Codec.encodeValue(e.value)).append('|');
         }
         return buildPacket(OsCmd.DATA_FULL, aid, tid, tsSec, sb.toString().getBytes(StandardCharsets.UTF_8));
     }
@@ -76,6 +104,18 @@ public final class PacketBuilder {
         return new byte[] {(byte) OsCmd.ID_ASSIGN, (byte) ((aid >> 24) & 0xFF), (byte) ((aid >> 16) & 0xFF), (byte) ((aid >> 8) & 0xFF), (byte) (aid & 0xFF)};
     }
 
+    public static byte[] buildHandshakeAck(int seq) {
+        return new byte[] {(byte) OsCmd.HANDSHAKE_ACK, (byte) ((seq >> 8) & 0xFF), (byte) (seq & 0xFF)};
+    }
+
+    public static byte[] buildHandshakeNack(int seq) {
+        return new byte[] {(byte) OsCmd.HANDSHAKE_NACK, (byte) ((seq >> 8) & 0xFF), (byte) (seq & 0xFF)};
+    }
+
+    public static byte[] buildSecureDictReady(int seq) {
+        return new byte[] {(byte) OsCmd.SECURE_DICT_READY, (byte) ((seq >> 8) & 0xFF), (byte) (seq & 0xFF)};
+    }
+
     public static byte[] buildRawHex(String hex) {
         String cleaned = hex.replaceAll("\\s+", "");
         if (cleaned.isEmpty() || cleaned.length() % 2 != 0) return null;
@@ -86,4 +126,3 @@ public final class PacketBuilder {
         return out.toByteArray();
     }
 }
-

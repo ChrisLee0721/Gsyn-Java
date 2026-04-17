@@ -12,6 +12,237 @@
         <item name="colorOnSecondaryContainer">@color/gsyn_on_surface</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/gsyn_background</item>
         <item name="android:navigationBarColor" tools:targetApi="o_mr1">@color/gsyn_background</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
     </style>
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         Accent colour overlays  (8 presets, mirror Flutter AppThemePreset)
+         Apply via: getTheme().applyStyle(id, true) BEFORE super.onCreate()
+         ══════════════════════════════════════════════════════════════════════ -->
+
+    <style name="ThemeOverlay.GsynJava.Accent.DeepBlue" parent="">
+        <item name="colorPrimary">@color/theme_deep_blue</item>
+        <item name="colorOnPrimary">@color/theme_deep_blue_on</item>
+        <item name="colorPrimaryContainer">@color/theme_deep_blue_container</item>
+        <item name="colorOnPrimaryContainer">@color/theme_deep_blue_on_container</item>
+    </style>
+    <style name="ThemeOverlay.GsynJava.Accent.Teal" parent="">
+        <item name="colorPrimary">@color/theme_teal</item>
+        <item name="colorOnPrimary">@color/theme_teal_on</item>
+        <item name="colorPrimaryContainer">@color/theme_teal_container</item>
+        <item name="colorOnPrimaryContainer">@color/theme_teal_on_container</item>
+    </style>
+    <style name="ThemeOverlay.GsynJava.Accent.Purple" parent="">
+        <item name="colorPrimary">@color/theme_purple</item>
+        <item name="colorOnPrimary">@color/theme_purple_on</item>
+        <item name="colorPrimaryContainer">@color/theme_purple_container</item>
+        <item name="colorOnPrimaryContainer">@color/theme_purple_on_container</item>
+    </style>
+    <style name="ThemeOverlay.GsynJava.Accent.Amber" parent="">
+        <item name="colorPrimary">@color/theme_amber</item>
+        <item name="colorOnPrimary">@color/theme_amber_on</item>
+        <item name="colorPrimaryContainer">@color/theme_amber_container</item>
+        <item name="colorOnPrimaryContainer">@color/theme_amber_on_container</item>
+    </style>
+    <style name="ThemeOverlay.GsynJava.Accent.Red" parent="">
+        <item name="colorPrimary">@color/theme_red</item>
+        <item name="colorOnPrimary">@color/theme_red_on</item>
+        <item name="colorPrimaryContainer">@color/theme_red_container</item>
+        <item name="colorOnPrimaryContainer">@color/theme_red_on_container</item>
+    </style>
+    <style name="ThemeOverlay.GsynJava.Accent.Cyan" parent="">
+        <item name="colorPrimary">@color/theme_cyan</item>
+        <item name="colorOnPrimary">@color/theme_cyan_on</item>
+        <item name="colorPrimaryContainer">@color/theme_cyan_container</item>
+        <item name="colorOnPrimaryContainer">@color/theme_cyan_on_container</item>
+    </style>
+    <style name="ThemeOverlay.GsynJava.Accent.Green" parent="">
+        <item name="colorPrimary">@color/theme_green</item>
+        <item name="colorOnPrimary">@color/theme_green_on</item>
+        <item name="colorPrimaryContainer">@color/theme_green_container</item>
+        <item name="colorOnPrimaryContainer">@color/theme_green_on_container</item>
+    </style>
+    <style name="ThemeOverlay.GsynJava.Accent.Pink" parent="">
+        <item name="colorPrimary">@color/theme_pink</item>
+        <item name="colorOnPrimary">@color/theme_pink_on</item>
+        <item name="colorPrimaryContainer">@color/theme_pink_container</item>
+        <item name="colorOnPrimaryContainer">@color/theme_pink_on_container</item>
+    </style>
+
+    <!-- ══════════════════════════════════════════════════════════════════════
+         Background preset overlays  (12 presets, mirror Flutter AppBgPreset)
+         Apply via: getTheme().applyStyle(id, true) BEFORE super.onCreate()
+         NOTE: All color attributes MUST use @color/ references, not inline hex.
+         Material3 internally inflates color state lists that resolve attrs as
+         resource IDs; inline hex values cause Resources$NotFoundException.
+         ══════════════════════════════════════════════════════════════════════ -->
+
+    <!-- Dark presets -->
+    <style name="ThemeOverlay.GsynJava.Bg.DeepNavy" parent="">
+        <item name="android:colorBackground">@color/bg_deep_navy</item>
+        <item name="colorSurface">@color/bg_deep_navy_surface</item>
+        <item name="colorSurfaceVariant">@color/bg_deep_navy_variant</item>
+        <item name="colorOnSurface">@color/bg_deep_navy_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/bg_deep_navy_on_surface_variant</item>
+        <item name="colorOutline">@color/bg_deep_navy_outline</item>
+        <item name="android:statusBarColor">@color/bg_deep_navy</item>
+        <item name="android:navigationBarColor">@color/bg_deep_navy</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+    </style>
+    <style name="ThemeOverlay.GsynJava.Bg.DarkSlate" parent="">
+        <item name="android:colorBackground">@color/bg_dark_slate</item>
+        <item name="colorSurface">@color/bg_dark_slate_surface</item>
+        <item name="colorSurfaceVariant">@color/bg_dark_slate_variant</item>
+        <item name="colorOnSurface">@color/bg_dark_slate_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/bg_dark_slate_on_surface_variant</item>
+        <item name="colorOutline">@color/bg_dark_slate_outline</item>
+        <item name="android:statusBarColor">@color/bg_dark_slate</item>
+        <item name="android:navigationBarColor">@color/bg_dark_slate</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+    </style>
+    <style name="ThemeOverlay.GsynJava.Bg.Charcoal" parent="">
+        <item name="android:colorBackground">@color/bg_charcoal</item>
+        <item name="colorSurface">@color/bg_charcoal_surface</item>
+        <item name="colorSurfaceVariant">@color/bg_charcoal_variant</item>
+        <item name="colorOnSurface">@color/bg_charcoal_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/bg_charcoal_on_surface_variant</item>
+        <item name="colorOutline">@color/bg_charcoal_outline</item>
+        <item name="android:statusBarColor">@color/bg_charcoal</item>
+        <item name="android:navigationBarColor">@color/bg_charcoal</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+    </style>
+    <style name="ThemeOverlay.GsynJava.Bg.TrueBlack" parent="">
+        <item name="android:colorBackground">@color/bg_true_black</item>
+        <item name="colorSurface">@color/bg_true_black_surface</item>
+        <item name="colorSurfaceVariant">@color/bg_true_black_variant</item>
+        <item name="colorOnSurface">@color/bg_true_black_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/bg_true_black_on_surface_variant</item>
+        <item name="colorOutline">@color/bg_true_black_outline</item>
+        <item name="android:statusBarColor">@color/bg_true_black</item>
+        <item name="android:navigationBarColor">@color/bg_true_black</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+    </style>
+    <style name="ThemeOverlay.GsynJava.Bg.ForestDark" parent="">
+        <item name="android:colorBackground">@color/bg_forest_dark</item>
+        <item name="colorSurface">@color/bg_forest_dark_surface</item>
+        <item name="colorSurfaceVariant">@color/bg_forest_dark_variant</item>
+        <item name="colorOnSurface">@color/bg_forest_dark_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/bg_forest_dark_on_surface_variant</item>
+        <item name="colorOutline">@color/bg_forest_dark_outline</item>
+        <item name="android:statusBarColor">@color/bg_forest_dark</item>
+        <item name="android:navigationBarColor">@color/bg_forest_dark</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+    </style>
+    <style name="ThemeOverlay.GsynJava.Bg.WarmDark" parent="">
+        <item name="android:colorBackground">@color/bg_warm_dark</item>
+        <item name="colorSurface">@color/bg_warm_dark_surface</item>
+        <item name="colorSurfaceVariant">@color/bg_warm_dark_variant</item>
+        <item name="colorOnSurface">@color/bg_warm_dark_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/bg_warm_dark_on_surface_variant</item>
+        <item name="colorOutline">@color/bg_warm_dark_outline</item>
+        <item name="android:statusBarColor">@color/bg_warm_dark</item>
+        <item name="android:navigationBarColor">@color/bg_warm_dark</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+    </style>
+
+    <!-- Light presets — must override colorOnSurface for readable text -->
+    <style name="ThemeOverlay.GsynJava.Bg.SnowWhite" parent="">
+        <item name="android:colorBackground">@color/bg_snow_white</item>
+        <item name="colorSurface">@color/bg_snow_white_surface</item>
+        <item name="colorSurfaceVariant">@color/bg_snow_white_variant</item>
+        <item name="colorOnSurface">@color/bg_snow_white_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/bg_snow_white_on_surface_variant</item>
+        <item name="colorOutline">@color/bg_snow_white_outline</item>
+        <item name="android:textColorPrimary">@color/bg_snow_white_text</item>
+        <item name="android:textColorSecondary">@color/bg_snow_white_text2</item>
+        <item name="android:textColorHint">@color/bg_snow_white_hint</item>
+        <item name="android:statusBarColor">@color/bg_snow_white</item>
+        <item name="android:navigationBarColor">@color/bg_snow_white</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+    </style>
+    <style name="ThemeOverlay.GsynJava.Bg.CloudGrey" parent="">
+        <item name="android:colorBackground">@color/bg_cloud_grey</item>
+        <item name="colorSurface">@color/bg_cloud_grey_surface</item>
+        <item name="colorSurfaceVariant">@color/bg_cloud_grey_variant</item>
+        <item name="colorOnSurface">@color/bg_cloud_grey_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/bg_cloud_grey_on_surface_variant</item>
+        <item name="colorOutline">@color/bg_cloud_grey_outline</item>
+        <item name="android:textColorPrimary">@color/bg_cloud_grey_text</item>
+        <item name="android:textColorSecondary">@color/bg_cloud_grey_text2</item>
+        <item name="android:textColorHint">@color/bg_cloud_grey_hint</item>
+        <item name="android:statusBarColor">@color/bg_cloud_grey</item>
+        <item name="android:navigationBarColor">@color/bg_cloud_grey</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+    </style>
+    <style name="ThemeOverlay.GsynJava.Bg.PaperCream" parent="">
+        <item name="android:colorBackground">@color/bg_paper_cream</item>
+        <item name="colorSurface">@color/bg_paper_cream_surface</item>
+        <item name="colorSurfaceVariant">@color/bg_paper_cream_variant</item>
+        <item name="colorOnSurface">@color/bg_paper_cream_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/bg_paper_cream_on_surface_variant</item>
+        <item name="colorOutline">@color/bg_paper_cream_outline</item>
+        <item name="android:textColorPrimary">@color/bg_paper_cream_text</item>
+        <item name="android:textColorSecondary">@color/bg_paper_cream_text2</item>
+        <item name="android:textColorHint">@color/bg_paper_cream_hint</item>
+        <item name="android:statusBarColor">@color/bg_paper_cream</item>
+        <item name="android:navigationBarColor">@color/bg_paper_cream</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+    </style>
+    <style name="ThemeOverlay.GsynJava.Bg.MintLight" parent="">
+        <item name="android:colorBackground">@color/bg_mint_light</item>
+        <item name="colorSurface">@color/bg_mint_light_surface</item>
+        <item name="colorSurfaceVariant">@color/bg_mint_light_variant</item>
+        <item name="colorOnSurface">@color/bg_mint_light_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/bg_mint_light_on_surface_variant</item>
+        <item name="colorOutline">@color/bg_mint_light_outline</item>
+        <item name="android:textColorPrimary">@color/bg_mint_light_text</item>
+        <item name="android:textColorSecondary">@color/bg_mint_light_text2</item>
+        <item name="android:textColorHint">@color/bg_mint_light_hint</item>
+        <item name="android:statusBarColor">@color/bg_mint_light</item>
+        <item name="android:navigationBarColor">@color/bg_mint_light</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+    </style>
+    <style name="ThemeOverlay.GsynJava.Bg.LavenderLight" parent="">
+        <item name="android:colorBackground">@color/bg_lavender_light</item>
+        <item name="colorSurface">@color/bg_lavender_light_surface</item>
+        <item name="colorSurfaceVariant">@color/bg_lavender_light_variant</item>
+        <item name="colorOnSurface">@color/bg_lavender_light_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/bg_lavender_light_on_surface_variant</item>
+        <item name="colorOutline">@color/bg_lavender_light_outline</item>
+        <item name="android:textColorPrimary">@color/bg_lavender_light_text</item>
+        <item name="android:textColorSecondary">@color/bg_lavender_light_text2</item>
+        <item name="android:textColorHint">@color/bg_lavender_light_hint</item>
+        <item name="android:statusBarColor">@color/bg_lavender_light</item>
+        <item name="android:navigationBarColor">@color/bg_lavender_light</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+    </style>
+    <style name="ThemeOverlay.GsynJava.Bg.SkyBlue" parent="">
+        <item name="android:colorBackground">@color/bg_sky_blue</item>
+        <item name="colorSurface">@color/bg_sky_blue_surface</item>
+        <item name="colorSurfaceVariant">@color/bg_sky_blue_variant</item>
+        <item name="colorOnSurface">@color/bg_sky_blue_on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/bg_sky_blue_on_surface_variant</item>
+        <item name="colorOutline">@color/bg_sky_blue_outline</item>
+        <item name="android:textColorPrimary">@color/bg_sky_blue_text</item>
+        <item name="android:textColorSecondary">@color/bg_sky_blue_text2</item>
+        <item name="android:textColorHint">@color/bg_sky_blue_hint</item>
+        <item name="android:statusBarColor">@color/bg_sky_blue</item>
+        <item name="android:navigationBarColor">@color/bg_sky_blue</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+    </style>
+
 </resources>
 

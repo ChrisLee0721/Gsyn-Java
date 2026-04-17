@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.opensynaptic.gsynjava.core.protocol.BodyParser;
+import com.opensynaptic.gsynjava.core.protocol.DiffEngine;
 import com.opensynaptic.gsynjava.core.protocol.OsCmd;
 import com.opensynaptic.gsynjava.core.protocol.PacketDecoder;
 import com.opensynaptic.gsynjava.data.Models;
@@ -45,6 +46,7 @@ public class TransportManager {
     private volatile boolean udpRunning;
     private volatile boolean mqttConnected;
     private MqttClient mqttClient;
+    private final DiffEngine diffEngine = new DiffEngine();
 
     private int totalMessages;
     private int messagesThisSecond;
@@ -116,6 +118,7 @@ public class TransportManager {
             udpSocket = null;
         }
         udpThread = null;
+        diffEngine.clear(); // clear DIFF/HEART template cache on stop
         emitStats();
     }
 
@@ -143,6 +146,7 @@ public class TransportManager {
         }
         mqttClient = null;
         mqttConnected = false;
+        diffEngine.clear(); // clear DIFF/HEART template cache on disconnect
         emitStats();
     }
 
@@ -166,10 +170,19 @@ public class TransportManager {
         Models.PacketMeta meta = PacketDecoder.decode(data);
         if (meta == null || !meta.crc16Ok || !meta.crc8Ok) return;
         if (!OsCmd.isDataCmd(meta.cmd)) return;
+
+        // Extract raw body bytes
         byte[] body = new byte[meta.bodyLen];
-        System.arraycopy(data, meta.bodyOffset, body, 0, meta.bodyLen);
-        Models.BodyParseResult parsed = BodyParser.parse(body);
-        if (parsed == null) return;
+        if (meta.bodyLen > 0) {
+            System.arraycopy(data, meta.bodyOffset, body, 0, meta.bodyLen);
+        }
+
+        // Run through DiffEngine to handle FULL/HEART/DIFF template logic
+        String bodyText = diffEngine.processPacket(meta.cmd, meta.aid, meta.tid, body);
+        if (bodyText == null) return;
+
+        Models.BodyParseResult parsed = BodyParser.parseText(bodyText);
+        if (parsed == null || parsed.readings.isEmpty()) return;
 
         Models.DeviceMessage message = new Models.DeviceMessage();
         message.cmd = meta.cmd;

@@ -1,17 +1,181 @@
 <resources>
-    <color name="gsyn_primary">#00639B</color>
+    <!-- === Core AppColors (mirrors Flutter AppColors exactly) === -->
+    <color name="gsyn_primary">#1A73E8</color>
     <color name="gsyn_on_primary">#FFFFFF</color>
-    <color name="gsyn_secondary">#4C6A88</color>
-    <color name="gsyn_background">#101418</color>
-    <color name="gsyn_surface">#182028</color>
+    <color name="gsyn_secondary">#34A853</color>
+    <color name="gsyn_background">#0F1923</color>
+    <color name="gsyn_surface">#1B2838</color>
+    <color name="gsyn_card">#213040</color>
     <color name="gsyn_surface_variant">#1E2833</color>
     <color name="gsyn_surface_elevated">#233140</color>
-    <color name="gsyn_on_surface">#E2E8F0</color>
-    <color name="gsyn_on_surface_muted">#9FB0C3</color>
+    <color name="gsyn_on_surface">#E8EAED</color>
+    <color name="gsyn_on_surface_muted">#9AA0A6</color>
     <color name="gsyn_outline">#314050</color>
-    <color name="gsyn_online">#34C759</color>
-    <color name="gsyn_warning">#FFB020</color>
-    <color name="gsyn_danger">#FF5A5F</color>
-    <color name="gsyn_info">#5AC8FA</color>
-</resources>
 
+    <!-- Status colors -->
+    <color name="gsyn_online">#34A853</color>
+    <color name="gsyn_offline">#5F6368</color>
+    <color name="gsyn_warning">#FBBC04</color>
+    <color name="gsyn_danger">#EA4335</color>
+    <color name="gsyn_info">#4285F4</color>
+
+    <!-- Zone colors -->
+    <color name="gsyn_zone_normal">#34A853</color>
+    <color name="gsyn_zone_warning">#FBBC04</color>
+    <color name="gsyn_zone_danger">#EA4335</color>
+
+    <!-- Chart palette (8 colors) -->
+    <color name="gsyn_chart_1">#4285F4</color>
+    <color name="gsyn_chart_2">#34A853</color>
+    <color name="gsyn_chart_3">#FBBC04</color>
+    <color name="gsyn_chart_4">#EA4335</color>
+    <color name="gsyn_chart_5">#9C27B0</color>
+    <color name="gsyn_chart_6">#00BCD4</color>
+    <color name="gsyn_chart_7">#FF9800</color>
+    <color name="gsyn_chart_8">#607D8B</color>
+
+    <!-- Theme accent seed colors (AppThemePreset) -->
+    <color name="theme_deep_blue">#1A73E8</color>
+    <color name="theme_deep_blue_on">#FFFFFF</color>
+    <color name="theme_deep_blue_container">#004787</color>
+    <color name="theme_deep_blue_on_container">#D3E3FD</color>
+
+    <color name="theme_teal">#00897B</color>
+    <color name="theme_teal_on">#FFFFFF</color>
+    <color name="theme_teal_container">#004B44</color>
+    <color name="theme_teal_on_container">#B2DFDB</color>
+
+    <color name="theme_purple">#7B1FA2</color>
+    <color name="theme_purple_on">#FFFFFF</color>
+    <color name="theme_purple_container">#4D0065</color>
+    <color name="theme_purple_on_container">#E1BEE7</color>
+
+    <color name="theme_amber">#FF8F00</color>
+    <color name="theme_amber_on">#1A1A1A</color>
+    <color name="theme_amber_container">#4D3200</color>
+    <color name="theme_amber_on_container">#FFF9C2</color>
+
+    <color name="theme_red">#D32F2F</color>
+    <color name="theme_red_on">#FFFFFF</color>
+    <color name="theme_red_container">#6B0000</color>
+    <color name="theme_red_on_container">#FFCDD2</color>
+
+    <color name="theme_cyan">#0097A7</color>
+    <color name="theme_cyan_on">#FFFFFF</color>
+    <color name="theme_cyan_container">#00363C</color>
+    <color name="theme_cyan_on_container">#B2EBF2</color>
+
+    <color name="theme_green">#2E7D32</color>
+    <color name="theme_green_on">#FFFFFF</color>
+    <color name="theme_green_container">#003A00</color>
+    <color name="theme_green_on_container">#C8E6C9</color>
+
+    <color name="theme_pink">#C2185B</color>
+    <color name="theme_pink_on">#FFFFFF</color>
+    <color name="theme_pink_container">#4D0022</color>
+    <color name="theme_pink_on_container">#FCE4EC</color>
+
+    <!-- Background preset background tones (AppBgPreset) -->
+    <color name="bg_deep_navy">#0F1923</color>
+    <color name="bg_deep_navy_surface">#1B2838</color>
+    <color name="bg_deep_navy_card">#213040</color>
+    <color name="bg_deep_navy_variant">#1E2833</color>
+    <color name="bg_deep_navy_on_surface">#E8EAED</color>
+    <color name="bg_deep_navy_on_surface_variant">#9AA0A6</color>
+    <color name="bg_deep_navy_outline">#314050</color>
+
+    <color name="bg_dark_slate">#121420</color>
+    <color name="bg_dark_slate_surface">#1D2033</color>
+    <color name="bg_dark_slate_variant">#252840</color>
+    <color name="bg_dark_slate_on_surface">#E8EAED</color>
+    <color name="bg_dark_slate_on_surface_variant">#9AA0A6</color>
+    <color name="bg_dark_slate_outline">#334055</color>
+
+    <color name="bg_charcoal">#1A1A1A</color>
+    <color name="bg_charcoal_surface">#262626</color>
+    <color name="bg_charcoal_variant">#303030</color>
+    <color name="bg_charcoal_on_surface">#E8EAED</color>
+    <color name="bg_charcoal_on_surface_variant">#9AA0A6</color>
+    <color name="bg_charcoal_outline">#444444</color>
+
+    <color name="bg_true_black">#080808</color>
+    <color name="bg_true_black_surface">#141414</color>
+    <color name="bg_true_black_variant">#1E1E1E</color>
+    <color name="bg_true_black_on_surface">#E8EAED</color>
+    <color name="bg_true_black_on_surface_variant">#9AA0A6</color>
+    <color name="bg_true_black_outline">#333333</color>
+
+    <color name="bg_forest_dark">#0D1A0D</color>
+    <color name="bg_forest_dark_surface">#172617</color>
+    <color name="bg_forest_dark_variant">#1F301F</color>
+    <color name="bg_forest_dark_on_surface">#E8EAED</color>
+    <color name="bg_forest_dark_on_surface_variant">#9AA0A6</color>
+    <color name="bg_forest_dark_outline">#2E4A2E</color>
+
+    <color name="bg_warm_dark">#1A1209</color>
+    <color name="bg_warm_dark_surface">#261D0F</color>
+    <color name="bg_warm_dark_variant">#302318</color>
+    <color name="bg_warm_dark_on_surface">#E8EAED</color>
+    <color name="bg_warm_dark_on_surface_variant">#9AA0A6</color>
+    <color name="bg_warm_dark_outline">#4A3A2A</color>
+
+    <color name="bg_snow_white">#FAFAFA</color>
+    <color name="bg_snow_white_surface">#FFFFFF</color>
+    <color name="bg_snow_white_variant">#F1F3F4</color>
+    <color name="bg_snow_white_on_surface">#1C1B1F</color>
+    <color name="bg_snow_white_on_surface_variant">#49454F</color>
+    <color name="bg_snow_white_outline">#79747E</color>
+    <color name="bg_snow_white_text">#1C1B1F</color>
+    <color name="bg_snow_white_text2">#49454F</color>
+    <color name="bg_snow_white_hint">#938F99</color>
+
+    <color name="bg_cloud_grey">#F1F3F4</color>
+    <color name="bg_cloud_grey_surface">#FFFFFF</color>
+    <color name="bg_cloud_grey_variant">#E8EAED</color>
+    <color name="bg_cloud_grey_on_surface">#1C1B1F</color>
+    <color name="bg_cloud_grey_on_surface_variant">#49454F</color>
+    <color name="bg_cloud_grey_outline">#79747E</color>
+    <color name="bg_cloud_grey_text">#1C1B1F</color>
+    <color name="bg_cloud_grey_text2">#49454F</color>
+    <color name="bg_cloud_grey_hint">#938F99</color>
+
+    <color name="bg_paper_cream">#FFFDE7</color>
+    <color name="bg_paper_cream_surface">#FFFFFF</color>
+    <color name="bg_paper_cream_variant">#FFF9C4</color>
+    <color name="bg_paper_cream_on_surface">#1C1B1F</color>
+    <color name="bg_paper_cream_on_surface_variant">#49454F</color>
+    <color name="bg_paper_cream_outline">#79747E</color>
+    <color name="bg_paper_cream_text">#1C1B1F</color>
+    <color name="bg_paper_cream_text2">#49454F</color>
+    <color name="bg_paper_cream_hint">#938F99</color>
+
+    <color name="bg_mint_light">#E8F5E9</color>
+    <color name="bg_mint_light_surface">#FFFFFF</color>
+    <color name="bg_mint_light_variant">#C8E6C9</color>
+    <color name="bg_mint_light_on_surface">#1C1B1F</color>
+    <color name="bg_mint_light_on_surface_variant">#49454F</color>
+    <color name="bg_mint_light_outline">#79747E</color>
+    <color name="bg_mint_light_text">#1C1B1F</color>
+    <color name="bg_mint_light_text2">#49454F</color>
+    <color name="bg_mint_light_hint">#938F99</color>
+
+    <color name="bg_lavender_light">#EDE7F6</color>
+    <color name="bg_lavender_light_surface">#FFFFFF</color>
+    <color name="bg_lavender_light_variant">#D1C4E9</color>
+    <color name="bg_lavender_light_on_surface">#1C1B1F</color>
+    <color name="bg_lavender_light_on_surface_variant">#49454F</color>
+    <color name="bg_lavender_light_outline">#79747E</color>
+    <color name="bg_lavender_light_text">#1C1B1F</color>
+    <color name="bg_lavender_light_text2">#49454F</color>
+    <color name="bg_lavender_light_hint">#938F99</color>
+
+    <color name="bg_sky_blue">#E3F2FD</color>
+    <color name="bg_sky_blue_surface">#FFFFFF</color>
+    <color name="bg_sky_blue_variant">#BBDEFB</color>
+    <color name="bg_sky_blue_on_surface">#1C1B1F</color>
+    <color name="bg_sky_blue_on_surface_variant">#49454F</color>
+    <color name="bg_sky_blue_outline">#79747E</color>
+    <color name="bg_sky_blue_text">#1C1B1F</color>
+    <color name="bg_sky_blue_text2">#49454F</color>
+    <color name="bg_sky_blue_hint">#938F99</color>
+</resources>

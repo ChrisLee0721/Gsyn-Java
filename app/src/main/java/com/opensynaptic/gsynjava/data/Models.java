@@ -116,5 +116,18 @@ public final class Models {
         public int messagesPerSecond;
         public int totalMessages;
     }
+
+    /** Application user — mirrors Flutter AppUser model. */
+    public static class AppUser {
+        public long id;
+        public String username = "";
+        public String passwordHash = "";
+        public String role = "viewer";  // "admin" | "viewer"
+        public long createdMs;
+
+        public boolean isAdmin() {
+            return "admin".equals(role);
+        }
+    }
 }
 

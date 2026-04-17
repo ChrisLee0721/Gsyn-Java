@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.opensynaptic.gsynjava.AppController;
 import com.opensynaptic.gsynjava.R;
+import com.opensynaptic.gsynjava.core.AppThemeConfig;
 import com.opensynaptic.gsynjava.data.AppRepository;
 import com.opensynaptic.gsynjava.data.Models;
 import com.opensynaptic.gsynjava.databinding.FragmentDashboardBinding;
@@ -32,6 +33,8 @@ public class DashboardFragment extends Fragment implements TransportManager.Mess
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        // Apply background preset
+        AppThemeConfig.applyBgToRoot(binding.getRoot(), requireContext());
         repository = AppController.get(requireContext()).repository();
         transportManager = AppController.get(requireContext()).transport();
         binding.btnMap.setOnClickListener(v -> startActivity(SecondaryActivity.intent(requireContext(), SecondaryActivity.MODE_MAP, R.string.title_map)));
@@ -45,6 +48,7 @@ public class DashboardFragment extends Fragment implements TransportManager.Mess
     @Override
     public void onStart() {
         super.onStart();
+        applyCardConfig();
         transportManager.addMessageListener(this);
         transportManager.addStatsListener(this);
         refresh();
@@ -186,6 +190,21 @@ public class DashboardFragment extends Fragment implements TransportManager.Mess
             }
         }
         return result;
+    }
+
+    private void applyCardConfig() {
+        if (binding == null) return;
+        DashboardCardConfig cfg = DashboardCardConfig.load(requireContext());
+        int v1 = cfg.showKpiRow1 ? View.VISIBLE : View.GONE;
+        int v2 = cfg.showKpiRow2 ? View.VISIBLE : View.GONE;
+        int v3 = cfg.showKpiRow3 ? View.VISIBLE : View.GONE;
+        binding.containerKpiRow1.setVisibility(v1);
+        binding.containerKpiRow2.setVisibility(v2);
+        binding.containerKpiRow3.setVisibility(v3);
+        binding.containerGauges.setVisibility(cfg.showGauges ? View.VISIBLE : View.GONE);
+        binding.containerCharts.setVisibility(cfg.showCharts ? View.VISIBLE : View.GONE);
+        binding.containerActivity.setVisibility(cfg.showActivityFeed ? View.VISIBLE : View.GONE);
+        binding.containerLatestReadings.setVisibility(cfg.showLatestReadings ? View.VISIBLE : View.GONE);
     }
 
     @Override

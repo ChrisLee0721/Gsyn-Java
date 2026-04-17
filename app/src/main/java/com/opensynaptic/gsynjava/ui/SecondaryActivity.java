@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.opensynaptic.gsynjava.R;
+import com.opensynaptic.gsynjava.core.AppThemeConfig;
 import com.opensynaptic.gsynjava.databinding.ActivitySecondaryBinding;
 import com.opensynaptic.gsynjava.ui.mirror.HealthMirrorFragment;
 import com.opensynaptic.gsynjava.ui.mirror.HistoryMirrorFragment;
@@ -31,9 +32,16 @@ public class SecondaryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Apply theme overlays BEFORE super.onCreate() — canonical approach.
+        getTheme().applyStyle(AppThemeConfig.getAccentOverlayRes(
+                AppThemeConfig.loadThemePreset(getApplicationContext())), true);
+        getTheme().applyStyle(AppThemeConfig.getBgOverlayRes(
+                AppThemeConfig.loadBgPreset(getApplicationContext())), true);
         super.onCreate(savedInstanceState);
         binding = ActivitySecondaryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        // Sync status-bar / nav-bar colours AFTER setContentView.
+        AppThemeConfig.applyBgToWindow(getWindow(), this);
         setSupportActionBar(binding.toolbar);
         String title = getIntent().getStringExtra(Intent.EXTRA_TITLE);
         String mode = getIntent().getStringExtra(EXTRA_MODE);

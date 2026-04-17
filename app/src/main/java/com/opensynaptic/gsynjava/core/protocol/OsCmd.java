@@ -34,6 +34,11 @@ public final class OsCmd {
         return cmd == DATA_FULL || cmd == DATA_FULL_SEC || cmd == DATA_DIFF || cmd == DATA_DIFF_SEC || cmd == DATA_HEART || cmd == DATA_HEART_SEC;
     }
 
+    /** Returns true if cmd is a secure (encrypted) variant. */
+    public static boolean isSecureCmd(int cmd) {
+        return cmd == DATA_FULL_SEC || cmd == DATA_DIFF_SEC || cmd == DATA_HEART_SEC;
+    }
+
     public static String nameOf(int cmd) {
         switch (cmd) {
             case DATA_FULL: return "DATA_FULL";

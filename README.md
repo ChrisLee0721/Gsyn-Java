@@ -1,38 +1,94 @@
 # Gsyn Java Mirror
 
-这是 `opensynaptic_dashboard` 的 Android Studio 原生 Java 镜像子项目，路径为：
+这是 [OpenSynaptic/Gsyn](https://github.com/OpenSynaptic/Gsyn)（Flutter 多平台 dashboard）的 Android Studio 原生 Java 镜像项目。
 
-- `native_android_java/`
+## 已镜像的核心内容
 
-## 当前已镜像的核心内容
+### 协议层（`core/protocol/`）
+| Java 文件 | 对应 Flutter 源文件 | 说明 |
+|---|---|---|
+| `OsCmd.java` | `lib/protocol/codec/commands.dart` | 命令字节常量 + isDataCmd / isSecureCmd / normalizeDataCmd |
+| `OsCrc.java` | `lib/protocol/codec/crc.dart` | CRC-8/SMBUS 和 CRC-16/CCITT-FALSE |
+| `Base62Codec.java` | `lib/protocol/codec/base62.dart` | Base62 编解码 + 时间戳 Base64url + 传感器值缩放 |
+| `BodyParser.java` | `lib/protocol/codec/body_parser.dart` | FULL 包体解析 → SensorReading 列表 |
+| `PacketDecoder.java` | `lib/protocol/codec/packet_decoder.dart` | 线路包头解析 + CRC 校验 |
+| `PacketBuilder.java` | `lib/protocol/codec/packet_builder.dart` | FULL/PING/PONG/ID_REQUEST/TIME_REQUEST/RAW_HEX 帧构建 |
+| `DiffEngine.java` | `lib/protocol/codec/diff_engine.dart` | DIFF/HEART 模板引擎（学习/重建/差分更新） |
+| `ProtocolConstants.java` | `lib/core/protocol_constants.dart` | 传感器 ID、单位、状态码常量及 defaultUnitFor() |
 
-- 原生 Android Studio 工程结构（Gradle / app / manifest / resources）
-- OpenSynaptic 协议常量、CRC、Base62、时间戳编码、包构建与包解析
-- SQLite 数据库 schema：`devices / sensor_data / alerts / rules / operation_logs / users / dashboard_layout / pending_commands`
-- 统一仓储层：设备、历史、告警、规则、操作日志
-- 传输层：UDP 监听、MQTT 订阅、发送命令
-- 规则引擎：阈值触发 -> 创建告警 / 发送命令 / 日志记录
-- 主导航：`Dashboard / Devices / Alerts / Send / Settings`
-- 二级镜像页面：`Map / History / Rules / System Health`
+### 数据层（`data/`）
+| Java 文件 | 对应 Flutter 源文件 | 说明 |
+|---|---|---|
+| `Models.java` | `lib/data/models/models.dart` + `lib/protocol/models/` | Device / SensorData / AlertItem / Rule / OperationLog / AppUser / SensorReading / DeviceMessage / PacketMeta |
+| `AppDatabaseHelper.java` | `lib/data/database/database_helper.dart` | SQLite schema v1：devices / sensor_data / alerts / rules / operation_logs / users / dashboard_layout / pending_commands |
+| `AppRepository.java` | `lib/data/repositories/repositories.dart` | 全部 CRUD：设备 upsert、传感器批量写入、告警 ACK、规则 CRUD、操作日志、CSV 导出、数据裁剪 |
+
+### 传输层（`transport/`）
+| Java 文件 | 对应 Flutter 源文件 | 说明 |
+|---|---|---|
+| `TransportManager.java` | `lib/protocol/transport/transport_manager.dart` + udp + mqtt | UDP 监听/发送、MQTT 订阅/发布、DiffEngine 集成（FULL/DIFF/HEART 自动处理）、统计广播 |
+
+### 规则引擎（`rules/`）
+| Java 文件 | 对应 Flutter 源文件 | 说明 |
+|---|---|---|
+| `RulesEngine.java` | `lib/rules/rules_engine.dart` | 阈值评估 → create_alert / send_command / log_only；冷却期管理 |
+
+### 应用控制器
+| Java 文件 | 说明 |
+|---|---|
+| `AppController.java` | 单例协调器：Repository + TransportManager + RulesEngine + 消息流转 |
+
+### UI 层
+| 页面/组件 | 对应 Flutter 页面 | 说明 |
+|---|---|---|
+| `MainActivity.java` | `app.dart` AppShell | BottomNav 5 标签导航 |
+| `DashboardFragment.java` | `features/dashboard/dashboard_page.dart` | KPI 卡片、Mini 折线图、水位/湿度进度、告警/操作摘要、传输状态 |
+| `DevicesFragment.java` | `features/devices/devices_page.dart` | 设备列表、搜索过滤、详情弹窗 |
+| `AlertsFragment.java` | `features/alerts/alerts_page.dart` | 告警列表、严重级过滤、一键确认 |
+| `SendFragment.java` | `features/send/send_page.dart` | 命令构建器（PING/PONG/ID_REQUEST/TIME_REQUEST/ID_ASSIGN/DATA_FULL_SENSOR/RAW_HEX）、发送日志 |
+| `SettingsFragment.java` | `features/settings/settings_page.dart` | UDP/MQTT 连接配置、瓦片 URL、运行时统计 |
+| `MapMirrorFragment.java` | `features/map/map_page.dart` | 设备坐标列表镜像（占位，后续可接 OSM 地图） |
+| `HistoryMirrorFragment.java` | `features/history/history_page.dart` | 24h 传感器历史、CSV 导出 |
+| `RulesMirrorFragment.java` | `features/rules_config/rules_config_page.dart` | 规则 CRUD、启停切换、操作日志列表 |
+| `HealthMirrorFragment.java` | `features/system_health/system_health_page.dart` | 传输状态、设备在线率、DB 大小、7天数据裁剪 |
+| `MiniTrendChartView.java` | `widgets/realtime_line_chart.dart` | 原生 Canvas 折线图（带填充、网格、端点高亮） |
+| `CardRowAdapter.java` | 通用列表行 | MaterialCardView + 角标徽章 |
+| `UiFormatters.java` | 通用格式化 | 相对时间、日期、传感器摘要、数字裁剪 |
+
+## 单元测试（8 项全部通过）
+```
+✅ base62_roundtrip
+✅ timestamp_roundtrip
+✅ packet_build_and_decode
+✅ body_parse_sensor
+✅ diff_engine_full_heart_roundtrip
+✅ diff_engine_clear
+✅ protocol_constants_default_unit
+✅ os_cmd_is_secure
+```
 
 ## 打开方式
 
-直接在 Android Studio 中打开：
-
-- `opensynaptic_dashboard/native_android_java`
-
-这是当前最稳的原生入口；如果你在仓库根目录里仍遇到 Android Studio 顶部运行按钮没有直接指向 `app`，可以优先改为打开这个子目录。
+直接在 Android Studio 中打开本目录：
+```
+C:\Users\26427\StudioProjects\Gsyn-Java
+```
 
 ## 命令行构建
 
 ```powershell
-Set-Location "C:\Users\MaoJu\AndroidStudioProjects\opensynaptic_dashboard\native_android_java"
-.\gradlew.bat projects
-.\gradlew.bat test
-.\gradlew.bat assembleDebug
+Set-Location "C:\Users\26427\StudioProjects\Gsyn-Java"
+$env:JAVA_HOME = "C:\Users\26427\.jdks\openjdk-25.0.2"
+.\gradlew.bat :app:testDebugUnitTest   # 运行单元测试
+.\gradlew.bat :app:assembleDebug       # 构建 Debug APK
 ```
 
-## 说明
+## 与 Flutter 源的主要差异
 
-这个子项目的目标是把原版 dashboard 的核心协议、数据结构、页面分区和交互流转迁移到 Java 原生工程中，便于你继续在 Android Studio 里做完整原生化开发与扩展。
-
+| 方面 | Flutter 源 | Java 镜像 |
+|---|---|---|
+| DI / 状态管理 | Riverpod Provider | 单例（AppController / AppRepository / TransportManager） |
+| 图表 | fl_chart（矢量 Widget） | 原生 Canvas `MiniTrendChartView` |
+| 地图 | flutter_map + OSM | 坐标列表占位（可后续集成 osmdroid） |
+| MQTT | mqtt5_client | Eclipse Paho MQTT v3 |
+| 多语言 | AppStrings / LocaleProvider | 中文硬编码字符串（可扩展至 strings.xml） |
