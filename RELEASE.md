@@ -4,6 +4,32 @@
 
 ## 一、配置签名密钥库 (Keystore)
 
+### 快速方法：使用自动化脚本
+
+我们提供了自动化脚本来简化 keystore 生成过程：
+
+**Linux / macOS:**
+```bash
+./scripts/generate-keystore.sh
+```
+
+**Windows PowerShell:**
+```powershell
+.\scripts\generate-keystore.ps1
+```
+
+脚本会自动：
+- ✅ 生成 JKS 格式的 keystore
+- ✅ 验证 keystore 格式是否正确
+- ✅ 生成 Base64 编码（可选自动复制到剪贴板）
+- ✅ 显示后续配置 GitHub Secrets 的步骤
+
+如果你希望手动生成或需要了解细节，请继续阅读下面的手动步骤。
+
+---
+
+### 手动方法：逐步生成 Keystore
+
 ### 1.1 生成 Keystore 文件
 
 **重要提示**：必须使用 JKS 格式，而不是 PKCS12 格式。Android Gradle Plugin 对 PKCS12 格式的支持有限，可能导致 "Tag number over 30 is not supported" 错误。
