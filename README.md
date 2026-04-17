@@ -83,6 +83,31 @@ $env:JAVA_HOME = "C:\Users\26427\.jdks\openjdk-25.0.2"
 .\gradlew.bat :app:assembleDebug       # 构建 Debug APK
 ```
 
+## 发布版本
+
+本项目配置了自动化 CI/CD 流程。推送 `v*` 格式的 tag（如 `v1.0.0`）即可自动构建签名 APK 并创建 GitHub Release。
+
+**详细发布指南请参考：[RELEASE.md](./RELEASE.md)**
+
+快速发布步骤：
+```bash
+# 1. 更新 app/build.gradle 中的 versionCode 和 versionName
+# 2. 提交代码
+git add app/build.gradle
+git commit -m "chore: bump version to 1.1.0"
+git push origin main
+
+# 3. 创建并推送 tag
+git tag v1.1.0
+git push origin v1.1.0
+```
+
+首次发布前需配置 GitHub Secrets（参见 [RELEASE.md](./RELEASE.md)）：
+- `KEYSTORE_BASE64` - JKS 格式的 keystore 文件（Base64 编码）
+- `KEYSTORE_PASSWORD` - Keystore 密码
+- `KEY_ALIAS` - 密钥别名
+- `KEY_PASSWORD` - 密钥密码
+
 ## 与 Flutter 源的主要差异
 
 | 方面 | Flutter 源 | Java 镜像 |
