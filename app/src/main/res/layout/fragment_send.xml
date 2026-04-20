@@ -22,7 +22,7 @@
                 <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:text="目标设备"
                     android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-                    android:textColor="@color/gsyn_on_surface_muted" />
+                    android:textColor="?attr/colorOnSurfaceVariant" />
 
                 <Spinner android:id="@+id/spinnerDevice"
                     android:layout_width="match_parent" android:layout_height="48dp"
@@ -227,7 +227,7 @@
                     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                         android:layout_marginTop="8dp" android:text="传感器 ID"
                         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-                        android:textColor="@color/gsyn_on_surface_muted" />
+                        android:textColor="?attr/colorOnSurfaceVariant" />
                     <Spinner android:id="@+id/spinnerSensorId"
                         android:layout_width="match_parent" android:layout_height="48dp" android:layout_marginTop="2dp" />
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -236,7 +236,7 @@
                             android:layout_weight="1" android:orientation="vertical">
                             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                                 android:text="单位" android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-                                android:textColor="@color/gsyn_on_surface_muted" />
+                                android:textColor="?attr/colorOnSurfaceVariant" />
                             <Spinner android:id="@+id/spinnerUnit"
                                 android:layout_width="match_parent" android:layout_height="48dp" android:layout_marginTop="2dp" />
                         </LinearLayout>
@@ -244,7 +244,7 @@
                             android:layout_marginStart="8dp" android:layout_weight="1" android:orientation="vertical">
                             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
                                 android:text="状态" android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-                                android:textColor="@color/gsyn_on_surface_muted" />
+                                android:textColor="?attr/colorOnSurfaceVariant" />
                             <Spinner android:id="@+id/spinnerState"
                                 android:layout_width="match_parent" android:layout_height="48dp" android:layout_marginTop="2dp" />
                         </LinearLayout>
@@ -265,7 +265,7 @@
                         android:layout_width="match_parent" android:layout_height="wrap_content"
                         android:layout_marginTop="4dp" android:text="预览：-"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
-                        android:textColor="@color/gsyn_on_surface_muted" />
+                        android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -316,14 +316,14 @@
                         android:layout_width="match_parent" android:layout_height="wrap_content"
                         android:layout_marginTop="10dp" android:text="发送 Raw HEX" />
                     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:layout_marginTop="14dp" android:text="CMD 参考表"
+                        android:layout_marginTop="6dp" android:text="CMD 参考表"
                         android:textAppearance="@style/TextAppearance.Material3.TitleSmall" android:textStyle="bold" />
                     <TextView android:id="@+id/tvCmdRef"
                         android:layout_width="match_parent" android:layout_height="wrap_content"
                         android:layout_marginTop="6dp" android:fontFamily="monospace"
                         android:text="加载中…"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
-                        android:textColor="@color/gsyn_on_surface_muted" />
+                        android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
@@ -347,7 +347,7 @@
                     android:layout_marginTop="8dp" android:minHeight="120dp"
                     android:text="发送日志\n\n尚未下发命令。"
                     android:textAppearance="@style/TextAppearance.Material3.BodySmall"
-                    android:textColor="@color/gsyn_on_surface_muted" />
+                    android:textColor="?attr/colorOnSurfaceVariant" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

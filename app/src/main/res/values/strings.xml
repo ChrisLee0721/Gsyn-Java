@@ -1,102 +1,119 @@
 <resources>
     <string name="app_name">Gsyn Java</string>
+
+    <!-- Bottom nav -->
     <string name="nav_dashboard">Dashboard</string>
     <string name="nav_devices">Devices</string>
     <string name="nav_alerts">Alerts</string>
     <string name="nav_send">Send</string>
     <string name="nav_settings">Settings</string>
-    <string name="nav_drawer_open">打开导航菜单</string>
-    <string name="nav_drawer_close">关闭导航菜单</string>
+    <string name="nav_drawer_open">Open navigation menu</string>
+    <string name="nav_drawer_close">Close navigation menu</string>
+
+    <!-- Section titles -->
     <string name="title_history">History</string>
     <string name="title_map">Map</string>
     <string name="title_rules">Rules</string>
     <string name="title_health">System Health</string>
+
+    <!-- Toolbar subtitles -->
     <string name="shell_toolbar_subtitle_main">Telemetry Console</string>
     <string name="shell_toolbar_subtitle_dashboard">Realtime KPIs · trends · activity feed</string>
     <string name="shell_toolbar_subtitle_devices">Fleet overview · filters · live readings</string>
     <string name="shell_toolbar_subtitle_alerts">Severity center · acknowledge workflow</string>
     <string name="shell_toolbar_subtitle_send">Packet builder · dispatch console</string>
-    <string name="shell_toolbar_subtitle_settings">Transport control · mirrors · runtime config</string>
-    <string name="shell_toolbar_subtitle_map">Geo mirror · device coordinates · tile view</string>
-    <string name="shell_toolbar_subtitle_history">History mirror · samples · exports · traces</string>
+    <string name="shell_toolbar_subtitle_settings">Transport control · runtime config</string>
+    <string name="shell_toolbar_subtitle_map">Geo mirror · device coordinates</string>
+    <string name="shell_toolbar_subtitle_history">History mirror · samples · exports</string>
     <string name="shell_toolbar_subtitle_rules">Automation mirror · thresholds · actions</string>
     <string name="shell_toolbar_subtitle_health">Transport mirror · throughput · runtime</string>
     <string name="shell_title_details">Details</string>
 
-    <string name="settings_control_title">控制中心 / Runtime Settings</string>
-    <string name="settings_status_placeholder">UDP/MQTT 当前状态</string>
-    <string name="settings_runtime_hint_placeholder">在这里集中维护监听、Broker、Tile 以及镜像子页入口。</string>
-    <string name="settings_metric_devices">设备</string>
-    <string name="settings_metric_alerts">告警</string>
-    <string name="settings_metric_rules">规则</string>
-    <string name="settings_metric_storage">存储</string>
+    <!-- Settings -->
+    <string name="settings_control_title">Runtime Settings</string>
+    <string name="settings_status_placeholder">UDP/MQTT status</string>
+    <string name="settings_runtime_hint_placeholder">Configure listen addresses, broker, and tile source.</string>
+    <string name="settings_metric_devices">Devices</string>
+    <string name="settings_metric_alerts">Alerts</string>
+    <string name="settings_metric_rules">Rules</string>
+    <string name="settings_metric_storage">Storage</string>
     <string name="settings_section_transport">Transport</string>
-    <string name="settings_section_appearance">Appearance + Mirrors</string>
-    <string name="settings_udp_enabled">启用 UDP</string>
-    <string name="settings_udp_host_hint">UDP 监听地址</string>
-    <string name="settings_udp_port_hint">UDP 监听端口</string>
-    <string name="settings_mqtt_enabled">启用 MQTT</string>
+    <string name="settings_section_appearance">Appearance</string>
+    <string name="settings_udp_enabled">Enable UDP</string>
+    <string name="settings_udp_host_hint">UDP listen address</string>
+    <string name="settings_udp_port_hint">UDP listen port</string>
+    <string name="settings_mqtt_enabled">Enable MQTT</string>
     <string name="settings_mqtt_broker_hint">MQTT Broker</string>
     <string name="settings_mqtt_port_hint">MQTT Port</string>
     <string name="settings_mqtt_topic_hint">MQTT Topic</string>
-    <string name="settings_tile_url_hint">地图瓦片 URL</string>
-    <string name="settings_save">保存并应用连接设置</string>
-    <string name="settings_mirror_title">扩展镜像页面</string>
-    <string name="settings_mirror_subtitle">保持与 Flutter dashboard 子页一致的入口节奏。</string>
-    <string name="settings_open_map">打开 Map</string>
-    <string name="settings_open_history">打开 History</string>
-    <string name="settings_open_rules">打开 Rules</string>
-    <string name="settings_open_health">打开 Health</string>
+    <string name="settings_tile_url_hint">Map tile URL</string>
+    <string name="settings_save">Save &amp; Apply</string>
+    <string name="settings_mirror_title">Extended pages</string>
+    <string name="settings_mirror_subtitle">Use the side drawer to navigate to Map, History, Rules and Health.</string>
+    <string name="settings_open_map">Open Map</string>
+    <string name="settings_open_history">Open History</string>
+    <string name="settings_open_rules">Open Rules</string>
+    <string name="settings_open_health">Open Health</string>
     <string name="settings_transport_status_format">UDP: %1$s · MQTT: %2$s · Tile: %3$s</string>
-    <string name="settings_runtime_hint_format">在线链路 %1$s / %2$s · 当前镜像共 %3$d 台设备、%4$d 条规则。</string>
+    <string name="settings_runtime_hint_format">Links %1$s / %2$s · %3$d devices, %4$d rules</string>
+    <string name="settings_accent_label">Accent Color</string>
+    <string name="settings_bg_label">Background Preset</string>
+    <string name="settings_card_visibility">Dashboard card visibility</string>
+    <string name="settings_card_kpi1">KPI row 1: total devices + online rate</string>
+    <string name="settings_card_kpi2">KPI row 2: alerts + throughput</string>
+    <string name="settings_card_kpi3">KPI row 3: rules + cumulative traffic</string>
+    <string name="settings_card_gauges">Live metrics / Gauges</string>
+    <string name="settings_card_charts">Trend charts (temp + humidity)</string>
+    <string name="settings_card_activity">Activity feed</string>
+    <string name="settings_card_readings">Latest live readings</string>
 
+    <!-- Secondary / generic -->
     <string name="secondary_action_default">Action</string>
-    <string name="secondary_empty_default">暂无内容</string>
+    <string name="secondary_empty_default">No content</string>
 
+    <!-- Map mirror -->
     <string name="mirror_map_title">Map Mirror</string>
-    <string name="mirror_map_action">刷新设备</string>
-    <string name="mirror_map_summary_format">设备总数 %1$d · 具备坐标 %2$d · 目标是后续替换成真实地图视图。</string>
-    <string name="mirror_map_detail_format">当前瓦片源: %1$s
-本页先保持原版地图信息层结构：设备位置、状态和 transport 摘要。</string>
-    <string name="mirror_map_empty">暂无设备位置数据，等待设备上报或后续补录经纬度。</string>
+    <string name="mirror_map_action">Refresh</string>
+    <string name="mirror_map_summary_format">%1$d devices · %2$d located · real-time Google Maps</string>
+    <string name="mirror_map_detail_format">Tile: %1$s</string>
+    <string name="mirror_map_empty">No device location data. Waiting for GEO sensor readings.</string>
     <string name="mirror_map_row_coords">lat %1$.5f · lng %2$.5f</string>
-    <string name="mirror_map_row_no_coords">暂无坐标，当前作为列表镜像占位</string>
+    <string name="mirror_map_row_no_coords">No coordinates yet</string>
 
+    <!-- History mirror -->
     <string name="mirror_history_title">History Mirror</string>
-    <string name="mirror_history_action">导出 CSV</string>
-    <string name="mirror_history_summary_format">最近 24 小时记录 %1$d 条，保留传感器、AID、单位和采样时间线。</string>
-    <string name="mirror_history_detail_format">导出文件会写入应用外部目录，格式与当前 Java 原生镜像的数据表一致。
-最新采样：%1$s</string>
-    <string name="mirror_history_empty">暂无历史数据，先从 Dashboard/Send/UDP/MQTT 流入一些实时数据。</string>
-    <string name="mirror_history_device_format">设备 AID %1$d</string>
-    <string name="mirror_history_export_ok">已导出到: %1$s</string>
-    <string name="mirror_history_export_fail">导出失败: %1$s</string>
+    <string name="mirror_history_action">Export CSV</string>
+    <string name="mirror_history_summary_format">%1$d records in last 24 h</string>
+    <string name="mirror_history_detail_format">Exported to app external dir.\nLatest sample: %1$s</string>
+    <string name="mirror_history_empty">No history. Let data flow in from Dashboard / Send / UDP / MQTT.</string>
+    <string name="mirror_history_device_format">Device AID %1$d</string>
+    <string name="mirror_history_export_ok">Exported to: %1$s</string>
+    <string name="mirror_history_export_fail">Export failed: %1$s</string>
 
+    <!-- Rules mirror -->
     <string name="mirror_rules_title">Rules Mirror</string>
-    <string name="mirror_rules_action">新建快速规则</string>
-    <string name="mirror_rules_summary_format">规则数 %1$d · 最近操作日志 %2$d。点击规则切换启停，长按删除。</string>
-    <string name="mirror_rules_detail">保持与原版 rules 页面一致的重点：阈值条件、动作类型、启停状态、操作记录。</string>
-    <string name="mirror_rules_empty">暂无规则，点击上方按钮创建一条快速阈值规则。</string>
+    <string name="mirror_rules_action">New Rule</string>
+    <string name="mirror_rules_summary_format">%1$d rules · %2$d operation logs. Tap to toggle, long-press to delete.</string>
+    <string name="mirror_rules_detail">Threshold conditions, action types, enable/disable, operation log.</string>
+    <string name="mirror_rules_empty">No rules. Tap the button to create a threshold rule.</string>
     <string name="mirror_rules_meta_format">AID %1$s · cooldown %2$ds</string>
-    <string name="mirror_rules_toggle_format">规则已切换为%1$s</string>
-    <string name="mirror_rules_state_enabled">启用</string>
-    <string name="mirror_rules_state_disabled">停用</string>
-    <string name="mirror_rules_delete_ok">已删除规则: %1$s</string>
-    <string name="mirror_rules_dialog_title">新建快速规则</string>
-    <string name="mirror_rules_dialog_message">创建一个最接近原版 rules 配置页的阈值规则。</string>
-    <string name="mirror_rules_sensor_hint">传感器 ID，例如 TEMP</string>
-    <string name="mirror_rules_threshold_hint">阈值，例如 50</string>
-    <string name="dialog_cancel">取消</string>
-    <string name="dialog_create">创建</string>
+    <string name="mirror_rules_toggle_format">Rule set to %1$s</string>
+    <string name="mirror_rules_state_enabled">enabled</string>
+    <string name="mirror_rules_state_disabled">disabled</string>
+    <string name="mirror_rules_delete_ok">Deleted rule: %1$s</string>
+    <string name="mirror_rules_dialog_title">New Quick Rule</string>
+    <string name="mirror_rules_dialog_message">Create a threshold rule matching the Flutter rules config page.</string>
+    <string name="mirror_rules_sensor_hint">Sensor ID, e.g. TEMP</string>
+    <string name="mirror_rules_threshold_hint">Threshold, e.g. 50</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_create">Create</string>
 
+    <!-- Health mirror -->
     <string name="mirror_health_title">System Health Mirror</string>
-    <string name="mirror_health_action">清理 7 天前历史</string>
-    <string name="mirror_health_summary_format">设备 %1$d 台 · 消息速率 %2$d/s · 总消息数 %3$d</string>
-    <string name="mirror_health_detail_format">UDP: %1$s
-MQTT: %2$s
-数据库大小: %3$d KB</string>
-    <string name="mirror_health_empty">暂无设备健康明细。</string>
-    <string name="mirror_health_last_seen_format">最后活动: %1$s</string>
-    <string name="mirror_health_prune_ok">已清理 %1$d 条历史记录</string>
+    <string name="mirror_health_action">Prune 7-day history</string>
+    <string name="mirror_health_summary_format">%1$d devices · %2$d msg/s · total %3$d</string>
+    <string name="mirror_health_detail_format">UDP: %1$s\nMQTT: %2$s\nDB size: %3$d KB</string>
+    <string name="mirror_health_empty">No device health details.</string>
+    <string name="mirror_health_last_seen_format">Last seen: %1$s</string>
+    <string name="mirror_health_prune_ok">Pruned %1$d records</string>
 </resources>
-

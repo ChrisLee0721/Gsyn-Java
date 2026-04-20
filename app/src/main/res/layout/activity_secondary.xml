@@ -20,7 +20,7 @@
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
             android:title="@string/shell_title_details"
-            android:titleTextColor="@color/gsyn_on_surface"
+            android:titleTextColor="?attr/colorOnSurface"
             android:navigationIcon="@android:drawable/ic_media_previous" />
     </FrameLayout>
 

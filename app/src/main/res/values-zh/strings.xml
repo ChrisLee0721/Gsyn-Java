@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gsyn Java</string>
+
+    <!-- 底部导航 -->
+    <string name="nav_dashboard">仪表盘</string>
+    <string name="nav_devices">设备</string>
+    <string name="nav_alerts">告警</string>
+    <string name="nav_send">发送</string>
+    <string name="nav_settings">设置</string>
+    <string name="nav_drawer_open">打开导航菜单</string>
+    <string name="nav_drawer_close">关闭导航菜单</string>
+
+    <!-- 页面标题 -->
+    <string name="title_history">历史数据</string>
+    <string name="title_map">设备地图</string>
+    <string name="title_rules">规则引擎</string>
+    <string name="title_health">系统健康</string>
+
+    <!-- 工具栏副标题 -->
+    <string name="shell_toolbar_subtitle_main">遥测控制台</string>
+    <string name="shell_toolbar_subtitle_dashboard">实时 KPI · 趋势 · 活动摘要</string>
+    <string name="shell_toolbar_subtitle_devices">设备总览 · 过滤 · 实时读数</string>
+    <string name="shell_toolbar_subtitle_alerts">严重级中心 · 确认工作流</string>
+    <string name="shell_toolbar_subtitle_send">报文构建器 · 发送控制台</string>
+    <string name="shell_toolbar_subtitle_settings">传输控制 · 运行时配置</string>
+    <string name="shell_toolbar_subtitle_map">地理镜像 · 设备坐标</string>
+    <string name="shell_toolbar_subtitle_history">历史镜像 · 采样 · 导出</string>
+    <string name="shell_toolbar_subtitle_rules">自动化镜像 · 阈值 · 动作</string>
+    <string name="shell_toolbar_subtitle_health">传输镜像 · 吞吐量 · 运行时</string>
+    <string name="shell_title_details">详情</string>
+
+    <!-- 设置 -->
+    <string name="settings_control_title">控制中心 / 运行时设置</string>
+    <string name="settings_status_placeholder">UDP/MQTT 当前状态</string>
+    <string name="settings_runtime_hint_placeholder">在这里集中维护监听、Broker 及 Tile 配置。</string>
+    <string name="settings_metric_devices">设备</string>
+    <string name="settings_metric_alerts">告警</string>
+    <string name="settings_metric_rules">规则</string>
+    <string name="settings_metric_storage">存储</string>
+    <string name="settings_section_transport">传输层</string>
+    <string name="settings_section_appearance">外观</string>
+    <string name="settings_udp_enabled">启用 UDP</string>
+    <string name="settings_udp_host_hint">UDP 监听地址</string>
+    <string name="settings_udp_port_hint">UDP 监听端口</string>
+    <string name="settings_mqtt_enabled">启用 MQTT</string>
+    <string name="settings_mqtt_broker_hint">MQTT Broker</string>
+    <string name="settings_mqtt_port_hint">MQTT 端口</string>
+    <string name="settings_mqtt_topic_hint">MQTT 主题</string>
+    <string name="settings_tile_url_hint">地图瓦片 URL</string>
+    <string name="settings_save">保存并应用连接设置</string>
+    <string name="settings_mirror_title">扩展镜像页面</string>
+    <string name="settings_mirror_subtitle">从左侧侧边栏进入 Map、History、Rules 和 Health。</string>
+    <string name="settings_open_map">打开 Map</string>
+    <string name="settings_open_history">打开 History</string>
+    <string name="settings_open_rules">打开 Rules</string>
+    <string name="settings_open_health">打开 Health</string>
+    <string name="settings_transport_status_format">UDP: %1$s · MQTT: %2$s · Tile: %3$s</string>
+    <string name="settings_runtime_hint_format">链路 %1$s / %2$s · %3$d 台设备、%4$d 条规则</string>
+    <string name="settings_accent_label">主题色 / Accent</string>
+    <string name="settings_bg_label">背景预设 / Background</string>
+    <string name="settings_card_visibility">仪表盘卡片可见性</string>
+    <string name="settings_card_kpi1">KPI 行 1：总设备 + 在线率</string>
+    <string name="settings_card_kpi2">KPI 行 2：告警 + 吞吐量</string>
+    <string name="settings_card_kpi3">KPI 行 3：规则 + 累计流量</string>
+    <string name="settings_card_gauges">实时指标 / Gauges</string>
+    <string name="settings_card_charts">趋势图（温度 + 湿度）</string>
+    <string name="settings_card_activity">近期态势 / Activity Feed</string>
+    <string name="settings_card_readings">最近实时读数</string>
+
+    <!-- 通用 -->
+    <string name="secondary_action_default">操作</string>
+    <string name="secondary_empty_default">暂无内容</string>
+
+    <!-- 地图镜像 -->
+    <string name="mirror_map_title">设备地图</string>
+    <string name="mirror_map_action">刷新</string>
+    <string name="mirror_map_summary_format">共 %1$d 台 · 已定位 %2$d 台 · Google Maps 实时</string>
+    <string name="mirror_map_detail_format">瓦片源: %1$s</string>
+    <string name="mirror_map_empty">暂无设备位置数据，等待 GEO 传感器上报。</string>
+    <string name="mirror_map_row_coords">lat %1$.5f · lng %2$.5f</string>
+    <string name="mirror_map_row_no_coords">暂无坐标</string>
+
+    <!-- 历史镜像 -->
+    <string name="mirror_history_title">历史数据镜像</string>
+    <string name="mirror_history_action">导出 CSV</string>
+    <string name="mirror_history_summary_format">最近 24 小时记录 %1$d 条</string>
+    <string name="mirror_history_detail_format">导出到应用外部目录。\n最新采样：%1$s</string>
+    <string name="mirror_history_empty">暂无历史数据，先从 Dashboard/Send/UDP/MQTT 流入数据。</string>
+    <string name="mirror_history_device_format">设备 AID %1$d</string>
+    <string name="mirror_history_export_ok">已导出到: %1$s</string>
+    <string name="mirror_history_export_fail">导出失败: %1$s</string>
+
+    <!-- 规则镜像 -->
+    <string name="mirror_rules_title">规则引擎镜像</string>
+    <string name="mirror_rules_action">新建快速规则</string>
+    <string name="mirror_rules_summary_format">规则数 %1$d · 操作日志 %2$d。点击切换启停，长按删除。</string>
+    <string name="mirror_rules_detail">阈值条件、动作类型、启停状态、操作记录。</string>
+    <string name="mirror_rules_empty">暂无规则，点击上方按钮创建一条快速阈值规则。</string>
+    <string name="mirror_rules_meta_format">AID %1$s · 冷却 %2$ds</string>
+    <string name="mirror_rules_toggle_format">规则已切换为%1$s</string>
+    <string name="mirror_rules_state_enabled">启用</string>
+    <string name="mirror_rules_state_disabled">停用</string>
+    <string name="mirror_rules_delete_ok">已删除规则: %1$s</string>
+    <string name="mirror_rules_dialog_title">新建快速规则</string>
+    <string name="mirror_rules_dialog_message">创建一个阈值规则。</string>
+    <string name="mirror_rules_sensor_hint">传感器 ID，例如 TEMP</string>
+    <string name="mirror_rules_threshold_hint">阈值，例如 50</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="dialog_create">创建</string>
+
+    <!-- 健康镜像 -->
+    <string name="mirror_health_title">系统健康镜像</string>
+    <string name="mirror_health_action">清理 7 天前历史</string>
+    <string name="mirror_health_summary_format">设备 %1$d 台 · 消息速率 %2$d/s · 总消息数 %3$d</string>
+    <string name="mirror_health_detail_format">UDP: %1$s\nMQTT: %2$s\n数据库大小: %3$d KB</string>
+    <string name="mirror_health_empty">暂无设备健康明细。</string>
+    <string name="mirror_health_last_seen_format">最后活动: %1$s</string>
+    <string name="mirror_health_prune_ok">已清理 %1$d 条历史记录</string>
+</resources>
+
