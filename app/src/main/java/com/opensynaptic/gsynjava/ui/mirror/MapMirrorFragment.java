@@ -22,7 +22,6 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.ChipGroup;
 import com.opensynaptic.gsynjava.AppController;
 import com.opensynaptic.gsynjava.R;
@@ -60,24 +59,23 @@ public class MapMirrorFragment extends Fragment implements OnMapReadyCallback {
 
         view.findViewById(R.id.btnRefresh).setOnClickListener(v -> loadMarkers());
 
-        // Map type chip group
         ChipGroup chipGroup = view.findViewById(R.id.chipGroupMapType);
         chipGroup.setOnCheckedStateChangeListener((group, ids) -> {
             if (googleMap == null || ids.isEmpty()) return;
             int id = ids.get(0);
-            if (id == R.id.chipSatellite)     googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-            else if (id == R.id.chipHybrid)   googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-            else                               googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+            if (id == R.id.chipSatellite)   googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+            else if (id == R.id.chipHybrid) googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+            else                            googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         });
 
-        // ── Key fix: add SupportMapFragment programmatically via childFragmentManager ──
+        // Use commitNow() so the fragment is attached before getMapAsync is called
         SupportMapFragment mapFrag = (SupportMapFragment)
                 getChildFragmentManager().findFragmentByTag("MAP_FRAG");
         if (mapFrag == null) {
             mapFrag = SupportMapFragment.newInstance();
             getChildFragmentManager().beginTransaction()
                     .add(R.id.mapContainer, mapFrag, "MAP_FRAG")
-                    .commit();
+                    .commitNow();
         }
         mapFrag.getMapAsync(this);
         return view;
@@ -104,6 +102,8 @@ public class MapMirrorFragment extends Fragment implements OnMapReadyCallback {
             marker.showInfoWindow();
             return true;
         });
+        // Default view: China center, zoom 4 — visible even with no device data
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(35.0, 105.0), 4f));
         loadMarkers();
     }
 

@@ -17,7 +17,6 @@ import com.opensynaptic.gsynjava.data.Models;
 import com.opensynaptic.gsynjava.databinding.FragmentDashboardBinding;
 import com.opensynaptic.gsynjava.transport.TransportManager;
 import com.opensynaptic.gsynjava.ui.common.UiFormatters;
-import com.opensynaptic.gsynjava.ui.SecondaryActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +36,6 @@ public class DashboardFragment extends Fragment implements TransportManager.Mess
         AppThemeConfig.applyBgToRoot(binding.getRoot(), requireContext());
         repository = AppController.get(requireContext()).repository();
         transportManager = AppController.get(requireContext()).transport();
-        binding.btnMap.setOnClickListener(v -> startActivity(SecondaryActivity.intent(requireContext(), SecondaryActivity.MODE_MAP, R.string.title_map)));
-        binding.btnHistory.setOnClickListener(v -> startActivity(SecondaryActivity.intent(requireContext(), SecondaryActivity.MODE_HISTORY, R.string.title_history)));
-        binding.btnRules.setOnClickListener(v -> startActivity(SecondaryActivity.intent(requireContext(), SecondaryActivity.MODE_RULES, R.string.title_rules)));
-        binding.btnHealth.setOnClickListener(v -> startActivity(SecondaryActivity.intent(requireContext(), SecondaryActivity.MODE_HEALTH, R.string.title_health)));
         binding.btnRefresh.setOnClickListener(v -> refresh());
         return binding.getRoot();
     }

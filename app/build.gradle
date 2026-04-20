@@ -34,7 +34,7 @@ android {
 
     buildTypes {
         debug {
-            applicationIdSuffix '.debug'
+            // applicationIdSuffix removed — Maps API key requires package com.opensynaptic.gsynjava
             versionNameSuffix   '-debug'
         }
         release {

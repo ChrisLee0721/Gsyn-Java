@@ -16,10 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GsynJava">
 
-        <!-- Google Maps API Key (injected via manifestPlaceholders in build.gradle) -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}" />
+            android:value="AIzaSyBoBs-NVkZSIjqsrc4aKs2hB3QrgEdDz84" />
         <activity
             android:name=".ui.SecondaryActivity"
             android:exported="false" />
