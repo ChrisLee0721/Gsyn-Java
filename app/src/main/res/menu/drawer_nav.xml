@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_main_dashboard"
+            android:icon="@android:drawable/ic_menu_compass"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/nav_main_devices"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="Devices" />
+        <item
+            android:id="@+id/nav_main_alerts"
+            android:icon="@android:drawable/ic_dialog_alert"
+            android:title="Alerts" />
+        <item
+            android:id="@+id/nav_main_send"
+            android:icon="@android:drawable/ic_menu_send"
+            android:title="Send" />
+        <item
+            android:id="@+id/nav_main_settings"
+            android:icon="@android:drawable/ic_menu_preferences"
+            android:title="Settings" />
+    </group>
+
+    <item android:title="扩展功能">
+        <menu>
+            <item
+                android:id="@+id/nav_drawer_map"
+                android:icon="@android:drawable/ic_menu_mapmode"
+                android:title="🗺 Map · 设备地图" />
+            <item
+                android:id="@+id/nav_drawer_history"
+                android:icon="@android:drawable/ic_menu_recent_history"
+                android:title="📈 History · 历史数据" />
+            <item
+                android:id="@+id/nav_drawer_rules"
+                android:icon="@android:drawable/ic_menu_edit"
+                android:title="⚙️ Rules · 规则引擎" />
+            <item
+                android:id="@+id/nav_drawer_health"
+                android:icon="@android:drawable/ic_menu_info_details"
+                android:title="💚 Health · 系统健康" />
+        </menu>
+    </item>
+
+</menu>
+

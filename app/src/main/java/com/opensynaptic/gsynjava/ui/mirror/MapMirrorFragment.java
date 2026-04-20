@@ -1,6 +1,8 @@
 package com.opensynaptic.gsynjava.ui.mirror;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.chip.ChipGroup;
 import com.opensynaptic.gsynjava.AppController;
 import com.opensynaptic.gsynjava.R;
 import com.opensynaptic.gsynjava.data.AppRepository;
@@ -38,6 +41,15 @@ public class MapMirrorFragment extends Fragment implements OnMapReadyCallback {
     private TextView tvMapSummary;
     private final List<Marker> currentMarkers = new ArrayList<>();
 
+    // Auto-refresh every 10 seconds while visible
+    private final Handler autoRefreshHandler = new Handler(Looper.getMainLooper());
+    private final Runnable autoRefreshRunnable = new Runnable() {
+        @Override public void run() {
+            loadMarkers();
+            autoRefreshHandler.postDelayed(this, 10_000);
+        }
+    };
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,15 +57,23 @@ public class MapMirrorFragment extends Fragment implements OnMapReadyCallback {
         repository = AppController.get(requireContext()).repository();
         tvMapSummary = view.findViewById(R.id.tvMapSummary);
 
+        // Refresh button
         MaterialButton btnRefresh = view.findViewById(R.id.btnRefresh);
         btnRefresh.setOnClickListener(v -> loadMarkers());
 
-        // Obtain the SupportMapFragment and get notified when the map is ready
+        // Map type chips
+        ChipGroup chipGroup = view.findViewById(R.id.chipGroupMapType);
+        chipGroup.setOnCheckedStateChangeListener((group, checkedIds) -> {
+            if (googleMap == null || checkedIds.isEmpty()) return;
+            int id = checkedIds.get(0);
+            if (id == R.id.chipSatellite) googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+            else if (id == R.id.chipHybrid) googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+            else googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        });
+
         SupportMapFragment mapFrag = (SupportMapFragment)
                 getChildFragmentManager().findFragmentById(R.id.mapFragment);
-        if (mapFrag != null) {
-            mapFrag.getMapAsync(this);
-        }
+        if (mapFrag != null) mapFrag.getMapAsync(this);
         return view;
     }
 
@@ -62,9 +82,10 @@ public class MapMirrorFragment extends Fragment implements OnMapReadyCallback {
         this.googleMap = map;
         googleMap.getUiSettings().setZoomControlsEnabled(true);
         googleMap.getUiSettings().setCompassEnabled(true);
+        googleMap.getUiSettings().setMyLocationButtonEnabled(false);
+        googleMap.setInfoWindowAdapter(null); // use default info window
         googleMap.setOnMarkerClickListener(marker -> {
-            Toast.makeText(requireContext(), marker.getTitle() + "\n" + marker.getSnippet(),
-                    Toast.LENGTH_SHORT).show();
+            marker.showInfoWindow();
             return true;
         });
         loadMarkers();
@@ -73,7 +94,19 @@ public class MapMirrorFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onStart() {
         super.onStart();
-        if (googleMap != null) loadMarkers();
+        autoRefreshHandler.post(autoRefreshRunnable);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        autoRefreshHandler.removeCallbacks(autoRefreshRunnable);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        autoRefreshHandler.removeCallbacks(autoRefreshRunnable);
     }
 
     private void loadMarkers() {
@@ -94,14 +127,17 @@ public class MapMirrorFragment extends Fragment implements OnMapReadyCallback {
             LatLng pos = new LatLng(device.lat, device.lng);
             String title = (device.name == null || device.name.isEmpty())
                     ? "Device " + device.aid : device.name;
+            boolean online = "online".equals(device.status);
             String snippet = String.format(Locale.getDefault(),
-                    "AID %d · %s · %s",
+                    "%s  |  AID %d  |  %s\n最后在线: %s",
+                    online ? "🟢 在线" : "🟠 离线",
                     device.aid,
                     UiFormatters.upperOrFallback(device.transportType, "UDP"),
                     UiFormatters.formatRelativeTime(device.lastSeenMs));
 
-            boolean online = "online".equals(device.status);
-            float hue = online ? BitmapDescriptorFactory.HUE_GREEN : BitmapDescriptorFactory.HUE_ORANGE;
+            float hue = online
+                    ? BitmapDescriptorFactory.HUE_GREEN
+                    : BitmapDescriptorFactory.HUE_ORANGE;
 
             Marker marker = googleMap.addMarker(new MarkerOptions()
                     .position(pos)
@@ -113,18 +149,21 @@ public class MapMirrorFragment extends Fragment implements OnMapReadyCallback {
             hasBounds = true;
         }
 
-        // Update summary bar
+        // Summary bar
+        long onlineCount = devices.stream().filter(d -> "online".equals(d.status)).count();
         tvMapSummary.setText(String.format(Locale.getDefault(),
-                "设备 %d 台 · 已定位 %d 台", devices.size(), mappedCount));
+                "共 %d 台 · 在线 %d · 已定位 %d · 自动刷新 10s",
+                devices.size(), onlineCount, mappedCount));
 
         if (hasBounds) {
             try {
                 LatLngBounds bounds = boundsBuilder.build();
                 if (mappedCount == 1) {
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                            bounds.getCenter(), 14f));
+                    googleMap.animateCamera(
+                            CameraUpdateFactory.newLatLngZoom(bounds.getCenter(), 14f));
                 } else {
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 120));
+                    googleMap.animateCamera(
+                            CameraUpdateFactory.newLatLngBounds(bounds, 120));
                 }
             } catch (Exception ignored) {}
         }

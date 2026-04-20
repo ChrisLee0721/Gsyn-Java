@@ -35,10 +35,6 @@ public class SettingsFragment extends Fragment {
         buildBgChips();
         loadCardConfig();
         binding.btnSave.setOnClickListener(v -> savePrefs());
-        binding.btnOpenMap.setOnClickListener(v -> startActivity(SecondaryActivity.intent(requireContext(), SecondaryActivity.MODE_MAP, R.string.title_map)));
-        binding.btnOpenHistory.setOnClickListener(v -> startActivity(SecondaryActivity.intent(requireContext(), SecondaryActivity.MODE_HISTORY, R.string.title_history)));
-        binding.btnOpenRules.setOnClickListener(v -> startActivity(SecondaryActivity.intent(requireContext(), SecondaryActivity.MODE_RULES, R.string.title_rules)));
-        binding.btnOpenHealth.setOnClickListener(v -> startActivity(SecondaryActivity.intent(requireContext(), SecondaryActivity.MODE_HEALTH, R.string.title_health)));
         return binding.getRoot();
     }
 
