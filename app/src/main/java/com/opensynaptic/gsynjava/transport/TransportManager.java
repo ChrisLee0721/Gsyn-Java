@@ -91,7 +91,9 @@ public class TransportManager {
 
     public synchronized void startUdp(String host, int port) throws Exception {
         stopUdp();
-        udpSocket = new DatagramSocket(port, InetAddress.getByName(host));
+        // Bind to wildcard so we receive packets from any source on this port.
+        // 'host' is kept as the default send-target for outgoing commands only.
+        udpSocket = new DatagramSocket(port);
         udpRunning = true;
         udpThread = new Thread(() -> {
             byte[] buffer = new byte[1024];
