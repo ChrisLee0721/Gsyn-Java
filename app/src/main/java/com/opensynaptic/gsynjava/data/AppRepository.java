@@ -28,20 +28,26 @@ public class AppRepository {
 
     public synchronized void upsertDevice(Models.Device device) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        Cursor c = db.query("devices", new String[] {"id"}, "aid=?", new String[] {String.valueOf(device.aid)}, null, null, null);
+        Cursor c = db.query("devices", new String[] {"id","lat","lng"}, "aid=?", new String[] {String.valueOf(device.aid)}, null, null, null);
         ContentValues values = new ContentValues();
         values.put("aid", device.aid);
         values.put("name", valueOrEmpty(device.name));
         values.put("type", valueOrEmpty(device.type, "sensor"));
-        values.put("lat", device.lat);
-        values.put("lng", device.lng);
         values.put("status", valueOrEmpty(device.status, "offline"));
         values.put("transport_type", valueOrEmpty(device.transportType, "udp"));
         values.put("last_seen_ms", device.lastSeenMs);
         try {
             if (c.moveToFirst()) {
+                // Preserve existing coordinates if the new message carries no location
+                double existingLat = c.getDouble(c.getColumnIndexOrThrow("lat"));
+                double existingLng = c.getDouble(c.getColumnIndexOrThrow("lng"));
+                boolean hasNewCoords = Math.abs(device.lat) > 1e-7 || Math.abs(device.lng) > 1e-7;
+                values.put("lat", hasNewCoords ? device.lat : existingLat);
+                values.put("lng", hasNewCoords ? device.lng : existingLng);
                 db.update("devices", values, "aid=?", new String[] {String.valueOf(device.aid)});
             } else {
+                values.put("lat", device.lat);
+                values.put("lng", device.lng);
                 db.insert("devices", null, values);
             }
         } finally {

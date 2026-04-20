@@ -3,6 +3,7 @@ package com.opensynaptic.gsynjava;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.opensynaptic.gsynjava.core.protocol.GeohashDecoder;
 import com.opensynaptic.gsynjava.data.AppRepository;
 import com.opensynaptic.gsynjava.data.Models;
 import com.opensynaptic.gsynjava.rules.RulesEngine;
@@ -52,6 +53,21 @@ public class AppController implements TransportManager.MessageListener {
         device.status = "online";
         device.transportType = message.transportType;
         device.lastSeenMs = System.currentTimeMillis();
+
+        // Detect GEO sensor readings and decode geohash → lat/lng
+        for (Models.SensorReading reading : message.readings) {
+            if (GeohashDecoder.isGeoSensor(reading.sensorId)) {
+                // The geohash string may arrive as rawB62 (string field) or unit field
+                String hash = reading.rawB62 != null && !reading.rawB62.isEmpty()
+                        ? reading.rawB62 : reading.unit;
+                double[] latLng = GeohashDecoder.decode(hash);
+                if (latLng != null) {
+                    device.lat = latLng[0];
+                    device.lng = latLng[1];
+                }
+            }
+        }
+
         repository.upsertDevice(device);
 
         for (Models.SensorReading reading : message.readings) {

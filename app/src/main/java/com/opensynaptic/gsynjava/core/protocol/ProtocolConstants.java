@@ -96,7 +96,9 @@ public final class ProtocolConstants {
             // Sound
             "NOISE", "DB1",
             // Counter / Status / Boolean
-            "COUNT", "CNT", "STATUS", "ST1", "BOOL", "B1"
+            "COUNT", "CNT", "STATUS", "ST1", "BOOL", "B1",
+            // Location (Geohash)
+            "GEO", "GEOHASH", "GEO1", "LOCATION"
     ));
 
     /**

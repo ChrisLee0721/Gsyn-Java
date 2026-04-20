@@ -14,6 +14,10 @@ android {
         versionName '1.0.0'
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+
+        // Google Maps API key — set MAPS_API_KEY in local.properties or as env var
+        def mapsKey = project.findProperty('MAPS_API_KEY') ?: System.getenv('MAPS_API_KEY') ?: ''
+        manifestPlaceholders['MAPS_API_KEY'] = mapsKey
     }
 
     signingConfigs {
@@ -70,6 +74,7 @@ dependencies {
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation 'androidx.preference:preference:1.2.1'
     implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5'
+    implementation 'com.google.android.gms:play-services-maps:18.2.0'
 
     testImplementation 'junit:junit:4.13.2'
 }
