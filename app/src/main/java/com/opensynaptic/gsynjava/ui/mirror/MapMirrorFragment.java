@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,12 +19,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.ChipGroup;
 import com.opensynaptic.gsynjava.AppController;
 import com.opensynaptic.gsynjava.R;
+import com.opensynaptic.gsynjava.core.AppThemeConfig;
 import com.opensynaptic.gsynjava.data.AppRepository;
 import com.opensynaptic.gsynjava.data.Models;
 import com.opensynaptic.gsynjava.ui.common.UiFormatters;
@@ -41,7 +42,6 @@ public class MapMirrorFragment extends Fragment implements OnMapReadyCallback {
     private TextView tvMapSummary;
     private final List<Marker> currentMarkers = new ArrayList<>();
 
-    // Auto-refresh every 10 seconds while visible
     private final Handler autoRefreshHandler = new Handler(Looper.getMainLooper());
     private final Runnable autoRefreshRunnable = new Runnable() {
         @Override public void run() {
@@ -52,38 +52,54 @@ public class MapMirrorFragment extends Fragment implements OnMapReadyCallback {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map_mirror, container, false);
         repository = AppController.get(requireContext()).repository();
         tvMapSummary = view.findViewById(R.id.tvMapSummary);
 
-        // Refresh button
-        MaterialButton btnRefresh = view.findViewById(R.id.btnRefresh);
-        btnRefresh.setOnClickListener(v -> loadMarkers());
+        view.findViewById(R.id.btnRefresh).setOnClickListener(v -> loadMarkers());
 
-        // Map type chips
+        // Map type chip group
         ChipGroup chipGroup = view.findViewById(R.id.chipGroupMapType);
-        chipGroup.setOnCheckedStateChangeListener((group, checkedIds) -> {
-            if (googleMap == null || checkedIds.isEmpty()) return;
-            int id = checkedIds.get(0);
-            if (id == R.id.chipSatellite) googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-            else if (id == R.id.chipHybrid) googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-            else googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+        chipGroup.setOnCheckedStateChangeListener((group, ids) -> {
+            if (googleMap == null || ids.isEmpty()) return;
+            int id = ids.get(0);
+            if (id == R.id.chipSatellite)     googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+            else if (id == R.id.chipHybrid)   googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+            else                               googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         });
 
+        // ── Key fix: add SupportMapFragment programmatically via childFragmentManager ──
         SupportMapFragment mapFrag = (SupportMapFragment)
-                getChildFragmentManager().findFragmentById(R.id.mapFragment);
-        if (mapFrag != null) mapFrag.getMapAsync(this);
+                getChildFragmentManager().findFragmentByTag("MAP_FRAG");
+        if (mapFrag == null) {
+            mapFrag = SupportMapFragment.newInstance();
+            getChildFragmentManager().beginTransaction()
+                    .add(R.id.mapContainer, mapFrag, "MAP_FRAG")
+                    .commit();
+        }
+        mapFrag.getMapAsync(this);
         return view;
     }
 
     @Override
     public void onMapReady(@NonNull GoogleMap map) {
         this.googleMap = map;
+
+        // Apply dark map style when app uses dark background
+        AppThemeConfig.BgPreset bg = AppThemeConfig.loadBgPreset(requireContext());
+        if (!bg.isLight) {
+            try {
+                map.setMapStyle(MapStyleOptions.loadRawResourceStyle(
+                        requireContext(), R.raw.map_style_dark));
+            } catch (Exception ignored) {}
+        }
+
         googleMap.getUiSettings().setZoomControlsEnabled(true);
         googleMap.getUiSettings().setCompassEnabled(true);
+        googleMap.getUiSettings().setMapToolbarEnabled(false);
         googleMap.getUiSettings().setMyLocationButtonEnabled(false);
-        googleMap.setInfoWindowAdapter(null); // use default info window
         googleMap.setOnMarkerClickListener(marker -> {
             marker.showInfoWindow();
             return true;
@@ -116,10 +132,12 @@ public class MapMirrorFragment extends Fragment implements OnMapReadyCallback {
 
         List<Models.Device> devices = repository.getAllDevices();
         int mappedCount = 0;
+        long onlineCount = 0;
         LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
         boolean hasBounds = false;
 
         for (Models.Device device : devices) {
+            if ("online".equals(device.status)) onlineCount++;
             boolean hasGps = Math.abs(device.lat) > 1e-7 || Math.abs(device.lng) > 1e-7;
             if (!hasGps) continue;
             mappedCount++;
@@ -128,44 +146,35 @@ public class MapMirrorFragment extends Fragment implements OnMapReadyCallback {
             String title = (device.name == null || device.name.isEmpty())
                     ? "Device " + device.aid : device.name;
             boolean online = "online".equals(device.status);
+
             String snippet = String.format(Locale.getDefault(),
-                    "%s  |  AID %d  |  %s\n最后在线: %s",
-                    online ? "🟢 在线" : "🟠 离线",
+                    "AID %d  ·  %s  ·  %s\n最后在线: %s",
                     device.aid,
+                    online ? "在线" : "离线",
                     UiFormatters.upperOrFallback(device.transportType, "UDP"),
                     UiFormatters.formatRelativeTime(device.lastSeenMs));
 
-            float hue = online
-                    ? BitmapDescriptorFactory.HUE_GREEN
-                    : BitmapDescriptorFactory.HUE_ORANGE;
-
+            float hue = online ? BitmapDescriptorFactory.HUE_GREEN : BitmapDescriptorFactory.HUE_ORANGE;
             Marker marker = googleMap.addMarker(new MarkerOptions()
-                    .position(pos)
-                    .title(title)
-                    .snippet(snippet)
+                    .position(pos).title(title).snippet(snippet)
                     .icon(BitmapDescriptorFactory.defaultMarker(hue)));
             if (marker != null) currentMarkers.add(marker);
             boundsBuilder.include(pos);
             hasBounds = true;
         }
 
-        // Summary bar
-        long onlineCount = devices.stream().filter(d -> "online".equals(d.status)).count();
         tvMapSummary.setText(String.format(Locale.getDefault(),
-                "共 %d 台 · 在线 %d · 已定位 %d · 自动刷新 10s",
+                "共 %d 台 · 在线 %d · 已定位 %d · 每 10s 刷新",
                 devices.size(), onlineCount, mappedCount));
 
-        if (hasBounds) {
-            try {
-                LatLngBounds bounds = boundsBuilder.build();
-                if (mappedCount == 1) {
-                    googleMap.animateCamera(
-                            CameraUpdateFactory.newLatLngZoom(bounds.getCenter(), 14f));
-                } else {
-                    googleMap.animateCamera(
-                            CameraUpdateFactory.newLatLngBounds(bounds, 120));
-                }
-            } catch (Exception ignored) {}
-        }
+        if (!hasBounds) return;
+        try {
+            LatLngBounds bounds = boundsBuilder.build();
+            if (mappedCount == 1) {
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(bounds.getCenter(), 14f));
+            } else {
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 120));
+            }
+        } catch (Exception ignored) {}
     }
 }

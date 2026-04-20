@@ -3,15 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="?android:colorBackground">
 
-    <!-- Top control bar -->
+    <!-- Control bar, styled like app shell panels -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="8dp"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_shell_panel_compact">
 
         <TextView
             android:id="@+id/tvMapSummary"
@@ -19,54 +21,62 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="设备地图"
-            android:textSize="13sp" />
+            android:textSize="12sp"
+            android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+            android:textColor="?attr/colorOnSurface"
+            android:maxLines="2" />
 
-        <!-- Map type toggle chips -->
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipGroupMapType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             app:singleSelection="true"
-            app:selectionRequired="true">
+            app:selectionRequired="true"
+            app:chipSpacingHorizontal="2dp">
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipNormal"
                 style="@style/Widget.Material3.Chip.Filter"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:text="普通"
+                android:textSize="11sp"
                 android:checked="true" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipSatellite"
                 style="@style/Widget.Material3.Chip.Filter"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="卫星" />
+                android:layout_height="32dp"
+                android:text="卫星"
+                android:textSize="11sp" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipHybrid"
                 style="@style/Widget.Material3.Chip.Filter"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="混合" />
+                android:layout_height="32dp"
+                android:text="混合"
+                android:textSize="11sp" />
         </com.google.android.material.chip.ChipGroup>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnRefresh"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="32dp"
             android:layout_marginStart="4dp"
             android:text="刷新"
-            android:textSize="12sp"
-            style="@style/Widget.Material3.Button.OutlinedButton" />
+            android:textSize="11sp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            style="@style/Widget.Material3.Button.TonalButton" />
 
     </LinearLayout>
 
-    <!-- Google Map fills the rest -->
-    <fragment
-        android:id="@+id/mapFragment"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <!-- Map container — FrameLayout avoids nested-fragment conflicts -->
+    <FrameLayout
+        android:id="@+id/mapContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />

@@ -29,21 +29,20 @@
             <item
                 android:id="@+id/nav_drawer_map"
                 android:icon="@android:drawable/ic_menu_mapmode"
-                android:title="🗺 Map · 设备地图" />
+                android:title="Map · 设备地图" />
             <item
                 android:id="@+id/nav_drawer_history"
                 android:icon="@android:drawable/ic_menu_recent_history"
-                android:title="📈 History · 历史数据" />
+                android:title="History · 历史数据" />
             <item
                 android:id="@+id/nav_drawer_rules"
                 android:icon="@android:drawable/ic_menu_edit"
-                android:title="⚙️ Rules · 规则引擎" />
+                android:title="Rules · 规则引擎" />
             <item
                 android:id="@+id/nav_drawer_health"
                 android:icon="@android:drawable/ic_menu_info_details"
-                android:title="💚 Health · 系统健康" />
+                android:title="Health · 系统健康" />
         </menu>
     </item>
 
 </menu>
-
