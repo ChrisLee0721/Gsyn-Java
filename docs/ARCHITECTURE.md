@@ -1,4 +1,7 @@
-# Architecture Guide
+﻿# Architecture Guide
+
+> 中文版請見 [ARCHITECTURE_zh.md](ARCHITECTURE_zh.md)
+
 
 This document explains the internal design of Gsyn Java and the rationale behind key decisions.
 

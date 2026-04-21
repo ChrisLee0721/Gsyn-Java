@@ -1,4 +1,7 @@
-# Contributing Guide
+﻿# Contributing Guide
+
+> 中文版請見 [CONTRIBUTING_zh.md](CONTRIBUTING_zh.md)
+
 
 This guide is for developers who want to add features, fix bugs, or submit improvements to Gsyn Java.
 
@@ -153,4 +156,3 @@ Run all unit tests:
 | Querying DB in `onBindViewHolder` | Query in `Fragment.refresh()`, pass data via `Snapshot` |
 | `commit()` for MapFragment | Must use `commitNow()` — see ARCHITECTURE.md §Google Maps |
 | `getActivity().runOnUiThread(...)` without null check | `if (getActivity() != null) getActivity().runOnUiThread(...)` |
-

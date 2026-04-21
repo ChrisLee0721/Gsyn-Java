@@ -1,4 +1,7 @@
-# UI Patterns
+﻿# UI Patterns
+
+> 中文版請見 [UI_PATTERNS_zh.md](UI_PATTERNS_zh.md)
+
 
 This document explains the recurring patterns used throughout the Gsyn Java UI layer.  
 Understanding these patterns lets you read any Fragment in the codebase after reading this once.
@@ -304,4 +307,3 @@ This is the canonical pattern for lightweight custom charts in Android — avoid
 | Theme colour | `?attr/colorXxx` in XML |
 | String | `@string/name` in XML, `getString(R.string.name)` in Java |
 | Language change | `LocaleHelper.applyAndSave(lang)` |
-

@@ -1,4 +1,7 @@
-# Data Flow — Sensor to Screen
+﻿# Data Flow — Sensor to Screen
+
+> 中文版請見 [DATA_FLOW_zh.md](DATA_FLOW_zh.md)
+
 
 This document traces the complete path data takes from the moment a UDP packet arrives on the network interface to the moment a value appears on the Dashboard.
 
@@ -220,4 +223,3 @@ CREATE TABLE operation_logs (
 1. Ensure the device sends `GEO` or `LAT`/`LNG` sensor IDs
 2. `MapMirrorFragment` looks for `geohash` column in the `devices` table
 3. `AppRepository.updateDeviceGeo()` must be called during packet processing — check that the sensor ID name matches what's expected in `TransportManager`
-

@@ -1,4 +1,7 @@
-# Getting Started — Developer Guide
+﻿# Getting Started — Developer Guide
+
+> 中文版請見 [GETTING_STARTED_zh.md](GETTING_STARTED_zh.md)
+
 
 Welcome to **Gsyn Java**, an Android telemetry console for the OpenSynaptic protocol.  
 This guide helps you set up a working dev environment and understand the project in the first 30 minutes.
@@ -147,4 +150,3 @@ All of this happens before any device connects. The app is always *listening* on
 - Read **[PROTOCOL.md](PROTOCOL.md)** for the binary packet format
 - Read **[DASHBOARD_CARDS.md](DASHBOARD_CARDS.md)** for the card system
 - Read **[UI_PATTERNS.md](UI_PATTERNS.md)** for ViewBinding, theming, and i18n patterns
-

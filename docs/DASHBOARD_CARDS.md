@@ -1,4 +1,7 @@
-# Dashboard Card System
+﻿# Dashboard Card System
+
+> 中文版請見 [DASHBOARD_CARDS_zh.md](DASHBOARD_CARDS_zh.md)
+
 
 The Dashboard is built as a fully customisable card list.  
 This document explains how each layer works so you can add new card types or modify existing ones.
@@ -234,4 +237,3 @@ Both write to the same `SharedPreferences` key and call `refresh()`.
 7. **Populate those fields** in `DashboardFragment.refresh()`
 8. **Add a default entry** in `DashboardCardConfig.defaultCards()` if it should appear by default
 9. **Add a toggle** in `fragment_settings.xml` + `SettingsFragment.loadCardConfig()` / `saveCardConfig()`
-
