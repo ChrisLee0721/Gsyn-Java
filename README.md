@@ -33,6 +33,20 @@
 
 ---
 
+## Documentation Index
+
+| Document | Audience | Contents |
+|----------|----------|----------|
+| [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md) | All developers | Setup, project structure, first run |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Mid–Senior | Layered design, threading, theming |
+| [docs/DATA_FLOW.md](docs/DATA_FLOW.md) | All | UDP → decode → DB → UI complete trace |
+| [docs/PROTOCOL.md](docs/PROTOCOL.md) | Protocol devs | Binary packet format, CRC, Base62 |
+| [docs/DASHBOARD_CARDS.md](docs/DASHBOARD_CARDS.md) | UI contributors | Card system, drag reorder, custom sensors |
+| [docs/UI_PATTERNS.md](docs/UI_PATTERNS.md) | Junior devs / students | ViewBinding, theming, i18n, RecyclerView |
+| [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) | Contributors | Branch convention, checklist, pitfalls |
+
+---
+
 ## Features
 
 | Feature | Detail |

@@ -2,6 +2,8 @@
 
 This document explains the internal design of Gsyn Java and the rationale behind key decisions.
 
+> **New to the project?** Start with [GETTING_STARTED.md](GETTING_STARTED.md), then come back here.
+
 ---
 
 ## Layered Architecture
@@ -195,3 +197,37 @@ mapFrag.getMapAsync(this);
 
 The API key is injected at build time via `manifestPlaceholders` from `local.properties`. The debug build does **not** append `.debug` to the application ID, ensuring the API key's Android app restriction matches both debug and release builds.
 
+---
+
+## Dashboard Card System (v1.2.0+)
+
+The Dashboard is a configurable, drag-reorderable card list. Full details in [DASHBOARD_CARDS.md](DASHBOARD_CARDS.md).
+
+```
+DashboardFragment
+    ├── DashboardCardConfig   ← JSON-serialised card order in SharedPreferences
+    ├── DashboardCardAdapter  ← RecyclerView adapter with 9 view types
+    │     └── Snapshot        ← immutable data snapshot, built once per refresh()
+    └── ItemTouchHelper       ← drag callback: moveItem() → persistOrderFromAdapter()
+```
+
+Key design decision: **Snapshot as a data contract.** Rather than letting each ViewHolder query the database, `DashboardFragment.refresh()` builds a single `Snapshot` object once and passes it to every card. This means:
+- Database is queried exactly once per refresh cycle, not N times
+- ViewHolders are stateless — they can be recycled without side effects
+- Adding a new card type only requires adding fields to `Snapshot` and a read in `refresh()`
+
+---
+
+## Localisation System (v1.2.0+)
+
+Per-app language switching uses `AppCompatDelegate.setApplicationLocales()` (AppCompat 1.6+):
+
+```java
+// Switch language — persists across restarts, triggers Activity recreation automatically
+LocaleListCompat locales = LocaleListCompat.forLanguageTags("zh");
+AppCompatDelegate.setApplicationLocales(locales);
+```
+
+Android 13+ also requires `res/xml/locale_config.xml` and `android:localeConfig` in the manifest.
+
+**All user-visible text** must be in `res/values/strings.xml` (EN) and `res/values-zh/strings.xml` (ZH). Hardcoded strings in Java or XML will not respond to language switching.
