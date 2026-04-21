@@ -21,13 +21,13 @@ import com.opensynaptic.gsynjava.core.AppThemeConfig;
 import com.opensynaptic.gsynjava.core.protocol.PacketBuilder;
 import com.opensynaptic.gsynjava.core.protocol.ProtocolConstants;
 import com.opensynaptic.gsynjava.data.Models;
+import com.opensynaptic.gsynjava.R;
 import com.opensynaptic.gsynjava.databinding.FragmentSendBinding;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class SendFragment extends Fragment {
     private FragmentSendBinding binding;
@@ -82,7 +82,7 @@ public class SendFragment extends Fragment {
     private void setupDeviceSpinner() {
         List<Models.Device> devices = AppController.get(requireContext()).repository().getAllDevices();
         List<String> labels = new ArrayList<>();
-        labels.add("手动输入 (不自动填充)");
+        labels.add(getString(R.string.send_device_manual));
         for (Models.Device d : devices) {
             labels.add("AID " + d.aid + (d.name != null && !d.name.isEmpty() ? "  " + d.name : ""));
         }
@@ -143,9 +143,9 @@ public class SendFragment extends Fragment {
 
     private void setupTabs() {
         TabLayout tabs = binding.tabLayout;
-        tabs.addTab(tabs.newTab().setText("控制"));
-        tabs.addTab(tabs.newTab().setText("数据"));
-        tabs.addTab(tabs.newTab().setText("原始"));
+        tabs.addTab(tabs.newTab().setText(R.string.send_tab_control));
+        tabs.addTab(tabs.newTab().setText(R.string.send_tab_data));
+        tabs.addTab(tabs.newTab().setText(R.string.send_tab_raw));
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override public void onTabSelected(TabLayout.Tab tab) { switchTab(tab.getPosition()); }
             @Override public void onTabUnselected(TabLayout.Tab tab) {}
@@ -204,7 +204,7 @@ public class SendFragment extends Fragment {
         // Multi-sensor: send
         binding.btnSendMulti.setOnClickListener(v -> {
             if (multiRows.isEmpty()) {
-                Toast.makeText(requireContext(), "请先添加传感器行", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), R.string.send_add_sensor_first, Toast.LENGTH_SHORT).show();
                 return;
             }
             int aid = parseInt(textOf(binding.etAid), 1);
@@ -235,7 +235,7 @@ public class SendFragment extends Fragment {
         Spinner spState = makeSpinner(ProtocolConstants.OS_STATES.toArray(new String[0]));
 
         TextInputEditText etVal = new TextInputEditText(requireContext());
-        etVal.setHint("值");
+        etVal.setHint(getString(R.string.send_value_hint));
         etVal.setText("0.0");
         LinearLayout.LayoutParams valParams = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f);
         valParams.setMarginStart(6);
@@ -296,7 +296,7 @@ public class SendFragment extends Fragment {
         binding.btnSendRaw.setOnClickListener(v -> {
             String hex = textOf(binding.etRaw).trim();
             if (hex.isEmpty()) {
-                Toast.makeText(requireContext(), "请输入 Raw HEX", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), R.string.send_enter_raw_hex, Toast.LENGTH_SHORT).show();
                 return;
             }
             byte[] frame = PacketBuilder.buildRawHex(hex);
@@ -307,24 +307,24 @@ public class SendFragment extends Fragment {
     private void setupCmdRef() {
         if (binding == null) return;
         binding.tvCmdRef.setText(
-                "CMD  |  HEX  |  描述\n" +
+                "CMD  |  HEX  |  Description\n" +
                 "─────────────────────────────────────────\n" +
-                "PING              | 0x01 | 链路探测\n" +
-                "PONG              | 0x02 | 探测回复\n" +
-                "ID_REQUEST        | 0x03 | 申请 AID\n" +
-                "ID_RESPONSE       | 0x04 | AID 响应\n" +
-                "ID_ASSIGN         | 0x05 | 分配 AID\n" +
-                "TIME_REQUEST      | 0x07 | 时间同步请求\n" +
-                "TIME_RESPONSE     | 0x08 | 时间同步响应\n" +
-                "HANDSHAKE_ACK     | 0x09 | 握手确认\n" +
-                "HANDSHAKE_NACK    | 0x0A | 握手拒绝\n" +
-                "DATA_FULL         | 0x20 | 完整数据帧\n" +
-                "DATA_DIFF         | 0x21 | 差量数据帧\n" +
-                "DATA_HEART        | 0x22 | 心跳帧(无载荷)\n" +
-                "DATA_FULL_SEC     | 0x23 | 加密完整帧\n" +
-                "DATA_DIFF_SEC     | 0x24 | 加密差量帧\n" +
-                "DATA_HEART_SEC    | 0x25 | 加密心跳帧\n" +
-                "SECURE_DICT_READY | 0x10 | 密钥就绪通知\n" +
+                "PING              | 0x01 | Link probe\n" +
+                "PONG              | 0x02 | Probe reply\n" +
+                "ID_REQUEST        | 0x03 | Request AID\n" +
+                "ID_RESPONSE       | 0x04 | AID response\n" +
+                "ID_ASSIGN         | 0x05 | Assign AID\n" +
+                "TIME_REQUEST      | 0x07 | Time sync request\n" +
+                "TIME_RESPONSE     | 0x08 | Time sync response\n" +
+                "HANDSHAKE_ACK     | 0x09 | Handshake ACK\n" +
+                "HANDSHAKE_NACK    | 0x0A | Handshake NACK\n" +
+                "DATA_FULL         | 0x20 | Full data frame\n" +
+                "DATA_DIFF         | 0x21 | Diff data frame\n" +
+                "DATA_HEART        | 0x22 | Heartbeat (no payload)\n" +
+                "DATA_FULL_SEC     | 0x23 | Encrypted full frame\n" +
+                "DATA_DIFF_SEC     | 0x24 | Encrypted diff frame\n" +
+                "DATA_HEART_SEC    | 0x25 | Encrypted heartbeat\n" +
+                "SECURE_DICT_READY | 0x10 | Key ready notify\n" +
                 "─────────────────────────────────────────\n" +
                 "Body: {aid}.{state}.{ts_b64}|{sid}>{state}.{unit}:{b62}|…\n" +
                 "Header: CMD(1) routeCount(1) AID(4) TID(1) TS(6) → body → CRC8(1) CRC16(2)"
@@ -336,7 +336,7 @@ public class SendFragment extends Fragment {
     private void sendAndLog(String label, byte[] frame) {
         if (binding == null) return;
         if (frame == null) {
-            Toast.makeText(requireContext(), "命令构建失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), R.string.send_cmd_failed, Toast.LENGTH_SHORT).show();
             return;
         }
         int aid  = parseInt(textOf(binding.etAid), 1);
@@ -350,16 +350,15 @@ public class SendFragment extends Fragment {
                 + "  " + label + "  " + (ok ? "✓ OK" : "✗ FAIL") + "  len=" + frame.length;
         logs.add(0, entry);
         if (logs.size() > 20) logs.remove(logs.size() - 1);
-        binding.tvLastResult.setText("最近: " + entry);
+        binding.tvLastResult.setText(getString(R.string.send_last_result_format, entry));
         binding.tvLog.setText(android.text.TextUtils.join("\n", logs));
-        Toast.makeText(requireContext(), ok ? "发送成功" : "发送失败", Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), ok ? R.string.send_ok_toast : R.string.send_fail_toast, Toast.LENGTH_SHORT).show();
         updateRouteSummary();
     }
 
     private void updateRouteSummary() {
         if (binding == null) return;
-        binding.tvRouteSummary.setText(String.format(Locale.getDefault(),
-                "路由：AID %s · TID %s · SEQ %s · %s:%s",
+        binding.tvRouteSummary.setText(getString(R.string.send_route_format,
                 textOf(binding.etAid), textOf(binding.etTid), textOf(binding.etSeq),
                 textOf(binding.etIp), textOf(binding.etPort)));
     }

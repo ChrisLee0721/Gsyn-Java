@@ -20,7 +20,7 @@
             android:id="@+id/tvMapSummary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="设备地图"
+            android:text="@string/map_title"
             android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
             android:textColor="?attr/colorOnSurface" />
 
@@ -45,7 +45,7 @@
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="普通"
+                    android:text="@string/map_type_normal"
                     android:checked="true" />
 
                 <com.google.android.material.chip.Chip
@@ -53,14 +53,14 @@
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="卫星" />
+                    android:text="@string/map_type_satellite" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chipHybrid"
                     style="@style/Widget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="混合" />
+                    android:text="@string/map_type_hybrid" />
             </com.google.android.material.chip.ChipGroup>
 
             <com.google.android.material.button.MaterialButton
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="刷新"
+                android:text="@string/map_refresh"
                 style="@style/Widget.Material3.Button.TonalButton" />
         </LinearLayout>
     </LinearLayout>

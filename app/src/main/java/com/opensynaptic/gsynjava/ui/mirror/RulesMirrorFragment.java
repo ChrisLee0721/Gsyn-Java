@@ -50,7 +50,7 @@ public class RulesMirrorFragment extends Fragment {
         list.setEmptyView(tvEmpty);
         list.setOnItemClickListener((parent, v, position, id) -> toggleRuleIfNeeded(position));
         list.setOnItemLongClickListener((parent, v, position, id) -> deleteRuleIfNeeded(position));
-        button.setText("新建快速规则");
+        button.setText(R.string.mirror_rules_action);
         button.setOnClickListener(v -> showCreateRuleDialog());
         return view;
     }
@@ -67,10 +67,10 @@ public class RulesMirrorFragment extends Fragment {
         cachedRules.clear();
         cachedRules.addAll(rules);
 
-        tvSectionLabel.setText("Rules Mirror");
-        tvSummary.setText("规则数 " + rules.size() + " · 最近操作日志 " + logs.size() + "。点击规则切换启停，长按删除。") ;
-        tvDetail.setText("保持与原版 rules 页面一致的重点：阈值条件、动作类型、启停状态、操作记录。") ;
-        tvEmpty.setText("暂无规则，点击上方按钮创建一条快速阈值规则。") ;
+        tvSectionLabel.setText(R.string.mirror_rules_title);
+        tvSummary.setText(getString(R.string.rules_summary_format, rules.size(), logs.size()));
+        tvDetail.setText(R.string.rules_detail);
+        tvEmpty.setText(R.string.rules_empty_local);
 
         List<CardRowAdapter.Row> rows = new ArrayList<>();
         for (Models.Rule rule : rules) {
@@ -101,7 +101,9 @@ public class RulesMirrorFragment extends Fragment {
         Models.Rule rule = cachedRules.get(position);
         repository.toggleRule(rule.id, !rule.enabled);
         repository.logOperation("TOGGLE_RULE", "ruleId=" + rule.id + " enabled=" + !rule.enabled);
-        Toast.makeText(requireContext(), "规则已切换为" + (!rule.enabled ? "启用" : "停用"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(),
+                getString(R.string.rules_toggle_toast, !rule.enabled ? getString(R.string.rules_toggle_enabled) : getString(R.string.rules_toggle_disabled)),
+                Toast.LENGTH_SHORT).show();
         load();
     }
 
@@ -110,18 +112,18 @@ public class RulesMirrorFragment extends Fragment {
         Models.Rule rule = cachedRules.get(position);
         repository.deleteRule(rule.id);
         repository.logOperation("DELETE_RULE", "ruleId=" + rule.id + " name=" + rule.name);
-        Toast.makeText(requireContext(), "已删除规则: " + rule.name, Toast.LENGTH_SHORT).show();
+        Toast.makeText(requireContext(), getString(R.string.rules_delete_toast, rule.name), Toast.LENGTH_SHORT).show();
         load();
         return true;
     }
 
     private void showCreateRuleDialog() {
         EditText sensorInput = new EditText(requireContext());
-        sensorInput.setHint("传感器 ID，例如 TEMP");
+        sensorInput.setHint(getString(R.string.mirror_rules_sensor_hint));
         sensorInput.setText("TEMP");
 
         EditText thresholdInput = new EditText(requireContext());
-        thresholdInput.setHint("阈值，例如 50");
+        thresholdInput.setHint(getString(R.string.mirror_rules_threshold_hint));
         thresholdInput.setText("50");
 
         android.widget.LinearLayout layout = new android.widget.LinearLayout(requireContext());
@@ -132,11 +134,11 @@ public class RulesMirrorFragment extends Fragment {
         layout.addView(thresholdInput);
 
         new AlertDialog.Builder(requireContext())
-                .setTitle("新建快速规则")
-                .setMessage("创建一个最接近原版 rules 配置页的阈值规则。")
+                .setTitle(R.string.mirror_rules_dialog_title)
+                .setMessage(R.string.mirror_rules_dialog_message)
                 .setView(layout)
-                .setNegativeButton("取消", null)
-                .setPositiveButton("创建", (dialog, which) -> {
+                .setNegativeButton(R.string.dialog_cancel, null)
+                .setPositiveButton(R.string.dialog_create, (dialog, which) -> {
                     Models.Rule rule = new Models.Rule();
                     rule.name = sensorInput.getText().toString().trim() + " threshold";
                     rule.sensorIdFilter = sensorInput.getText().toString().trim();

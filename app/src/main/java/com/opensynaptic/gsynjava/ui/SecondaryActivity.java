@@ -24,6 +24,7 @@ public class SecondaryActivity extends AppCompatActivity {
 
     private ActivitySecondaryBinding binding;
 
+
     public static Intent intent(Context context, String mode, int titleRes) {
         return new Intent(context, SecondaryActivity.class)
                 .putExtra(EXTRA_MODE, mode)

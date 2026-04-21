@@ -65,8 +65,8 @@ public class HealthMirrorFragment extends Fragment {
         tvSectionLabel.setText(R.string.mirror_health_title);
         tvSummary.setText(getString(R.string.mirror_health_summary_format, devices.size(), stats.messagesPerSecond, stats.totalMessages));
         tvDetail.setText(getString(R.string.mirror_health_detail_format,
-                stats.udpConnected ? "已启用" : "未启用",
-                stats.mqttConnected ? "已连接" : "未连接",
+                stats.udpConnected ? getString(R.string.transport_enabled) : getString(R.string.transport_disabled),
+                stats.mqttConnected ? getString(R.string.transport_connected) : getString(R.string.transport_disconnected),
                 dbKb));
         tvEmpty.setText(R.string.mirror_health_empty);
 

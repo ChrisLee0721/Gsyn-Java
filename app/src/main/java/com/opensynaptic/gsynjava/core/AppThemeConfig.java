@@ -20,14 +20,14 @@ public final class AppThemeConfig {
     // ── Accent colour presets ────────────────────────────────────────────────
 
     public enum ThemePreset {
-        DEEP_BLUE ("#1A73E8", "深蓝"),
-        TEAL      ("#00897B", "青绿"),
-        PURPLE    ("#7B1FA2", "紫色"),
-        AMBER     ("#FF8F00", "琥珀"),
-        RED       ("#D32F2F", "红色"),
-        CYAN      ("#0097A7", "蓝绿"),
-        GREEN     ("#2E7D32", "绿色"),
-        PINK      ("#C2185B", "粉色");
+        DEEP_BLUE ("#1A73E8", "Deep Blue"),
+        TEAL      ("#00897B", "Teal"),
+        PURPLE    ("#7B1FA2", "Purple"),
+        AMBER     ("#FF8F00", "Amber"),
+        RED       ("#D32F2F", "Red"),
+        CYAN      ("#0097A7", "Cyan"),
+        GREEN     ("#2E7D32", "Green"),
+        PINK      ("#C2185B", "Pink");
 
         public final String hex;
         public final String label;
@@ -46,19 +46,19 @@ public final class AppThemeConfig {
 
     public enum BgPreset {
         // Dark
-        DEEP_NAVY      ("#0F1923", "#1B2838", "#213040", "深海蓝 (默认)", false),
-        DARK_SLATE     ("#121420", "#1D2033", "#252840", "暗石板",         false),
-        CHARCOAL       ("#1A1A1A", "#262626", "#303030", "炭灰",           false),
-        TRUE_BLACK     ("#080808", "#141414", "#1E1E1E", "纯黑 (AMOLED)", false),
-        FOREST_DARK    ("#0D1A0D", "#172617", "#1F301F", "林暗绿",         false),
-        WARM_DARK      ("#1A1209", "#261D0F", "#302318", "暖棕暗",         false),
+        DEEP_NAVY      ("#0F1923", "#1B2838", "#213040", "Deep Navy (Default)", false),
+        DARK_SLATE     ("#121420", "#1D2033", "#252840", "Dark Slate",          false),
+        CHARCOAL       ("#1A1A1A", "#262626", "#303030", "Charcoal",            false),
+        TRUE_BLACK     ("#080808", "#141414", "#1E1E1E", "True Black (AMOLED)", false),
+        FOREST_DARK    ("#0D1A0D", "#172617", "#1F301F", "Forest Dark",         false),
+        WARM_DARK      ("#1A1209", "#261D0F", "#302318", "Warm Dark",           false),
         // Light
-        SNOW_WHITE     ("#FAFAFA", "#FFFFFF", "#F1F3F4", "雪白",           true),
-        CLOUD_GREY     ("#F1F3F4", "#FFFFFF", "#E8EAED", "云雾灰",         true),
-        PAPER_CREAM    ("#FFFDE7", "#FFFFFF", "#FFF9C4", "纸张米黄",       true),
-        MINT_LIGHT     ("#E8F5E9", "#FFFFFF", "#C8E6C9", "薄荷浅绿",       true),
-        LAVENDER_LIGHT ("#EDE7F6", "#FFFFFF", "#D1C4E9", "薰衣草紫",       true),
-        SKY_BLUE       ("#E3F2FD", "#FFFFFF", "#BBDEFB", "天空蓝",         true);
+        SNOW_WHITE     ("#FAFAFA", "#FFFFFF", "#F1F3F4", "Snow White",          true),
+        CLOUD_GREY     ("#F1F3F4", "#FFFFFF", "#E8EAED", "Cloud Grey",          true),
+        PAPER_CREAM    ("#FFFDE7", "#FFFFFF", "#FFF9C4", "Paper Cream",         true),
+        MINT_LIGHT     ("#E8F5E9", "#FFFFFF", "#C8E6C9", "Mint Light",          true),
+        LAVENDER_LIGHT ("#EDE7F6", "#FFFFFF", "#D1C4E9", "Lavender",            true),
+        SKY_BLUE       ("#E3F2FD", "#FFFFFF", "#BBDEFB", "Sky Blue",            true);
 
         public final String bgHex;
         public final String surfaceHex;

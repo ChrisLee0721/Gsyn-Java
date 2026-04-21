@@ -58,7 +58,186 @@
     <string name="settings_runtime_hint_format">Links %1$s / %2$s · %3$d devices, %4$d rules</string>
     <string name="settings_accent_label">Accent Color</string>
     <string name="settings_bg_label">Background Preset</string>
+    <!-- Language -->
+    <string name="settings_section_language">Language</string>
+    <string name="settings_lang_system">Follow System</string>
+    <string name="settings_lang_en">English</string>
+    <string name="settings_lang_zh">中文</string>
+    <string name="settings_lang_toast">Language changed. Restarting…</string>
+
+    <!-- Transport status values -->
+    <string name="transport_enabled">Enabled</string>
+    <string name="transport_disabled">Disabled</string>
+    <string name="transport_connected">Connected</string>
+    <string name="transport_disconnected">Disconnected</string>
+    <string name="settings_saved_toast">Settings saved</string>
+    <string name="settings_apply_error_toast">Failed to apply connection: %1$s</string>
+
+    <!-- UiFormatters -->
+    <string name="fmt_no_time">N/A</string>
+    <string name="fmt_never">Never</string>
+    <string name="fmt_no_readings">No readings</string>
+    <string name="fmt_no_data">N/A</string>
+
+    <!-- Alerts -->
+    <string name="alerts_filter_all">All</string>
+    <string name="alerts_acked_toast">Alert acknowledged</string>
+    <string name="alerts_summary_format">Critical %1$d · Warning %2$d · Info %3$d · Showing %4$d</string>
+    <string name="alerts_filter_state_format">Filter: %1$s · Unacked %2$d</string>
+    <string name="alerts_empty">No alerts for current filter.</string>
+    <string name="alerts_acked_label"> · Acked</string>
+    <string name="alerts_tap_to_ack"> · Tap to ack</string>
+
+    <!-- Dashboard -->
+    <string name="dashboard_subtitle_format">Online %1$d / %2$d · Unacked alerts %3$d · Rules %4$d</string>
+    <string name="dashboard_live_metrics_format">Temp: %1$s °C\nHumidity: %2$s %%\nPressure: %3$s hPa\nLevel: %4$s %%\nSamples: %5$d</string>
+    <string name="dashboard_sync_none">Last sync: no samples</string>
+    <string name="dashboard_sync_format">Last sync: %1$s · %2$s</string>
+    <string name="dashboard_no_readings">No live readings. Start UDP/MQTT in Settings.</string>
+    <string name="dashboard_recent_alerts_none">Recent alerts: No active alerts. System stable.</string>
+    <string name="dashboard_recent_alerts_prefix">Recent alerts: </string>
+    <string name="dashboard_recent_ops_none">Recent ops: No local operation records.</string>
+    <string name="dashboard_recent_ops_prefix">Recent ops: </string>
+
+    <!-- Devices -->
+    <string name="devices_summary_format">Found %1$d devices · Online %2$d · Showing %3$d</string>
+    <string name="devices_empty_no_data">No devices yet. Start UDP/MQTT in Settings.</string>
+    <string name="devices_empty_no_match">No matching devices. Try a different keyword.</string>
+    <string name="device_detail_name">Name: </string>
+    <string name="device_detail_type">Type: </string>
+    <string name="device_detail_status">Status: </string>
+    <string name="device_detail_transport">Transport: </string>
+    <string name="device_detail_location">Location: </string>
+    <string name="device_detail_last_seen">Last seen: </string>
+    <string name="device_detail_readings">\n\nLatest readings:\n</string>
+    <string name="device_detail_close">Close</string>
+    <string name="device_row_last_active">Last active </string>
+
+    <!-- Map -->
+    <string name="map_snippet_format">AID %1$d  ·  %2$s  ·  %3$s\nLast seen: %4$s</string>
+    <string name="map_status_online">Online</string>
+    <string name="map_status_offline">Offline</string>
+    <string name="map_summary_format">Total %1$d · Online %2$d · Located %3$d · Updates every 10s</string>
+
+    <!-- Rules -->
+    <string name="rules_summary_format">Rules: %1$d · Log entries: %2$d. Tap to toggle, long-press to delete.</string>
+    <string name="rules_detail">Threshold conditions, action types, enable/disable, operation log.</string>
+    <string name="rules_empty_local">No rules. Tap the button to create a threshold rule.</string>
+    <string name="rules_toggle_enabled">enabled</string>
+    <string name="rules_toggle_disabled">disabled</string>
+    <string name="rules_toggle_toast">Rule set to %1$s</string>
+    <string name="rules_delete_toast">Deleted rule: %1$s</string>
+
+    <!-- Alerts layout -->
+    <string name="alert_center_title">Alert Center</string>
+    <string name="alerts_summary_placeholder">0 alerts</string>
+    <string name="alerts_label_unacked">Unacked</string>
+    <string name="alerts_filter_by_level">Filter by level</string>
+    <string name="alerts_filter_default">Filter: All</string>
+    <string name="alerts_no_alerts">No alerts</string>
+
+    <!-- Dashboard layout -->
+    <string name="dashboard_placeholder_subtitle">Realtime KPIs · trends · runtime state.</string>
+    <string name="dashboard_refresh">Refresh</string>
+    <string name="dashboard_transport_placeholder">UDP / MQTT / ingress status</string>
+    <string name="dashboard_label_total_devices">Total Devices</string>
+    <string name="dashboard_label_online_rate">Online Rate</string>
+    <string name="dashboard_label_active_alerts">Active Alerts</string>
+    <string name="dashboard_label_throughput">Throughput</string>
+    <string name="dashboard_label_rules">Active Rules</string>
+    <string name="dashboard_label_cumulative">Cumulative Traffic</string>
+    <string name="dashboard_section_gauges">Live Metrics / Gauges</string>
+    <string name="dashboard_label_live_metrics">Live Metrics</string>
+    <string name="dashboard_label_water_level">Water Level</string>
+    <string name="dashboard_section_charts">Trend Charts</string>
+    <string name="dashboard_section_activity">Activity Feed</string>
+    <string name="dashboard_label_recent_alerts">Recent Alerts</string>
+    <string name="dashboard_label_recent_ops">Recent Ops</string>
+    <string name="dashboard_label_latest_readings">Latest Live Readings</string>
+    <string name="dashboard_label_humidity_gauge">Humidity Gauge</string>
+    <string name="dashboard_chart_temp">Temperature Trend</string>
+    <string name="dashboard_chart_humidity">Humidity Trend</string>
+    <!-- Custom sensor cards -->
+    <string name="dashboard_add_sensor_card">Add Sensor Card</string>
+    <string name="dashboard_add_sensor_dialog_title">Add Custom Sensor Card</string>
+    <string name="dashboard_sensor_card_id_hint">Sensor ID (e.g. TEMP1)</string>
+    <string name="dashboard_sensor_card_label_hint">Display label (optional)</string>
+    <string name="dashboard_sensor_card_id_empty_toast">Please enter a Sensor ID</string>
+    <string name="dashboard_sensor_card_no_data">No data yet for this sensor</string>
+    <string name="dashboard_sensor_card_last_seen">Last seen: %1$s</string>
+    <string name="dashboard_sensor_card_remove">Remove</string>
+    <!-- Single device mode -->
+    <string name="dashboard_single_mode_title">Single Device Mode</string>
+    <string name="dashboard_single_mode_exit">Switch to Fleet View</string>
+    <string name="dashboard_single_device_no_sensors">No sensor readings yet. Start UDP/MQTT in Settings.</string>
+    <string name="dashboard_single_mode_toggle_off">⊙ Single Device Mode: OFF</string>
+    <string name="dashboard_single_mode_toggle_on">⊙ Single Device Mode: ON  ·  Tap to exit</string>
+    <string name="dashboard_single_mode_no_device">Waiting for device…</string>
+    <!-- Drag handle -->
+    <string name="dashboard_drag_handle">Drag to reorder</string>
+
+    <!-- Devices layout -->
+    <string name="devices_title">Fleet Overview</string>
+    <string name="devices_summary_placeholder">0 devices found</string>
+    <string name="devices_label_total">Total</string>
+    <string name="devices_label_online">Online</string>
+    <string name="devices_label_offline">Offline</string>
+    <string name="devices_label_filtered">Filtered</string>
+    <string name="devices_search_hint">Search by name or AID</string>
+    <string name="devices_empty_placeholder">No devices yet</string>
+
+    <!-- Map layout -->
+    <string name="map_title">Device Map</string>
+    <string name="map_type_normal">Normal</string>
+    <string name="map_type_satellite">Satellite</string>
+    <string name="map_type_hybrid">Hybrid</string>
+    <string name="map_refresh">Refresh</string>
+
+    <!-- Send layout -->
+    <string name="send_target_device">Target Device</string>
+    <string name="send_ip_hint">Target IP</string>
+    <string name="send_port_hint">Port</string>
+    <string name="send_route_placeholder">Route: -</string>
+    <string name="send_section_control">Control Commands</string>
+    <string name="send_btn_send">Send</string>
+    <string name="send_section_single_sensor">Single Sensor Frame</string>
+    <string name="send_label_sensor_id">Sensor ID</string>
+    <string name="send_label_unit">Unit</string>
+    <string name="send_label_state">State</string>
+    <string name="send_btn_single">Send DATA_FULL</string>
+    <string name="send_preview_placeholder">Preview: -</string>
+    <string name="send_section_multi_sensor">Multi-Sensor Frame</string>
+    <string name="send_btn_add_row">+ Add Row</string>
+    <string name="send_btn_send_multi">Send Multi-Frame</string>
+    <string name="send_btn_send_raw">Send Raw HEX</string>
+    <string name="send_cmd_ref_title">CMD Reference</string>
+    <string name="send_loading">Loading…</string>
+    <string name="send_last_result_placeholder">Last sent: not yet executed</string>
+    <string name="send_log_placeholder">Send log\n\nNo commands sent yet.</string>
+
+    <!-- Drawer nav -->
+    <string name="drawer_group_extensions">Extensions</string>
+    <string name="drawer_item_map">Map · Device Map</string>
+    <string name="drawer_item_history">History · Data Log</string>
+    <string name="drawer_item_rules">Rules · Rule Engine</string>
+    <string name="drawer_item_health">Health · System Health</string>
+
+    <!-- Send -->
+    <string name="send_device_manual">Manual input (no autofill)</string>
+    <string name="send_tab_control">Control</string>
+    <string name="send_tab_data">Data</string>
+    <string name="send_tab_raw">Raw</string>
+    <string name="send_add_sensor_first">Please add sensor rows first</string>
+    <string name="send_value_hint">Value</string>
+    <string name="send_enter_raw_hex">Please enter Raw HEX</string>
+    <string name="send_cmd_failed">Command build failed</string>
+    <string name="send_last_result_format">Last: %1$s</string>
+    <string name="send_ok_toast">Sent successfully</string>
+    <string name="send_fail_toast">Send failed</string>
+    <string name="send_route_format">Route: AID %1$s · TID %2$s · SEQ %3$s · %4$s:%5$s</string>
+
     <string name="settings_card_visibility">Dashboard card visibility</string>
+    <string name="settings_single_device_mode">Single device focus mode (force full-screen view for one device)</string>
     <string name="settings_card_kpi1">KPI row 1: total devices + online rate</string>
     <string name="settings_card_kpi2">KPI row 2: alerts + throughput</string>
     <string name="settings_card_kpi3">KPI row 3: rules + cumulative traffic</string>

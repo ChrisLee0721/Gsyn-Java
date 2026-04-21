@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:background="?android:colorBackground"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="12dp">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -21,12 +21,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="12dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="告警中心"
+                    android:text="@string/alert_center_title"
                     android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                     android:textStyle="bold" />
 
@@ -35,7 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:text="0 条告警"
+                    android:text="@string/alerts_summary_placeholder"
                     android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
 
                 <LinearLayout
@@ -94,7 +94,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -129,7 +129,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="未确认"
+                            android:text="@string/alerts_label_unacked"
                             android:textAppearance="@style/TextAppearance.Material3.LabelMedium" />
 
                         <TextView
@@ -149,7 +149,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             app:cardUseCompatPadding="true">
 
             <LinearLayout
@@ -161,7 +161,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="按级别筛选"
+                    android:text="@string/alerts_filter_by_level"
                     android:textAppearance="@style/TextAppearance.Material3.LabelLarge" />
 
                 <Spinner
@@ -174,8 +174,8 @@
                     android:id="@+id/tvFilterState"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="当前筛选：全部"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/alerts_filter_default"
                     android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                     android:textColor="@color/gsyn_info" />
             </LinearLayout>
@@ -184,7 +184,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             app:cardUseCompatPadding="true">
 
@@ -207,7 +207,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:padding="24dp"
-                    android:text="当前没有告警"
+                    android:text="@string/alerts_no_alerts"
                     android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
             </FrameLayout>
         </com.google.android.material.card.MaterialCardView>

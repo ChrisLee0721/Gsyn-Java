@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:background="?android:colorBackground"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="12dp">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -21,12 +21,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="10dp">
+                android:padding="12dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="设备总览"
+                    android:text="@string/devices_title"
                     android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
                     android:textStyle="bold" />
 
@@ -35,7 +35,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
-                    android:text="已发现 0 台设备"
+                    android:text="@string/devices_summary_placeholder"
                     android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
 
                 <LinearLayout
@@ -53,7 +53,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="总量"
+                            android:text="@string/devices_label_total"
                             android:textAppearance="@style/TextAppearance.Material3.LabelMedium" />
 
                         <TextView
@@ -75,7 +75,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="在线"
+                            android:text="@string/devices_label_online"
                             android:textAppearance="@style/TextAppearance.Material3.LabelMedium" />
 
                         <TextView
@@ -93,7 +93,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
                     <LinearLayout
@@ -105,7 +105,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="离线"
+                            android:text="@string/devices_label_offline"
                             android:textAppearance="@style/TextAppearance.Material3.LabelMedium" />
 
                         <TextView
@@ -128,7 +128,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="过滤后"
+                            android:text="@string/devices_label_filtered"
                             android:textAppearance="@style/TextAppearance.Material3.LabelMedium" />
 
                         <TextView
@@ -149,8 +149,8 @@
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:hint="搜索设备名或 AID"
+            android:layout_marginTop="5dp"
+            android:hint="@string/devices_search_hint"
             app:startIconDrawable="@android:drawable/ic_menu_search">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -163,7 +163,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             app:cardUseCompatPadding="true">
 
@@ -186,7 +186,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:padding="24dp"
-                    android:text="还没有设备数据"
+                    android:text="@string/devices_empty_placeholder"
                     android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
             </FrameLayout>
         </com.google.android.material.card.MaterialCardView>

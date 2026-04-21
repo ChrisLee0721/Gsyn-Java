@@ -23,7 +23,6 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class AlertsFragment extends Fragment {
     private FragmentAlertsBinding binding;
@@ -40,7 +39,8 @@ public class AlertsFragment extends Fragment {
         binding.list.setAdapter(adapter);
         binding.list.setEmptyView(binding.tvEmpty);
         binding.swipeRefresh.setOnRefreshListener(this::load);
-        binding.spinnerLevel.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_dropdown_item, new String[] {"全部", "Critical", "Warning", "Info"}));
+        binding.spinnerLevel.setAdapter(new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_dropdown_item,
+                new String[] {getString(R.string.alerts_filter_all), "Critical", "Warning", "Info"}));
         binding.spinnerLevel.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
             @Override public void onItemSelected(android.widget.AdapterView<?> parent, View view, int position, long id) { load(); }
             @Override public void onNothingSelected(android.widget.AdapterView<?> parent) {}
@@ -49,7 +49,7 @@ public class AlertsFragment extends Fragment {
             Models.AlertItem alert = currentAlerts.get(position);
             if (!alert.acknowledged) {
                 repository.acknowledgeAlert(alert.id);
-                Toast.makeText(requireContext(), "已确认告警", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), R.string.alerts_acked_toast, Toast.LENGTH_SHORT).show();
                 load();
             }
         });
@@ -80,13 +80,13 @@ public class AlertsFragment extends Fragment {
         int warning = repository.getAlerts(1, 200).size();
         int info = repository.getAlerts(0, 200).size();
         int unacked = repository.getUnacknowledgedAlertCount();
-        binding.tvSummary.setText(String.format(Locale.getDefault(), "Critical %d · Warning %d · Info %d · 当前过滤 %d", critical, warning, info, currentAlerts.size()));
+        binding.tvSummary.setText(getString(R.string.alerts_summary_format, critical, warning, info, currentAlerts.size()));
         binding.tvCriticalCount.setText(String.valueOf(critical));
         binding.tvWarningCount.setText(String.valueOf(warning));
         binding.tvInfoCount.setText(String.valueOf(info));
         binding.tvUnackedCount.setText(String.valueOf(unacked));
-        binding.tvFilterState.setText(String.format(Locale.getDefault(), "当前筛选：%s · 待确认 %d 条", filterLabelForPosition(pos), unacked));
-        binding.tvEmpty.setText("当前筛选下没有告警记录。") ;
+        binding.tvFilterState.setText(getString(R.string.alerts_filter_state_format, filterLabelForPosition(pos), unacked));
+        binding.tvEmpty.setText(R.string.alerts_empty);
         List<CardRowAdapter.Row> rows = new ArrayList<>();
         for (Models.AlertItem a : currentAlerts) {
             String lv = a.level == 2 ? "CRITICAL" : a.level == 1 ? "WARNING" : "INFO";
@@ -94,7 +94,7 @@ public class AlertsFragment extends Fragment {
             rows.add(new CardRowAdapter.Row(
                     a.message,
                     "AID " + a.deviceAid + " · Sensor " + UiFormatters.upperOrFallback(a.sensorId, "N/A") + " · " + UiFormatters.formatRelativeTime(a.createdMs),
-                    DateFormat.getDateTimeInstance().format(new Date(a.createdMs)) + (a.acknowledged ? " · 已确认" : " · 点击确认"),
+                    DateFormat.getDateTimeInstance().format(new Date(a.createdMs)) + (a.acknowledged ? getString(R.string.alerts_acked_label) : getString(R.string.alerts_tap_to_ack)),
                     a.acknowledged ? lv + " · ACK" : lv,
                     color,
                     requireContext().getColor(R.color.gsyn_on_surface)
@@ -108,7 +108,7 @@ public class AlertsFragment extends Fragment {
         if (pos == 1) return "Critical";
         if (pos == 2) return "Warning";
         if (pos == 3) return "Info";
-        return "全部";
+        return getString(R.string.alerts_filter_all);
     }
 }
 

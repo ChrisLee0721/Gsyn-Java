@@ -62,7 +62,7 @@ public class HistoryMirrorFragment extends Fragment {
         List<Models.SensorData> rows = repository.querySensorData(now - 24L * 3600L * 1000L, now, 500);
         tvSectionLabel.setText(R.string.mirror_history_title);
         tvSummary.setText(getString(R.string.mirror_history_summary_format, rows.size()));
-        tvDetail.setText(getString(R.string.mirror_history_detail_format, rows.isEmpty() ? "暂无" : UiFormatters.formatDateTime(rows.get(0).timestampMs)));
+        tvDetail.setText(getString(R.string.mirror_history_detail_format, rows.isEmpty() ? getString(R.string.fmt_no_data) : UiFormatters.formatDateTime(rows.get(0).timestampMs)));
         tvEmpty.setText(R.string.mirror_history_empty);
 
         List<CardRowAdapter.Row> cards = new ArrayList<>();

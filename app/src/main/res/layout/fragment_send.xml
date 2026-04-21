@@ -16,69 +16,124 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardUseCompatPadding="true">
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:orientation="vertical" android:padding="14dp">
 
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:text="目标设备"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/send_target_device"
                     android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
                     android:textColor="?attr/colorOnSurfaceVariant" />
 
-                <Spinner android:id="@+id/spinnerDevice"
-                    android:layout_width="match_parent" android:layout_height="48dp"
+                <Spinner
+                    android:id="@+id/spinnerDevice"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
                     android:layout_marginTop="4dp" />
 
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp" android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal">
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                        android:layout_width="0dp" android:layout_height="wrap_content"
-                        android:layout_weight="1" android:hint="AID">
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="AID">
+
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etAid" android:layout_width="match_parent"
-                            android:layout_height="wrap_content" android:inputType="number" android:text="1" />
+                            android:id="@+id/etAid"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:text="1" />
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                        android:layout_width="0dp" android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp" android:layout_weight="1" android:hint="TID">
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:hint="TID">
+
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etTid" android:layout_width="match_parent"
-                            android:layout_height="wrap_content" android:inputType="number" android:text="1" />
+                            android:id="@+id/etTid"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:text="1" />
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                        android:layout_width="0dp" android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp" android:layout_weight="1" android:hint="SEQ">
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:hint="SEQ">
+
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etSeq" android:layout_width="match_parent"
-                            android:layout_height="wrap_content" android:inputType="number" android:text="0" />
+                            android:id="@+id/etSeq"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:text="0" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp" android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:orientation="horizontal">
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                        android:layout_width="0dp" android:layout_height="wrap_content"
-                        android:layout_weight="2" android:hint="目标 IP">
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:hint="@string/send_ip_hint">
+
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etIp" android:layout_width="match_parent"
-                            android:layout_height="wrap_content" android:inputType="textUri" android:text="127.0.0.1" />
+                            android:id="@+id/etIp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="textUri"
+                            android:text="127.0.0.1" />
                     </com.google.android.material.textfield.TextInputLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                        android:layout_width="0dp" android:layout_height="wrap_content"
-                        android:layout_marginStart="6dp" android:layout_weight="1" android:hint="端口">
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:hint="@string/send_port_hint">
+
                         <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etPort" android:layout_width="match_parent"
-                            android:layout_height="wrap_content" android:inputType="number" android:text="9876" />
+                            android:id="@+id/etPort"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:text="9876" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
-                <TextView android:id="@+id/tvRouteSummary"
-                    android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp" android:text="路由：-"
+                <TextView
+                    android:id="@+id/tvRouteSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/send_route_placeholder"
                     android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                     android:textColor="@color/gsyn_info" />
             </LinearLayout>
@@ -88,20 +143,20 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             app:tabGravity="fill" app:tabMode="fixed" />
 
         <!-- ═══ TAB 0: 控制 ═══ -->
         <LinearLayout android:id="@+id/tabControl"
             android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" android:orientation="vertical" android:visibility="visible">
+            android:layout_marginTop="5dp" android:orientation="vertical" android:visibility="visible">
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 app:cardUseCompatPadding="true">
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:orientation="vertical" android:padding="12dp">
                     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:text="控制指令" android:textAppearance="@style/TextAppearance.Material3.TitleSmall" android:textStyle="bold" />
+                        android:text="@string/send_section_control" android:textAppearance="@style/TextAppearance.Material3.TitleSmall" android:textStyle="bold" />
 
                     <!-- PING 0x01 -->
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -114,7 +169,7 @@
                         <com.google.android.material.button.MaterialButton android:id="@+id/btnSendPing"
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             android:layout_width="wrap_content" android:layout_height="wrap_content"
-                            android:text="发送" android:textSize="12sp"/>
+                            android:text="@string/send_btn_send" android:textSize="12sp"/>
                     </LinearLayout>
                     <!-- PONG 0x02 -->
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -127,7 +182,7 @@
                         <com.google.android.material.button.MaterialButton android:id="@+id/btnSendPong"
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             android:layout_width="wrap_content" android:layout_height="wrap_content"
-                            android:text="发送" android:textSize="12sp"/>
+                            android:text="@string/send_btn_send" android:textSize="12sp"/>
                     </LinearLayout>
                     <!-- ID_REQUEST 0x03 -->
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -140,7 +195,7 @@
                         <com.google.android.material.button.MaterialButton android:id="@+id/btnSendIdRequest"
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             android:layout_width="wrap_content" android:layout_height="wrap_content"
-                            android:text="发送" android:textSize="12sp"/>
+                            android:text="@string/send_btn_send" android:textSize="12sp"/>
                     </LinearLayout>
                     <!-- ID_ASSIGN 0x05 -->
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -153,7 +208,7 @@
                         <com.google.android.material.button.MaterialButton android:id="@+id/btnSendIdAssign"
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             android:layout_width="wrap_content" android:layout_height="wrap_content"
-                            android:text="发送" android:textSize="12sp"/>
+                            android:text="@string/send_btn_send" android:textSize="12sp"/>
                     </LinearLayout>
                     <!-- TIME_REQUEST 0x07 -->
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -166,7 +221,7 @@
                         <com.google.android.material.button.MaterialButton android:id="@+id/btnSendTimeRequest"
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             android:layout_width="wrap_content" android:layout_height="wrap_content"
-                            android:text="发送" android:textSize="12sp"/>
+                            android:text="@string/send_btn_send" android:textSize="12sp"/>
                     </LinearLayout>
                     <!-- HANDSHAKE_ACK 0x09 -->
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -179,7 +234,7 @@
                         <com.google.android.material.button.MaterialButton android:id="@+id/btnSendHsAck"
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             android:layout_width="wrap_content" android:layout_height="wrap_content"
-                            android:text="发送" android:textSize="12sp"/>
+                            android:text="@string/send_btn_send" android:textSize="12sp"/>
                     </LinearLayout>
                     <!-- HANDSHAKE_NACK 0x0A -->
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -192,7 +247,7 @@
                         <com.google.android.material.button.MaterialButton android:id="@+id/btnSendHsNack"
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             android:layout_width="wrap_content" android:layout_height="wrap_content"
-                            android:text="发送" android:textSize="12sp"/>
+                            android:text="@string/send_btn_send" android:textSize="12sp"/>
                     </LinearLayout>
                     <!-- SECURE_DICT_READY 0x10 -->
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
@@ -205,7 +260,7 @@
                         <com.google.android.material.button.MaterialButton android:id="@+id/btnSendSecureDict"
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             android:layout_width="wrap_content" android:layout_height="wrap_content"
-                            android:text="发送" android:textSize="12sp"/>
+                            android:text="@string/send_btn_send" android:textSize="12sp"/>
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -214,7 +269,7 @@
         <!-- ═══ TAB 1: 数据 ═══ -->
         <LinearLayout android:id="@+id/tabData"
             android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" android:orientation="vertical" android:visibility="gone">
+            android:layout_marginTop="5dp" android:orientation="vertical" android:visibility="gone">
 
             <!-- Single sensor -->
             <com.google.android.material.card.MaterialCardView
@@ -223,19 +278,19 @@
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:orientation="vertical" android:padding="14dp">
                     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:text="单传感器数据帧" android:textAppearance="@style/TextAppearance.Material3.TitleSmall" android:textStyle="bold" />
+                        android:text="@string/send_section_single_sensor" android:textAppearance="@style/TextAppearance.Material3.TitleSmall" android:textStyle="bold" />
                     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp" android:text="传感器 ID"
+                        android:layout_marginTop="5dp" android:text="@string/send_label_sensor_id"
                         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
                         android:textColor="?attr/colorOnSurfaceVariant" />
                     <Spinner android:id="@+id/spinnerSensorId"
                         android:layout_width="match_parent" android:layout_height="48dp" android:layout_marginTop="2dp" />
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp" android:orientation="horizontal">
+                        android:layout_marginTop="5dp" android:orientation="horizontal">
                         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                             android:layout_weight="1" android:orientation="vertical">
                             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                                android:text="单位" android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+                                android:text="@string/send_label_unit" android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
                                 android:textColor="?attr/colorOnSurfaceVariant" />
                             <Spinner android:id="@+id/spinnerUnit"
                                 android:layout_width="match_parent" android:layout_height="48dp" android:layout_marginTop="2dp" />
@@ -243,7 +298,7 @@
                         <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                             android:layout_marginStart="8dp" android:layout_weight="1" android:orientation="vertical">
                             <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                                android:text="状态" android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+                                android:text="@string/send_label_state" android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
                                 android:textColor="?attr/colorOnSurfaceVariant" />
                             <Spinner android:id="@+id/spinnerState"
                                 android:layout_width="match_parent" android:layout_height="48dp" android:layout_marginTop="2dp" />
@@ -252,7 +307,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                         android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp" android:hint="数值 (Value)">
+                        android:layout_marginTop="5dp" android:hint="@string/send_value_hint">
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etValue" android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -260,10 +315,10 @@
                     </com.google.android.material.textfield.TextInputLayout>
                     <com.google.android.material.button.MaterialButton android:id="@+id/btnSendSingle"
                         android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp" android:text="单帧发送 DATA_FULL" />
+                        android:layout_marginTop="10dp" android:text="@string/send_btn_single" />
                     <TextView android:id="@+id/tvSinglePreview"
                         android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp" android:text="预览：-"
+                        android:layout_marginTop="4dp" android:text="@string/send_preview_placeholder"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
@@ -272,23 +327,23 @@
             <!-- Multi-sensor -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:layout_marginTop="8dp" app:cardUseCompatPadding="true">
+                android:layout_marginTop="5dp" app:cardUseCompatPadding="true">
                 <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
                     android:orientation="vertical" android:padding="14dp">
                     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:text="多传感器数据帧" android:textAppearance="@style/TextAppearance.Material3.TitleSmall" android:textStyle="bold" />
+                        android:text="@string/send_section_multi_sensor" android:textAppearance="@style/TextAppearance.Material3.TitleSmall" android:textStyle="bold" />
                     <LinearLayout android:id="@+id/containerMultiSensor"
                         android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp" android:orientation="vertical" />
+                        android:layout_marginTop="5dp" android:orientation="vertical" />
                     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp" android:orientation="horizontal">
+                        android:layout_marginTop="5dp" android:orientation="horizontal">
                         <com.google.android.material.button.MaterialButton android:id="@+id/btnAddSensor"
                             style="@style/Widget.Material3.Button.OutlinedButton"
                             android:layout_width="0dp" android:layout_height="wrap_content"
-                            android:layout_weight="1" android:text="＋ 添加行" />
+                            android:layout_weight="1" android:text="@string/send_btn_add_row" />
                         <com.google.android.material.button.MaterialButton android:id="@+id/btnSendMulti"
                             android:layout_width="0dp" android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp" android:layout_weight="1" android:text="发送多帧" />
+                            android:layout_marginStart="8dp" android:layout_weight="1" android:text="@string/send_btn_send_multi" />
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -297,7 +352,7 @@
         <!-- ═══ TAB 2: 原始 ═══ -->
         <LinearLayout android:id="@+id/tabRaw"
             android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" android:orientation="vertical" android:visibility="gone">
+            android:layout_marginTop="5dp" android:orientation="vertical" android:visibility="gone">
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent" android:layout_height="wrap_content"
                 app:cardUseCompatPadding="true">
@@ -314,14 +369,14 @@
                     </com.google.android.material.textfield.TextInputLayout>
                     <com.google.android.material.button.MaterialButton android:id="@+id/btnSendRaw"
                         android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp" android:text="发送 Raw HEX" />
+                        android:layout_marginTop="10dp" android:text="@string/send_btn_send_raw" />
                     <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp" android:text="CMD 参考表"
+                        android:layout_marginTop="6dp" android:text="@string/send_cmd_ref_title"
                         android:textAppearance="@style/TextAppearance.Material3.TitleSmall" android:textStyle="bold" />
                     <TextView android:id="@+id/tvCmdRef"
                         android:layout_width="match_parent" android:layout_height="wrap_content"
                         android:layout_marginTop="6dp" android:fontFamily="monospace"
-                        android:text="加载中…"
+                        android:text="@string/send_loading"
                         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                         android:textColor="?attr/colorOnSurfaceVariant" />
                 </LinearLayout>
@@ -339,13 +394,13 @@
                     android:textAppearance="@style/TextAppearance.Material3.TitleSmall" android:textStyle="bold" />
                 <TextView android:id="@+id/tvLastResult"
                     android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp" android:text="最近一次发送：尚未执行"
+                    android:layout_marginTop="4dp" android:text="@string/send_last_result_placeholder"
                     android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                     android:textColor="@color/gsyn_info" />
                 <TextView android:id="@+id/tvLog"
                     android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp" android:minHeight="120dp"
-                    android:text="发送日志\n\n尚未下发命令。"
+                    android:layout_marginTop="5dp" android:minHeight="120dp"
+                    android:text="@string/send_log_placeholder"
                     android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                     android:textColor="?attr/colorOnSurfaceVariant" />
             </LinearLayout>

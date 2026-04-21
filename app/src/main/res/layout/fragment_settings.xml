@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="12dp">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="12dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -78,6 +78,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:text="0"
+                            android:textColor="?attr/colorOnSurface"
                             android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -104,6 +105,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:text="0"
+                            android:textColor="?attr/colorOnSurface"
                             android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -137,6 +139,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:text="0"
+                            android:textColor="?attr/colorOnSurface"
                             android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -163,6 +166,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="6dp"
                             android:text="0 KB"
+                            android:textColor="?attr/colorOnSurface"
                             android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -189,12 +193,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="12dp">
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/switch_udp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorOnSurface"
                     android:text="@string/settings_udp_enabled" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -235,12 +240,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="12dp">
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/switch_mqtt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorOnSurface"
                     android:text="@string/settings_mqtt_enabled" />
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -301,7 +307,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="12dp">
 
                 <!-- ── Accent colour picker ── -->
                 <TextView
@@ -358,6 +364,53 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- ── Language ── -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:text="@string/settings_section_language"
+            android:textAppearance="@style/TextAppearance.Material3.TitleSmall"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textStyle="bold" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            app:cardUseCompatPadding="true">
+
+            <RadioGroup
+                android:id="@+id/rgLanguage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <RadioButton
+                    android:id="@+id/rbLangSystem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_lang_system"
+                    android:textColor="?attr/colorOnSurface" />
+
+                <RadioButton
+                    android:id="@+id/rbLangEn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_lang_en"
+                    android:textColor="?attr/colorOnSurface" />
+
+                <RadioButton
+                    android:id="@+id/rbLangZh"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/settings_lang_zh"
+                    android:textColor="?attr/colorOnSurface" />
+
+            </RadioGroup>
+        </com.google.android.material.card.MaterialCardView>
+
         <!-- ── Dashboard card visibility ── -->
         <TextView
             android:layout_width="match_parent"
@@ -378,48 +431,71 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-        android:padding="10dp">
+                android:padding="12dp">
+
+                <!-- Single device mode toggle -->
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchSingleDeviceMode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/colorOnSurface"
+                    android:text="@string/settings_single_device_mode" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="?attr/colorOutline"
+                    android:alpha="0.2" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/switchCardKpiRow1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorOnSurface"
                     android:text="@string/settings_card_kpi1" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/switchCardKpiRow2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorOnSurface"
                     android:text="@string/settings_card_kpi2" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/switchCardKpiRow3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorOnSurface"
                     android:text="@string/settings_card_kpi3" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/switchCardGauges"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorOnSurface"
                     android:text="@string/settings_card_gauges" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/switchCardCharts"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorOnSurface"
                     android:text="@string/settings_card_charts" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/switchCardActivity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorOnSurface"
                     android:text="@string/settings_card_activity" />
 
                 <androidx.appcompat.widget.SwitchCompat
                     android:id="@+id/switchCardReadings"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textColor="?attr/colorOnSurface"
                     android:text="@string/settings_card_readings" />
 
             </LinearLayout>

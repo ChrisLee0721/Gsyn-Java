@@ -1,5 +1,7 @@
 package com.opensynaptic.gsynjava.ui.common;
 
+import android.text.format.DateUtils;
+
 import com.opensynaptic.gsynjava.data.Models;
 
 import java.text.DateFormat;
@@ -13,26 +15,21 @@ public final class UiFormatters {
     private UiFormatters() {}
 
     public static String formatDateTime(long ms) {
-        if (ms <= 0) return "暂无时间";
+        if (ms <= 0) return "N/A";
         synchronized (DATE_TIME) {
             return DATE_TIME.format(new Date(ms));
         }
     }
 
     public static String formatRelativeTime(long ms) {
-        if (ms <= 0) return "从未上报";
-        long diff = Math.max(0L, System.currentTimeMillis() - ms);
-        long minutes = diff / 60_000L;
-        long hours = diff / 3_600_000L;
-        long days = diff / 86_400_000L;
-        if (diff < 60_000L) return "刚刚更新";
-        if (minutes < 60) return minutes + " 分钟前";
-        if (hours < 24) return hours + " 小时前";
-        return days + " 天前";
+        if (ms <= 0) return "—";
+        return DateUtils.getRelativeTimeSpanString(
+                ms, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS,
+                DateUtils.FORMAT_ABBREV_RELATIVE).toString();
     }
 
     public static String formatSensorSummary(List<Models.SensorData> readings) {
-        if (readings == null || readings.isEmpty()) return "暂无最近读数";
+        if (readings == null || readings.isEmpty()) return "—";
         StringBuilder sb = new StringBuilder();
         int count = 0;
         for (Models.SensorData data : readings) {
@@ -65,4 +62,3 @@ public final class UiFormatters {
         return safe.isEmpty() ? fallback : safe.toUpperCase(Locale.ROOT);
     }
 }
-

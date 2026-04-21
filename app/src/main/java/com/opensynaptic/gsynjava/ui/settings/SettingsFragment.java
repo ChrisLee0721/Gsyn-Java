@@ -15,10 +15,11 @@ import com.google.android.material.chip.Chip;
 import com.opensynaptic.gsynjava.AppController;
 import com.opensynaptic.gsynjava.R;
 import com.opensynaptic.gsynjava.core.AppThemeConfig;
+import com.opensynaptic.gsynjava.core.LocaleHelper;
 import com.opensynaptic.gsynjava.databinding.FragmentSettingsBinding;
 import com.opensynaptic.gsynjava.transport.TransportManager;
-import com.opensynaptic.gsynjava.ui.SecondaryActivity;
 import com.opensynaptic.gsynjava.ui.dashboard.DashboardCardConfig;
+import com.opensynaptic.gsynjava.ui.dashboard.DashboardCardItem;
 
 import java.util.Locale;
 
@@ -34,6 +35,7 @@ public class SettingsFragment extends Fragment {
         buildAccentChips();
         buildBgChips();
         loadCardConfig();
+        loadLanguagePref();
         binding.btnSave.setOnClickListener(v -> savePrefs());
         return binding.getRoot();
     }
@@ -42,6 +44,28 @@ public class SettingsFragment extends Fragment {
     public void onDestroyView() {
         binding = null;
         super.onDestroyView();
+    }
+
+    // ── Language picker ────────────────────────────────────────────────────
+
+    private void loadLanguagePref() {
+        if (binding == null) return;
+        String lang = LocaleHelper.current();
+        if (LocaleHelper.LANG_EN.equals(lang)) {
+            binding.rgLanguage.check(R.id.rbLangEn);
+        } else if (LocaleHelper.LANG_ZH.equals(lang)) {
+            binding.rgLanguage.check(R.id.rbLangZh);
+        } else {
+            binding.rgLanguage.check(R.id.rbLangSystem);
+        }
+        binding.rgLanguage.setOnCheckedChangeListener((group, checkedId) -> {
+            String selected;
+            if (checkedId == R.id.rbLangEn) selected = LocaleHelper.LANG_EN;
+            else if (checkedId == R.id.rbLangZh) selected = LocaleHelper.LANG_ZH;
+            else selected = LocaleHelper.LANG_SYSTEM;
+            // AppCompat persists & recreates the activity automatically
+            LocaleHelper.applyAndSave(selected);
+        });
     }
 
     // ── Accent colour chip group ───────────────────────────────────────────
@@ -101,26 +125,37 @@ public class SettingsFragment extends Fragment {
     private void loadCardConfig() {
         if (binding == null) return;
         DashboardCardConfig cfg = DashboardCardConfig.load(requireContext());
-        binding.switchCardKpiRow1.setChecked(cfg.showKpiRow1);
-        binding.switchCardKpiRow2.setChecked(cfg.showKpiRow2);
-        binding.switchCardKpiRow3.setChecked(cfg.showKpiRow3);
-        binding.switchCardGauges.setChecked(cfg.showGauges);
-        binding.switchCardCharts.setChecked(cfg.showCharts);
-        binding.switchCardActivity.setChecked(cfg.showActivityFeed);
-        binding.switchCardReadings.setChecked(cfg.showLatestReadings);
+        binding.switchCardKpiRow1.setChecked(cfg.isVisible(DashboardCardItem.Type.KPI_ROW1));
+        binding.switchCardKpiRow2.setChecked(cfg.isVisible(DashboardCardItem.Type.KPI_ROW2));
+        binding.switchCardKpiRow3.setChecked(cfg.isVisible(DashboardCardItem.Type.KPI_ROW3));
+        binding.switchCardGauges.setChecked(cfg.isVisible(DashboardCardItem.Type.GAUGES));
+        binding.switchCardCharts.setChecked(cfg.isVisible(DashboardCardItem.Type.CHARTS));
+        binding.switchCardActivity.setChecked(cfg.isVisible(DashboardCardItem.Type.ACTIVITY));
+        binding.switchCardReadings.setChecked(cfg.isVisible(DashboardCardItem.Type.LATEST_READINGS));
+        // Single device mode toggle — takes effect immediately (no Save needed)
+        boolean singleMode = AppController.get(requireContext()).preferences()
+                .getBoolean("single_device_mode", false);
+        binding.switchSingleDeviceMode.setChecked(singleMode);
+        binding.switchSingleDeviceMode.setOnCheckedChangeListener((btn, checked) ->
+                AppController.get(requireContext()).preferences().edit()
+                        .putBoolean("single_device_mode", checked).apply());
     }
 
     private void saveCardConfig() {
         if (binding == null) return;
-        DashboardCardConfig cfg = DashboardCardConfig.defaults();
-        cfg.showKpiRow1        = binding.switchCardKpiRow1.isChecked();
-        cfg.showKpiRow2        = binding.switchCardKpiRow2.isChecked();
-        cfg.showKpiRow3        = binding.switchCardKpiRow3.isChecked();
-        cfg.showGauges         = binding.switchCardGauges.isChecked();
-        cfg.showCharts         = binding.switchCardCharts.isChecked();
-        cfg.showActivityFeed   = binding.switchCardActivity.isChecked();
-        cfg.showLatestReadings = binding.switchCardReadings.isChecked();
+        DashboardCardConfig cfg = DashboardCardConfig.load(requireContext());
+        cfg.setVisible(DashboardCardItem.Type.KPI_ROW1,        binding.switchCardKpiRow1.isChecked());
+        cfg.setVisible(DashboardCardItem.Type.KPI_ROW2,        binding.switchCardKpiRow2.isChecked());
+        cfg.setVisible(DashboardCardItem.Type.KPI_ROW3,        binding.switchCardKpiRow3.isChecked());
+        cfg.setVisible(DashboardCardItem.Type.GAUGES,          binding.switchCardGauges.isChecked());
+        cfg.setVisible(DashboardCardItem.Type.CHARTS,          binding.switchCardCharts.isChecked());
+        cfg.setVisible(DashboardCardItem.Type.ACTIVITY,        binding.switchCardActivity.isChecked());
+        cfg.setVisible(DashboardCardItem.Type.LATEST_READINGS, binding.switchCardReadings.isChecked());
         cfg.save(requireContext());
+        // Save single device mode
+        AppController.get(requireContext()).preferences().edit()
+                .putBoolean("single_device_mode", binding.switchSingleDeviceMode.isChecked())
+                .apply();
     }
 
     // ── Prefs ──────────────────────────────────────────────────────────────
@@ -167,9 +202,9 @@ public class SettingsFragment extends Fragment {
                 manager.disconnectMqtt();
             }
             refreshTransportStatus();
-            Toast.makeText(requireContext(), "设置已保存", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), R.string.settings_saved_toast, Toast.LENGTH_SHORT).show();
         } catch (Exception ex) {
-            Toast.makeText(requireContext(), "应用连接设置失败: " + ex.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(requireContext(), getString(R.string.settings_apply_error_toast, ex.getMessage()), Toast.LENGTH_LONG).show();
         }
 
         // Recreate activity to apply any accent/bg theme change
@@ -186,8 +221,8 @@ public class SettingsFragment extends Fragment {
         long dbBytes = controller.repository().getDatabaseSizeBytes();
         binding.tvTransportStatus.setText(getString(
                 R.string.settings_transport_status_format,
-                manager.isUdpRunning() ? "已启用" : "未启用",
-                manager.isMqttConnected() ? "已连接" : "未连接",
+                manager.isUdpRunning() ? getString(R.string.transport_enabled) : getString(R.string.transport_disabled),
+                manager.isMqttConnected() ? getString(R.string.transport_connected) : getString(R.string.transport_disconnected),
                 textOf(binding.etTileUrl).trim()
         ));
         binding.tvDeviceCount.setText(String.valueOf(devices));

@@ -11,6 +11,7 @@
         android:allowBackup="true"
         android:icon="@android:drawable/sym_def_app_icon"
         android:label="Gsyn Java"
+        android:localeConfig="@xml/locale_config"
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@android:drawable/sym_def_app_icon"
         android:supportsRtl="true"

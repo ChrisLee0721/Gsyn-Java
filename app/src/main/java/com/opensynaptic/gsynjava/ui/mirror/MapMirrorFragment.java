@@ -147,10 +147,9 @@ public class MapMirrorFragment extends Fragment implements OnMapReadyCallback {
                     ? "Device " + device.aid : device.name;
             boolean online = "online".equals(device.status);
 
-            String snippet = String.format(Locale.getDefault(),
-                    "AID %d  ·  %s  ·  %s\n最后在线: %s",
+            String snippet = getString(R.string.map_snippet_format,
                     device.aid,
-                    online ? "在线" : "离线",
+                    online ? getString(R.string.map_status_online) : getString(R.string.map_status_offline),
                     UiFormatters.upperOrFallback(device.transportType, "UDP"),
                     UiFormatters.formatRelativeTime(device.lastSeenMs));
 
@@ -163,8 +162,7 @@ public class MapMirrorFragment extends Fragment implements OnMapReadyCallback {
             hasBounds = true;
         }
 
-        tvMapSummary.setText(String.format(Locale.getDefault(),
-                "共 %d 台 · 在线 %d · 已定位 %d · 每 10s 刷新",
+        tvMapSummary.setText(getString(R.string.map_summary_format,
                 devices.size(), onlineCount, mappedCount));
 
         if (!hasBounds) return;

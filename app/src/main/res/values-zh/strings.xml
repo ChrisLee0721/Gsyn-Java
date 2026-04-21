@@ -59,7 +59,185 @@
     <string name="settings_runtime_hint_format">链路 %1$s / %2$s · %3$d 台设备、%4$d 条规则</string>
     <string name="settings_accent_label">主题色 / Accent</string>
     <string name="settings_bg_label">背景预设 / Background</string>
+    <!-- 语言 -->
+    <string name="settings_section_language">语言 / Language</string>
+    <string name="settings_lang_system">跟随系统</string>
+    <string name="settings_lang_en">English</string>
+    <string name="settings_lang_zh">中文</string>
+    <string name="settings_lang_toast">语言已切换，正在重启…</string>
+
+    <!-- 传输状态值 -->
+    <string name="transport_enabled">已启用</string>
+    <string name="transport_disabled">未启用</string>
+    <string name="transport_connected">已连接</string>
+    <string name="transport_disconnected">未连接</string>
+    <string name="settings_saved_toast">设置已保存</string>
+    <string name="settings_apply_error_toast">应用连接设置失败: %1$s</string>
+
+    <!-- UiFormatters -->
+    <string name="fmt_no_time">暂无时间</string>
+    <string name="fmt_never">从未上报</string>
+    <string name="fmt_no_readings">暂无读数</string>
+    <string name="fmt_no_data">暂无</string>
+
+    <!-- 告警 -->
+    <string name="alerts_filter_all">全部</string>
+    <string name="alerts_acked_toast">已确认告警</string>
+    <string name="alerts_summary_format">Critical %1$d · Warning %2$d · Info %3$d · 当前显示 %4$d</string>
+    <string name="alerts_filter_state_format">当前筛选：%1$s · 待确认 %2$d 条</string>
+    <string name="alerts_empty">当前筛选下没有告警记录。</string>
+    <string name="alerts_acked_label"> · 已确认</string>
+    <string name="alerts_tap_to_ack"> · 点击确认</string>
+
+    <!-- 仪表盘 -->
+    <string name="dashboard_subtitle_format">在线设备 %1$d / %2$d · 未确认告警 %3$d · 规则 %4$d 条</string>
+    <string name="dashboard_live_metrics_format">温度: %1$s °C\n湿度: %2$s %%\n压力: %3$s hPa\n液位: %4$s %%\n最近采样窗口: %5$d 条</string>
+    <string name="dashboard_sync_none">最后同步：暂无采样</string>
+    <string name="dashboard_sync_format">最后同步：%1$s · %2$s</string>
+    <string name="dashboard_no_readings">暂无实时读数，先去 Settings 开启 UDP/MQTT 监听。</string>
+    <string name="dashboard_recent_alerts_none">近期告警：暂无活动告警，系统状态平稳。</string>
+    <string name="dashboard_recent_alerts_prefix">近期告警：</string>
+    <string name="dashboard_recent_ops_none">近期操作：暂无本地操作记录。</string>
+    <string name="dashboard_recent_ops_prefix">近期操作：</string>
+
+    <!-- 设备 -->
+    <string name="devices_summary_format">已发现 %1$d 台设备 · 在线 %2$d 台 · 当前显示 %3$d 台</string>
+    <string name="devices_empty_no_data">还没有设备数据，先去 Settings 启动 UDP/MQTT 监听。</string>
+    <string name="devices_empty_no_match">没有匹配的设备，请换个关键词试试。</string>
+    <string name="device_detail_name">名称: </string>
+    <string name="device_detail_type">类型: </string>
+    <string name="device_detail_status">状态: </string>
+    <string name="device_detail_transport">传输: </string>
+    <string name="device_detail_location">位置: </string>
+    <string name="device_detail_last_seen">最后活动: </string>
+    <string name="device_detail_readings">\n\n最新读数:\n</string>
+    <string name="device_detail_close">关闭</string>
+    <string name="device_row_last_active">最近活跃 </string>
+
+    <!-- 地图 -->
+    <string name="map_snippet_format">AID %1$d  ·  %2$s  ·  %3$s\n最后在线: %4$s</string>
+    <string name="map_status_online">在线</string>
+    <string name="map_status_offline">离线</string>
+    <string name="map_summary_format">共 %1$d 台 · 在线 %2$d · 已定位 %3$d · 每 10s 刷新</string>
+
+    <!-- 规则 -->
+    <string name="rules_summary_format">规则数 %1$d · 操作日志 %2$d。点击切换启停，长按删除。</string>
+    <string name="rules_detail">阈值条件、动作类型、启停状态、操作记录。</string>
+    <string name="rules_empty_local">暂无规则，点击上方按钮创建一条快速阈值规则。</string>
+    <string name="rules_toggle_enabled">启用</string>
+    <string name="rules_toggle_disabled">停用</string>
+    <string name="rules_toggle_toast">规则已切换为%1$s</string>
+    <string name="rules_delete_toast">已删除规则: %1$s</string>
+
+    <!-- 告警布局 -->
+    <string name="alert_center_title">告警中心</string>
+    <string name="alerts_summary_placeholder">0 条告警</string>
+    <string name="alerts_label_unacked">未确认</string>
+    <string name="alerts_filter_by_level">按级别筛选</string>
+    <string name="alerts_filter_default">当前筛选：全部</string>
+    <string name="alerts_no_alerts">当前没有告警</string>
+
+    <!-- 仪表盘布局 -->
+    <string name="dashboard_placeholder_subtitle">实时 KPI · 趋势 · 运行状态</string>
+    <string name="dashboard_refresh">刷新</string>
+    <string name="dashboard_transport_placeholder">UDP / MQTT / ingress 状态</string>
+    <string name="dashboard_label_total_devices">总设备</string>
+    <string name="dashboard_label_online_rate">在线率</string>
+    <string name="dashboard_label_active_alerts">活跃告警</string>
+    <string name="dashboard_label_throughput">吞吐量</string>
+    <string name="dashboard_label_rules">启用规则</string>
+    <string name="dashboard_label_cumulative">累计流量</string>
+    <string name="dashboard_section_gauges">实时指标 / Gauges</string>
+    <string name="dashboard_label_live_metrics">实时指标</string>
+    <string name="dashboard_label_water_level">液位 / Water Level</string>
+    <string name="dashboard_section_charts">实时趋势图</string>
+    <string name="dashboard_section_activity">近期态势 / Activity Feed</string>
+    <string name="dashboard_label_recent_alerts">近期告警</string>
+    <string name="dashboard_label_recent_ops">近期操作</string>
+    <string name="dashboard_label_latest_readings">最近实时读数</string>
+    <string name="dashboard_label_humidity_gauge">湿度 Gauge</string>
+    <string name="dashboard_chart_temp">温度趋势</string>
+    <string name="dashboard_chart_humidity">湿度趋势</string>
+    <!-- 自定义传感器卡片 -->
+    <string name="dashboard_add_sensor_card">添加传感器卡片</string>
+    <string name="dashboard_add_sensor_dialog_title">添加自定义传感器卡片</string>
+    <string name="dashboard_sensor_card_id_hint">传感器 ID（如 TEMP1）</string>
+    <string name="dashboard_sensor_card_label_hint">显示标签（可选）</string>
+    <string name="dashboard_sensor_card_id_empty_toast">请输入传感器 ID</string>
+    <string name="dashboard_sensor_card_no_data">该传感器暂无数据</string>
+    <string name="dashboard_sensor_card_last_seen">上次更新：%1$s</string>
+    <string name="dashboard_sensor_card_remove">删除</string>
+    <!-- 单设备模式 -->
+    <string name="dashboard_single_mode_title">单设备模式</string>
+    <string name="dashboard_single_mode_exit">切换到舰队视图</string>
+    <string name="dashboard_single_device_no_sensors">暂无传感器数据，请在设置中启动 UDP/MQTT</string>
+    <string name="dashboard_single_mode_toggle_off">⊙ 单设备模式：关闭</string>
+    <string name="dashboard_single_mode_toggle_on">⊙ 单设备模式：开启  ·  点击关闭</string>
+    <string name="dashboard_single_mode_no_device">等待设备连接…</string>
+    <string name="dashboard_drag_handle">拖动排序</string>
+
+    <!-- 设备布局 -->
+    <string name="devices_title">设备总览</string>
+    <string name="devices_summary_placeholder">已发现 0 台设备</string>
+    <string name="devices_label_total">总量</string>
+    <string name="devices_label_online">在线</string>
+    <string name="devices_label_offline">离线</string>
+    <string name="devices_label_filtered">过滤后</string>
+    <string name="devices_search_hint">搜索设备名或 AID</string>
+    <string name="devices_empty_placeholder">还没有设备数据</string>
+
+    <!-- 地图布局 -->
+    <string name="map_title">设备地图</string>
+    <string name="map_type_normal">普通</string>
+    <string name="map_type_satellite">卫星</string>
+    <string name="map_type_hybrid">混合</string>
+    <string name="map_refresh">刷新</string>
+
+    <!-- 发送布局 -->
+    <string name="send_target_device">目标设备</string>
+    <string name="send_ip_hint">目标 IP</string>
+    <string name="send_port_hint">端口</string>
+    <string name="send_route_placeholder">路由：-</string>
+    <string name="send_section_control">控制指令</string>
+    <string name="send_btn_send">发送</string>
+    <string name="send_section_single_sensor">单传感器数据帧</string>
+    <string name="send_label_sensor_id">传感器 ID</string>
+    <string name="send_label_unit">单位</string>
+    <string name="send_label_state">状态</string>
+    <string name="send_btn_single">单帧发送 DATA_FULL</string>
+    <string name="send_preview_placeholder">预览：-</string>
+    <string name="send_section_multi_sensor">多传感器数据帧</string>
+    <string name="send_btn_add_row">＋ 添加行</string>
+    <string name="send_btn_send_multi">发送多帧</string>
+    <string name="send_btn_send_raw">发送 Raw HEX</string>
+    <string name="send_cmd_ref_title">CMD 参考表</string>
+    <string name="send_loading">加载中…</string>
+    <string name="send_last_result_placeholder">最近一次发送：尚未执行</string>
+    <string name="send_log_placeholder">发送日志\n\n尚未下发命令。</string>
+
+    <!-- 侧边栏 -->
+    <string name="drawer_group_extensions">扩展功能</string>
+    <string name="drawer_item_map">Map · 设备地图</string>
+    <string name="drawer_item_history">History · 历史数据</string>
+    <string name="drawer_item_rules">Rules · 规则引擎</string>
+    <string name="drawer_item_health">Health · 系统健康</string>
+
+    <!-- 发送 -->
+    <string name="send_device_manual">手动输入（不自动填充）</string>
+    <string name="send_tab_control">控制</string>
+    <string name="send_tab_data">数据</string>
+    <string name="send_tab_raw">原始</string>
+    <string name="send_add_sensor_first">请先添加传感器行</string>
+    <string name="send_value_hint">值</string>
+    <string name="send_enter_raw_hex">请输入 Raw HEX</string>
+    <string name="send_cmd_failed">命令构建失败</string>
+    <string name="send_last_result_format">最近: %1$s</string>
+    <string name="send_ok_toast">发送成功</string>
+    <string name="send_fail_toast">发送失败</string>
+    <string name="send_route_format">路由：AID %1$s · TID %2$s · SEQ %3$s · %4$s:%5$s</string>
+
     <string name="settings_card_visibility">仪表盘卡片可见性</string>
+    <string name="settings_single_device_mode">单设备专注模式（强制全屏显示单台设备）</string>
     <string name="settings_card_kpi1">KPI 行 1：总设备 + 在线率</string>
     <string name="settings_card_kpi2">KPI 行 2：告警 + 吞吐量</string>
     <string name="settings_card_kpi3">KPI 行 3：规则 + 累计流量</string>
