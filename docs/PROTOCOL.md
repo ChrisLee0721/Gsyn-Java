@@ -3,6 +3,8 @@
 This document describes the Gsyn wire protocol as implemented in `core/protocol/`.  
 It mirrors the Flutter source at `lib/protocol/codec/`.
 
+> 中文版請見 [PROTOCOL_zh.md](PROTOCOL_zh.md)
+
 ---
 
 ## Packet Frame Layout
@@ -182,7 +184,7 @@ decodeSensorValue("aN", "°C") → 25.6
 
 ### Timestamp Encoding
 
-Millisecond timestamps are encoded as 8-character Base64url strings (standard Base64 with `+`→`-` `/ `→`_`):
+Millisecond timestamps are encoded as 8-character Base64url strings (standard Base64 with `+`→`-` `/`→`_`):
 
 ```
 encodeTimestamp(1713600000000) → "AYy2MQAA"
@@ -234,4 +236,3 @@ Precision table:
 ---
 
 *For the Java implementation see `core/protocol/`. For the Flutter reference see `lib/protocol/codec/`.*
-
