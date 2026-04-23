@@ -128,6 +128,33 @@
     <string name="rules_toggle_toast">Rule set to %1$s</string>
     <string name="rules_delete_toast">Deleted rule: %1$s</string>
 
+    <!-- Rules dialog extra fields -->
+    <string name="rules_dialog_operator_label">Operator</string>
+    <string name="rules_dialog_level_label">Alert Level</string>
+    <string name="rules_dialog_cooldown_hint">Cooldown (seconds)</string>
+
+    <!-- Notification channels -->
+    <string name="notif_channel_critical_name">Critical Alerts</string>
+    <string name="notif_channel_warning_name">Warning Alerts</string>
+
+    <!-- History time range -->
+    <string name="history_range_1h">Last 1 hour</string>
+    <string name="history_range_6h">Last 6 hours</string>
+    <string name="history_range_24h">Last 24 hours</string>
+    <string name="history_range_7d">Last 7 days</string>
+
+    <!-- History mirror summary uses range -->
+    <string name="mirror_history_summary_format">%1$d records in selected range</string>
+
+    <!-- Alerts extra -->
+    <string name="alerts_search_hint">Search alerts…</string>
+    <string name="alerts_btn_ack_all">Ack All</string>
+    <string name="alerts_btn_clear_acked">Clear Acked</string>
+    <string name="alerts_ack_all_toast">All alerts acknowledged</string>
+    <string name="alerts_clear_acked_toast">Cleared %1$d acknowledged alerts</string>
+    <string name="alerts_delete_toast">Alert deleted</string>
+    <string name="alerts_long_press_hint">Long-press to delete</string>
+
     <!-- Alerts layout -->
     <string name="alert_center_title">Alert Center</string>
     <string name="alerts_summary_placeholder">0 alerts</string>
@@ -262,7 +289,6 @@
     <!-- History mirror -->
     <string name="mirror_history_title">History Mirror</string>
     <string name="mirror_history_action">Export CSV</string>
-    <string name="mirror_history_summary_format">%1$d records in last 24 h</string>
     <string name="mirror_history_detail_format">Exported to app external dir.\nLatest sample: %1$s</string>
     <string name="mirror_history_empty">No history. Let data flow in from Dashboard / Send / UDP / MQTT.</string>
     <string name="mirror_history_device_format">Device AID %1$d</string>

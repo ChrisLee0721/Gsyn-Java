@@ -170,6 +170,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp" />
 
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/searchView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    app:iconifiedByDefault="false"
+                    app:queryHint="@string/alerts_search_hint" />
+
                 <TextView
                     android:id="@+id/tvFilterState"
                     android:layout_width="match_parent"
@@ -178,6 +186,33 @@
                     android:text="@string/alerts_filter_default"
                     android:textAppearance="@style/TextAppearance.Material3.BodySmall"
                     android:textColor="@color/gsyn_info" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnAckAll"
+                        style="@style/Widget.Material3.Button.TonalButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:layout_weight="1"
+                        android:text="@string/alerts_btn_ack_all"
+                        android:textSize="12sp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnClearAcked"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        android:text="@string/alerts_btn_clear_acked"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

@@ -8,8 +8,12 @@ import android.database.sqlite.SQLiteDatabase;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AppRepository {
     private static AppRepository instance;
@@ -100,6 +104,25 @@ public class AppRepository {
         }
     }
 
+    /** Batch version: returns latest readings for ALL devices in one query — avoids N+1. */
+    public synchronized Map<Integer, List<Models.SensorData>> getAllLatestReadings() {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor c = db.rawQuery(
+                "SELECT * FROM sensor_data WHERE id IN "
+                + "(SELECT MAX(id) FROM sensor_data GROUP BY device_aid, sensor_id)", null);
+        try {
+            Map<Integer, List<Models.SensorData>> map = new HashMap<>();
+            while (c.moveToNext()) {
+                Models.SensorData d = mapSensorData(c);
+                if (!map.containsKey(d.deviceAid)) map.put(d.deviceAid, new ArrayList<>());
+                map.get(d.deviceAid).add(d);
+            }
+            return map;
+        } finally {
+            c.close();
+        }
+    }
+
     public synchronized List<Models.SensorData> querySensorData(long fromMs, long toMs, int limit) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor c = db.query("sensor_data", null, "timestamp_ms >= ? AND timestamp_ms <= ?", new String[] {String.valueOf(fromMs), String.valueOf(toMs)}, null, null, "timestamp_ms DESC", String.valueOf(limit));
@@ -145,6 +168,40 @@ public class AppRepository {
         ContentValues values = new ContentValues();
         values.put("acknowledged", 1);
         db.update("alerts", values, "id=?", new String[] {String.valueOf(id)});
+    }
+
+    public synchronized int acknowledgeAllAlerts() {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("acknowledged", 1);
+        return db.update("alerts", values, "acknowledged=0", null);
+    }
+
+    public synchronized int deleteAlert(long id) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        return db.delete("alerts", "id=?", new String[] {String.valueOf(id)});
+    }
+
+    public synchronized int deleteAcknowledgedAlerts() {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        return db.delete("alerts", "acknowledged=1", null);
+    }
+
+    /** Returns int[3]: [criticalCount, warningCount, infoCount] in a single query. */
+    public synchronized int[] getAlertCountsByLevel() {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor c = db.rawQuery("SELECT level, COUNT(*) FROM alerts GROUP BY level", null);
+        int[] counts = new int[3];
+        try {
+            while (c.moveToNext()) {
+                int lvl = c.getInt(0);
+                int cnt = c.getInt(1);
+                if (lvl >= 0 && lvl <= 2) counts[lvl] = cnt;
+            }
+        } finally {
+            c.close();
+        }
+        return counts;
     }
 
     public synchronized List<Models.Rule> getAllRules() {
@@ -249,11 +306,23 @@ public class AppRepository {
     public synchronized File exportHistoryCsv() throws IOException {
         long now = System.currentTimeMillis();
         List<Models.SensorData> rows = querySensorData(now - 24L * 3600L * 1000L, now, 500);
+        return exportHistoryCsv(rows);
+    }
+
+    public synchronized File exportHistoryCsv(long fromMs, long toMs, int limit) throws IOException {
+        List<Models.SensorData> rows = querySensorData(fromMs, toMs, limit);
+        return exportHistoryCsv(rows);
+    }
+
+    private File exportHistoryCsv(List<Models.SensorData> rows) throws IOException {
+        long now = System.currentTimeMillis();
         File file = new File(context.getExternalFilesDir(null), "export_" + now + ".csv");
+        DateFormat df = DateFormat.getDateTimeInstance();
         try (FileWriter writer = new FileWriter(file)) {
-            writer.append("timestamp,device_aid,sensor_id,value,unit\n");
+            writer.append("datetime,timestamp_ms,device_aid,sensor_id,value,unit\n");
             for (Models.SensorData item : rows) {
-                writer.append(String.valueOf(item.timestampMs)).append(',')
+                writer.append(df.format(new Date(item.timestampMs))).append(',')
+                        .append(String.valueOf(item.timestampMs)).append(',')
                         .append(String.valueOf(item.deviceAid)).append(',')
                         .append(item.sensorId).append(',')
                         .append(String.valueOf(item.value)).append(',')

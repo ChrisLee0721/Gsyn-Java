@@ -80,6 +80,24 @@
     <string name="fmt_no_readings">暂无读数</string>
     <string name="fmt_no_data">暂无</string>
 
+    <!-- 规则对话框扩展字段 -->
+    <string name="rules_dialog_operator_label">运算符</string>
+    <string name="rules_dialog_level_label">告警级别</string>
+    <string name="rules_dialog_cooldown_hint">冷却时间（秒）</string>
+
+    <!-- 通知渠道 -->
+    <string name="notif_channel_critical_name">严重告警</string>
+    <string name="notif_channel_warning_name">警告告警</string>
+
+    <!-- 历史时间范围 -->
+    <string name="history_range_1h">最近 1 小时</string>
+    <string name="history_range_6h">最近 6 小时</string>
+    <string name="history_range_24h">最近 24 小时</string>
+    <string name="history_range_7d">最近 7 天</string>
+
+    <!-- 历史镜像摘要（带范围） -->
+    <string name="mirror_history_summary_format">所选范围内记录 %1$d 条</string>
+
     <!-- 告警 -->
     <string name="alerts_filter_all">全部</string>
     <string name="alerts_acked_toast">已确认告警</string>
@@ -88,6 +106,13 @@
     <string name="alerts_empty">当前筛选下没有告警记录。</string>
     <string name="alerts_acked_label"> · 已确认</string>
     <string name="alerts_tap_to_ack"> · 点击确认</string>
+    <string name="alerts_search_hint">搜索告警…</string>
+    <string name="alerts_btn_ack_all">全部确认</string>
+    <string name="alerts_btn_clear_acked">清除已确认</string>
+    <string name="alerts_ack_all_toast">所有告警已确认</string>
+    <string name="alerts_clear_acked_toast">已清除 %1$d 条已确认告警</string>
+    <string name="alerts_delete_toast">告警已删除</string>
+    <string name="alerts_long_press_hint">长按可删除</string>
 
     <!-- 仪表盘 -->
     <string name="dashboard_subtitle_format">在线设备 %1$d / %2$d · 未确认告警 %3$d · 规则 %4$d 条</string>
@@ -262,7 +287,6 @@
     <!-- 历史镜像 -->
     <string name="mirror_history_title">历史数据镜像</string>
     <string name="mirror_history_action">导出 CSV</string>
-    <string name="mirror_history_summary_format">最近 24 小时记录 %1$d 条</string>
     <string name="mirror_history_detail_format">导出到应用外部目录。\n最新采样：%1$s</string>
     <string name="mirror_history_empty">暂无历史数据，先从 Dashboard/Send/UDP/MQTT 流入数据。</string>
     <string name="mirror_history_device_format">设备 AID %1$d</string>

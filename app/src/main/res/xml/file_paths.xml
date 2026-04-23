@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- Covers getExternalFilesDir(null) used by AppRepository.exportHistoryCsv() -->
+    <external-files-path name="exports" path="." />
+    <!-- Fallback: internal files dir -->
+    <files-path name="internal_exports" path="." />
+</paths>
+
