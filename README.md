@@ -44,11 +44,6 @@
 | [docs/DASHBOARD_CARDS.md](docs/DASHBOARD_CARDS.md) | UI contributors | Card system, drag reorder, custom sensors |
 | [docs/UI_PATTERNS.md](docs/UI_PATTERNS.md) | Junior devs / students | ViewBinding, theming, i18n, RecyclerView |
 | [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) | Contributors | Branch convention, checklist, pitfalls |
-| [docs/TESTING.md](docs/TESTING.md) | All developers | Unit tests, end-to-end UDP/MQTT validation, Logcat tips |
-| [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md) | All | Common build, transport, UI, and release issues |
-| [docs/TECHNICAL_REFERENCE.md](docs/TECHNICAL_REFERENCE.md) | Integration / Protocol devs | Exact frame layout, command byte values, CRC, encoding, threading |
-| [docs/ANDROID_DEV_GUIDE.md](docs/ANDROID_DEV_GUIDE.md) | Android developers | Navigation, DB schema, theming, ViewBinding, Fragment lifecycle, Maps |
-| [CHANGELOG.md](CHANGELOG.md) | All | Version history and release notes |
 
 ---
 

@@ -150,3 +150,7 @@ All of this happens before any device connects. The app is always *listening* on
 - Read **[PROTOCOL.md](PROTOCOL.md)** for the binary packet format
 - Read **[DASHBOARD_CARDS.md](DASHBOARD_CARDS.md)** for the card system
 - Read **[UI_PATTERNS.md](UI_PATTERNS.md)** for ViewBinding, theming, and i18n patterns
+- Read **[FAQ.md](FAQ.md)** for design decision explanations
+- Read **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)** if something isn't working
+- Read **[CI_CD.md](CI_CD.md)** for release and pipeline setup
+- Read **[SECURITY.md](SECURITY.md)** for API key and keystore management
