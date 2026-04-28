@@ -4,12 +4,30 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.io.File;
+
 public class AppDatabaseHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "gsyn_java.db";
     public static final int DB_VERSION = 1;
 
     public AppDatabaseHelper(Context context) {
-        super(context, DB_NAME, null, DB_VERSION);
+        super(context, getDbPath(context), null, DB_VERSION);
+    }
+
+    /**
+     * Store the database in the external private directory so it is visible
+     * in the system file manager without root:
+     *   /sdcard/Android/data/com.opensynaptic.gsynjava/files/databases/gsyn_java.db
+     * Falls back to internal storage if external is not available.
+     */
+    private static String getDbPath(Context context) {
+        File extDir = context.getExternalFilesDir("databases");
+        if (extDir != null) {
+            extDir.mkdirs();
+            return new File(extDir, DB_NAME).getAbsolutePath();
+        }
+        // Fallback: internal storage
+        return context.getDatabasePath(DB_NAME).getAbsolutePath();
     }
 
     @Override

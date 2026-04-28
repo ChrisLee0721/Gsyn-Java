@@ -237,6 +237,11 @@ public class AppRepository {
     }
 
     public synchronized long getDatabaseSizeBytes() {
+        java.io.File extDir = context.getExternalFilesDir("databases");
+        if (extDir != null) {
+            java.io.File f = new java.io.File(extDir, AppDatabaseHelper.DB_NAME);
+            if (f.exists()) return f.length();
+        }
         return context.getDatabasePath(AppDatabaseHelper.DB_NAME).length();
     }
 

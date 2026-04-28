@@ -342,18 +342,27 @@ public class SendFragment extends Fragment {
         int aid  = parseInt(textOf(binding.etAid), 1);
         String host = textOf(binding.etIp).trim();
         int port = parseInt(textOf(binding.etPort), 9876);
-        boolean ok = AppController.get(requireContext()).transport()
-                .sendCommand(frame, aid, host, port);
-        AppController.get(requireContext()).repository()
-                .logOperation("SEND_CMD", label + " → AID:" + aid + " " + host + ":" + port + " ok=" + ok);
-        String entry = DateFormat.getTimeInstance().format(new Date())
-                + "  " + label + "  " + (ok ? "✓ OK" : "✗ FAIL") + "  len=" + frame.length;
-        logs.add(0, entry);
-        if (logs.size() > 20) logs.remove(logs.size() - 1);
-        binding.tvLastResult.setText(getString(R.string.send_last_result_format, entry));
-        binding.tvLog.setText(android.text.TextUtils.join("\n", logs));
-        Toast.makeText(requireContext(), ok ? R.string.send_ok_toast : R.string.send_fail_toast, Toast.LENGTH_SHORT).show();
-        updateRouteSummary();
+
+        // Network I/O must run off the main thread to avoid NetworkOnMainThreadException
+        new Thread(() -> {
+            boolean ok = AppController.get(requireContext()).transport()
+                    .sendCommand(frame, aid, host, port);
+            AppController.get(requireContext()).repository()
+                    .logOperation("SEND_CMD", label + " → AID:" + aid + " " + host + ":" + port + " ok=" + ok);
+            String entry = DateFormat.getTimeInstance().format(new Date())
+                    + "  " + label + "  " + (ok ? "✓ OK" : "✗ FAIL") + "  len=" + frame.length;
+
+            // Update UI back on main thread
+            new android.os.Handler(android.os.Looper.getMainLooper()).post(() -> {
+                if (binding == null) return;
+                logs.add(0, entry);
+                if (logs.size() > 20) logs.remove(logs.size() - 1);
+                binding.tvLastResult.setText(getString(R.string.send_last_result_format, entry));
+                binding.tvLog.setText(android.text.TextUtils.join("\n", logs));
+                Toast.makeText(requireContext(), ok ? R.string.send_ok_toast : R.string.send_fail_toast, Toast.LENGTH_SHORT).show();
+                updateRouteSummary();
+            });
+        }, "gsyn-send").start();
     }
 
     private void updateRouteSummary() {
